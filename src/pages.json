@@ -1,0 +1,19 @@
+{
+  "pages": [
+    {
+      "path": "pages/index/index",
+      "style": {
+        "navigationBarTitleText": "峡谷全随机构筑器",
+        "navigationBarBackgroundColor": "#0e1015",
+        "navigationBarTextStyle": "white",
+        "backgroundColor": "#0e1015"
+      }
+    }
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "峡谷全随机构筑器",
+    "navigationBarBackgroundColor": "#0e1015",
+    "backgroundColor": "#0e1015"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "name": "峡谷全随机构筑器",
+  "appid": "",
+  "description": "英雄联盟召唤师峡谷娱乐向全随机构筑生成器",
+  "versionName": "0.1.0",
+  "versionCode": "100",
+  "transformPx": false,
+  "app-plus": {
+    "usingComponents": true,
+    "nvueStyleCompiler": "uni-app",
+    "compilerVersion": 3
+  },
+  "quickapp": {},
+  "mp-weixin": {
+    "appid": "",
+    "setting": {
+      "urlCheck": false
+    },
+    "usingComponents": true
+  },
+  "h5": {
+    "title": "峡谷全随机构筑器",
+    "router": {
+      "mode": "hash"
+    }
+  },
+  "vueVersion": "3"
+}

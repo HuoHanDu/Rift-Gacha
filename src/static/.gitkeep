@@ -1,0 +1,2 @@
+# 占位文件：保证 src/static 目录被 git 跟踪。
+# 项目不打包任何官方美术资源，图标一律热链 game.gtimg.cn CDN。
