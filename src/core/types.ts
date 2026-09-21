@@ -33,10 +33,8 @@ export interface ItemRef {
   /** 总价（金币）。 */
   gold: number
   types: string[]
-  /** 已剥掉游戏内富文本标签的纯文本说明。 */
+  /** 已剥掉游戏内富文本标签的纯文本说明，直接上屏用。 */
   desc: string
-  /** 原始说明 HTML。 */
-  descHtml: string
 }
 
 export interface RuneRef {

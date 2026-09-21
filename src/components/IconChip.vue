@@ -1,5 +1,5 @@
 <template>
-  <view class="chip">
+  <view class="chip" tabindex="0">
     <image
       v-if="!failed"
       class="chip__img"
@@ -13,10 +13,10 @@
       <text class="chip__fallback-text">{{ initial }}</text>
     </view>
 
-    <view class="chip__tip">
+    <view class="chip__tip" :style="tipStyle">
       <text class="chip__tip-name">{{ name }}</text>
       <text v-if="meta" class="chip__tip-meta">{{ meta }}</text>
-      <text v-if="desc" class="chip__tip-desc">{{ desc }}</text>
+      <text v-if="detail" class="chip__tip-desc">{{ detail }}</text>
     </view>
   </view>
 </template>
@@ -30,14 +30,22 @@ const props = withDefaults(
     name: string
     /** 资料卡第二行：价格、冷却、符文系之类的元信息。 */
     meta?: string
+    /** 首选用作资料卡正文的详细说明；为空时回退到 `desc`。 */
+    detail?: string
+    /** 资料卡的备选正文。 */
     desc?: string
     size?: number
     /** 圆形图标（英雄头像用）。 */
     round?: boolean
     /** 铜色描边，标记基石 / 主系这类「重点」。 */
     accent?: boolean
+    /**
+     * 资料卡相对图标的对齐方式。
+     * 行首的图标必须用 `start`、行尾必须用 `end`，否则 232px 宽的浮层会溢出视口被裁掉。
+     */
+    align?: 'start' | 'center' | 'end'
   }>(),
-  { meta: '', desc: '', size: 34, round: false, accent: false },
+  { meta: '', detail: '', desc: '', size: 34, round: false, accent: false, align: 'center' },
 )
 
 const failed = ref(false)
@@ -47,6 +55,14 @@ const boxStyle = computed(
     `width:${props.size}px;height:${props.size}px;border-radius:${props.round ? '50%' : '5px'};`,
 )
 
+const tipStyle = computed(() => {
+  if (props.align === 'start') return 'left:0;transform:none;'
+  if (props.align === 'end') return 'left:auto;right:0;transform:none;'
+  return 'left:50%;transform:translateX(-50%);'
+})
+
+const detail = computed(() => props.detail || props.desc)
+
 const initial = computed(() => props.name.slice(0, 1))
 </script>
 
@@ -55,6 +71,12 @@ const initial = computed(() => props.name.slice(0, 1))
   position: relative;
   display: block;
   flex: none;
+}
+
+.chip:focus {
+  outline: 1px solid var(--brass);
+  outline-offset: 2px;
+  border-radius: 5px;
 }
 
 .chip__img,
@@ -80,13 +102,10 @@ const initial = computed(() => props.name.slice(0, 1))
   color: var(--ink-muted);
 }
 
-/* 图标不可达时的兜底已经在模板里处理，这里只负责悬停资料卡。 */
 .chip__tip {
   display: none;
   position: absolute;
   bottom: calc(100% + 8px);
-  left: 50%;
-  transform: translateX(-50%);
   width: 232px;
   padding: 10px 12px;
   background: #12151c;
@@ -96,7 +115,9 @@ const initial = computed(() => props.name.slice(0, 1))
   z-index: 40;
 }
 
-.chip:hover .chip__tip {
+/* 鼠标悬停与键盘聚焦都能看到资料卡。 */
+.chip:hover .chip__tip,
+.chip:focus .chip__tip {
   display: block;
 }
 

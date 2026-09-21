@@ -19,6 +19,7 @@
         :desc="`官方定位：${championMeta}`"
         :size="56"
         round
+        align="start"
       />
       <view class="champion__text">
         <text class="champion__name">{{ build.champion.title }}</text>
@@ -31,13 +32,14 @@
       <text class="section__label">召唤师技能</text>
       <view class="row">
         <IconChip
-          v-for="spell in build.spells"
+          v-for="(spell, spellIndex) in build.spells"
           :key="spell.id"
           :icon="spell.icon"
           :name="spell.name"
           :meta="spell.cooldown ? `冷却 ${spell.cooldown} 秒` : ''"
           :desc="spell.desc"
           :size="34"
+          :align="spellIndex === 0 ? 'start' : 'end'"
         />
       </view>
     </view>
@@ -53,6 +55,7 @@
           meta="云游图鉴 · 升级形态"
           :desc="build.displayStarterItem.desc"
           :size="34"
+          align="start"
         />
         <IconChip
           v-else
@@ -61,6 +64,7 @@
           :meta="`${build.starterItem.gold} 金币`"
           :desc="build.starterItem.desc"
           :size="34"
+          align="start"
         />
       </view>
     </view>
@@ -70,13 +74,14 @@
       <text class="section__label">成装</text>
       <view class="row row--items">
         <IconChip
-          v-for="item in build.legendaryItems"
+          v-for="(item, itemIndex) in build.legendaryItems"
           :key="item.id"
           :icon="item.icon"
           :name="item.name"
           :meta="`${item.gold} 金币`"
           :desc="item.desc"
           :size="34"
+          :align="itemIndex === 0 ? 'start' : 'center'"
         />
         <view class="row__gap" />
         <IconChip
@@ -86,6 +91,7 @@
           :desc="build.boots.desc"
           :size="34"
           accent
+          align="end"
         />
       </view>
     </view>
@@ -109,23 +115,27 @@
           meta="主系"
           :size="26"
           accent
+          align="start"
         />
         <IconChip
           :icon="build.runes.keystone.icon"
           :name="build.runes.keystone.name"
           meta="基石"
+          :detail="build.runes.keystone.long"
           :desc="build.runes.keystone.short"
           :size="30"
           accent
         />
         <IconChip
-          v-for="rune in build.runes.primaryMinors"
+          v-for="(rune, runeIndex) in build.runes.primaryMinors"
           :key="rune.id"
           :icon="rune.icon"
           :name="rune.name"
           meta="主系小符文"
+          :detail="rune.long"
           :desc="rune.short"
           :size="26"
+          :align="runeIndex === build.runes.primaryMinors.length - 1 ? 'end' : 'center'"
         />
       </view>
 
@@ -136,15 +146,18 @@
           :name="build.runes.secondaryStyle.name"
           meta="副系"
           :size="26"
+          align="start"
         />
         <IconChip
-          v-for="rune in build.runes.secondaryMinors"
+          v-for="(rune, runeIndex) in build.runes.secondaryMinors"
           :key="rune.id"
           :icon="rune.icon"
           :name="rune.name"
           meta="副系小符文"
+          :detail="rune.long"
           :desc="rune.short"
           :size="26"
+          :align="runeIndex === build.runes.secondaryMinors.length - 1 ? 'end' : 'center'"
         />
       </view>
     </view>
@@ -159,8 +172,10 @@
           :icon="shard.icon"
           :name="shard.name"
           :meta="shardRowLabel(index)"
-          :desc="shard.long"
+          :detail="shard.long"
+          :desc="shard.short"
           :size="28"
+          :align="index === 0 ? 'start' : index === build.shards.length - 1 ? 'end' : 'center'"
         />
       </view>
     </view>

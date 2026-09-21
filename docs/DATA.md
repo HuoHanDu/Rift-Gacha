@@ -144,7 +144,7 @@
 // ItemRef
 { "id": "3031", "name": "无尽之刃", "icon": "https://.../item/3031.png",
   "gold": 3500, "types": ["CriticalStrike","Damage"],
-  "desc": "…纯文本（已剥标签）", "descHtml": "…原始 HTML（资料卡用）" }
+  "desc": "…纯文本（已剥标签）" }
 
 // runes.json
 { "styles": [{ "id": "8000", "name": "精密", "icon": "…",
@@ -160,7 +160,8 @@
 [{ "id": "4", "name": "闪现", "icon": "…", "desc": "…", "cooldown": "300" }]
 ```
 
-> `description` 里含 `<mainText>`、`<attention>`、`<br>` 等游戏内富文本标签。快照同时保留 `desc`（剥标签纯文本，用于 `HoverCard` 的纯文本行）与 `descHtml`（原始串，若将来要还原官方样式再用）。
+> `description` 里含 `<mainText>`、`<attention>`、`<br>` 等游戏内富文本标签。快照只保留剥标签后的 `desc`（纯文本，资料卡直接上屏）。
+> 原始 HTML **不保留**：它是 `desc` 的 3.5 倍体积（约 36 KB vs 10 KB），而 v1 的界面完全用不到——需要还原官方样式时再重新抓一次即可。
 
 ---
 

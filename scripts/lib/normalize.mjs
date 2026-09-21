@@ -176,7 +176,6 @@ export function normalizeItems(rawItems, rawItemsExt) {
     gold: Number(item.total ?? item.price ?? 0),
     types: toArray(item.types).map(String),
     desc: firstNonEmpty(stripHtml(item.description), item.plaintext, item.item_desc),
-    descHtml: item.description ?? '',
   })
 
   const boots = SPEC.boots.map((id) => toRef(get(id)))

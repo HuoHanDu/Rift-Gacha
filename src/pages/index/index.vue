@@ -73,12 +73,12 @@
           <view v-for="(player, index) in players" :key="index" class="row">
             <text class="row__no">{{ String(index + 1).padStart(2, '0') }}</text>
             <input
+              v-model="player.name"
               class="row__name"
               type="text"
-              :value="player.name"
               placeholder="玩家名（选填）"
               placeholder-class="row__name-ph"
-              @input="onNameInput(index, $event)"
+              @input="clearOutcome"
             />
             <view class="seg seg--compact">
               <view
@@ -184,6 +184,11 @@ const teamMode = ref(false)
 const splitTeamsRandomly = ref(true)
 const banSmite = ref(true)
 
+/**
+ * 玩家名走 `v-model`（而不是 `:value` + 手写 `@input`）：`v-model` 编译成 Vue 的 vModelText，
+ * 它会处理 IME 组合事件（compositionstart / compositionend），中文输入法下不会被回写打断候选。
+ * 模板上额外挂的 `@input="clearOutcome"` 只负责在改名字时清掉上一次的结果。
+ */
 const players = reactive<EditablePlayer[]>([{ name: '' }])
 
 const results = ref<BuildResult[]>([])
@@ -227,14 +232,6 @@ function setPosition(index: number, position: Position | undefined) {
 
 function setTeam(index: number, team: TeamId) {
   players[index].team = team
-  clearOutcome()
-}
-
-/** uni-app 的 `<input>` 在小程序端把值放在 `event.detail.value`，H5 端在 `event.target.value`。 */
-function onNameInput(index: number, event: Event) {
-  const detail = (event as unknown as { detail?: { value?: string } }).detail
-  const target = event.target as unknown as { value?: string } | null
-  players[index].name = String(detail?.value ?? target?.value ?? '')
   clearOutcome()
 }
 
