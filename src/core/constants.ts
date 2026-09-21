@@ -21,6 +21,12 @@ export const POSITION_LABELS: Record<Position, string> = {
 /** 每队人数上限。 */
 export const TEAM_SIZE = 5
 
+/** docs/RULES.md §5.2 —— 成装件数。 */
+export const LEGENDARY_ITEM_COUNT = 6
+
+/** docs/RULES.md §6.3 —— 副系随机选中的排数。 */
+export const SECONDARY_MINOR_SLOT_COUNT = 2
+
 /** 单队模式的人数上限；双队模式是它的两倍。 */
 export const MAX_TEAMS: readonly TeamId[] = [1, 2]
 

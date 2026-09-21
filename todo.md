@@ -9,7 +9,7 @@
 | --- | --- | --- |
 | P0 | 环境与仓库 | ✅ 完成 |
 | P1 | 数据流水线与快照 | ✅ 完成 |
-| P2 | 随机引擎（`core/`）+ 单元测试 | ☐ |
+| P2 | 随机引擎（`core/`）+ 单元测试 | ✅ 完成 |
 | P3 | 展示层（页面 / 卡片 / 资料卡） | ☐ |
 | P4 | 端到端验证与打磨 | ☐ |
 | P5 | 部署文档与 README | ☐ |
@@ -69,29 +69,32 @@
 
 > 本阶段**不碰 UI**。`core/` 不得 import Vue / uni-app / DOM，也不得直接 import `src/data/*.json`（数据以 `DataBundle` 注入）。
 
-- [ ] **P2.1 `core/types.ts` + `core/random.ts`**
-  - 全部对外类型；`createRng(seed)`（mulberry32）、`pick`、`pickMany`（无放回）、`shuffle`、`defaultRng`。
-  - **完成判据**：`tests/random.test.ts` 覆盖：同 seed 序列一致、`pickMany` 不重复且不越界、`shuffle` 是排列、`pick` 覆盖全池。
+- [x] **P2.1 `core/types.ts` + `core/random.ts`**
+  - `types.ts` 是全项目类型唯一出处（P1 已建）；`constants.ts` 放运行时常量与固定映射。
+  - `random.ts`：`createRng`(mulberry32)、`pick`、`pickMany`（无放回）、`shuffle`、`pickFromGroups`、`createRandomSeed`。
+  - **完成判据**：`tests/random.test.ts` 18 个用例通过。✅
 
-- [ ] **P2.2 `core/validate.ts` + `core/positions.ts`**
-  - `docs/RULES.md` §1 的 V1~V5；§2 的位置分配。
-  - **完成判据**：`tests/validate.test.ts` 覆盖人数越界、人数≠位置数、同队重复位置、每队位置恰好 5 个不同值、指定位置被尊重。
+- [x] **P2.2 `core/validate.ts` + `core/positions.ts`**
+  - V1~V6（`NO_PLAYERS`/`TOO_MANY_PLAYERS`/`MISSING_TEAM`/`TOO_MANY_PER_TEAM`/`DUPLICATE_POSITION`/`NOT_ENOUGH_CHAMPIONS`）。
+  - 随机分队改为**发牌算法**而非「洗牌切两半」：洗牌切两半在 10 人都指定位置时几乎必然撞车；发牌保证每队位置不重复，无解时返回可读错误。
+  - **完成判据**：`tests/validate.test.ts` 11 个 + `tests/positions.test.ts` 12 个用例通过。✅
 
-- [ ] **P2.3 `core/champions.ts` + `core/spells.ts`**
-  - 英雄全场去重；技能按位置与开关取池（`docs/RULES.md` §4）。
-  - **完成判据**：`tests/generate.test.ts` 断言打野必含惩戒、非打野开关开时无惩戒、开关关时允许惩戒、两技能不重复、多人英雄不重复。
+- [x] **P2.3 `core/champions.ts` + `core/spells.ts`**
+  - 英雄全场去重（`usedHeroIds` 由编排层持有）；技能按位置与开关取池。
+  - **完成判据**：`tests/generate.test.ts` 覆盖打野必带惩戒、开关开时非打野无惩戒、开关关时可出现惩戒、两技能不重复、多人英雄不重复。✅
 
-- [ ] **P2.4 `core/items.ts`**
-  - 出门装（含辅助展示替换）、六件成装（无放回、107 池）、鞋子（中路升级）（`docs/RULES.md` §5）。
-  - **完成判据**：`tests/items.test.ts` 断言恰好 6 件、互不重复、全在 107 池内、不含任务专属件与鞋子；鞋池正确；中路必为升级款、非中路必为未升级款。
+- [x] **P2.4 `core/items.ts`**
+  - 出门装分流（辅助展示件、打野蛋、8 件通用）、6 件成装（无放回）、鞋子（中路升级）。
+  - **完成判据**：`tests/items.test.ts` 7 个用例，各 500 seed，覆盖全部池与全部鞋型。✅
 
-- [ ] **P2.5 `core/runes.ts`**
-  - 主系 / 副系 / 小符文 / 海克斯闪现罗网约束（`docs/RULES.md` §6）。
-  - **完成判据**：`tests/runes.test.ts` 断言副系≠主系、主系 3 小符文分属 3 个不同排、副系 2 个分属 2 个不同排、小符文每排结果属于该排候选；**扫描 1 万个 seed** 验证 `8306` 出现的充要条件成立。
+- [x] **P2.5 `core/runes.ts`**
+  - 主系 / 副系 / 小符文 / 海克斯科技闪现罗网约束。
+  - **完成判据**：`tests/runes.test.ts` 10 个用例，3000 seed 扫描：无闪现阶段 8306 一次都不出现；有闪现阶段能抽到且主副系必含启迪；「巧具」排 3 个候选都能抽到。✅
 
-- [ ] **P2.6 `core/generate.ts` 编排**
-  - 按 `docs/RULES.md` §8 的固定顺序串起来，返回 `GenerateResult`。
-  - **完成判据**：`tests/generate.test.ts` 断言同 seed 同输入两次运行深比较相等；单人 / 5 人 / 10 人双队（随机分队与预先分队两种）各跑通并满足全部不变量。
+- [x] **P2.6 `core/generate.ts` 编排**
+  - 按 §8 固定顺序串起，返回 `GenerateResult`（错误以 `ok:false` 返回，不抛异常）。
+  - **完成判据**：`tests/generate.test.ts` 15 个用例：同 seed 深比较相等、不传 seed 时返回的 seed 可复现、1/5/10 人（随机分队与预先分队）各 200 seed 全部满足不变量。✅
+  - 全量：**73 个用例通过**，`typecheck` 与 `build:h5` 均通过。
 
 ---
 

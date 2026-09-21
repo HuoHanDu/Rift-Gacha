@@ -42,31 +42,40 @@ interface GenerateInput {
 
 **校验规则**（全部在生成前完成，失败返回结构化错误而非抛异常）：
 
-| 编号 | 规则 |
-| --- | --- |
-| V1 | `teamMode=false` 时 `players.length ∈ [1, 5]` |
-| V2 | `teamMode=true` 时 `players.length ∈ [1, 10]`；分队后每队 ≤ 5 人 |
-| V3 | 同一队内不得出现重复位置（预先指定时） |
-| V4 | 位置数量与人数相等：留空的位置由随机补齐，使每队恰好填满 5 个位置；单队模式人数 < 5 时，只分配玩家数量个互不重复的位置 |
-| V5 | 英雄池容量 173 > 玩家总数，恒成立，不需运行时分支 |
+| 编号 | 规则 | 错误码 |
+| --- | --- | --- |
+| V1 | `players.length ≥ 1` | `NO_PLAYERS` |
+| V2 | 单队 `players.length ≤ 5`；双队 `≤ 10` | `TOO_MANY_PLAYERS` |
+| V3 | `teamMode && !splitTeamsRandomly` 时每个玩家必须已指定队伍 | `MISSING_TEAM` |
+| V4 | 预先分队时每队 `≤ 5` 人 | `TOO_MANY_PER_TEAM` |
+| V5 | 同一队内不得出现重复位置（预先分队时静态判定；随机分队时在「发牌」阶段判定） | `DUPLICATE_POSITION` |
+| V6 | `players.length ≤ 英雄池容量` | `NOT_ENOUGH_CHAMPIONS` |
 
-**单队模式（≤5 人）**：玩家数 N，从 5 个位置中随机取 N 个互不重复的位置；已指定的位置先占位。
+**单队模式**：已指定的位置先占位；其余玩家从「5 个位置 − 已占」里洗牌后依次补齐（人数 < 5 时只取所需个数）。
 
-**双队模式**：
-1. `splitTeamsRandomly=true` → 打乱 `players` 后前 5 人为队伍 1、后 5 人为队伍 2（人数不足 5 时按实际数量）。
-2. `splitTeamsRandomly=false` → 按 `player.team` 分组，校验每队 ≤ 5。
-3. 每队**独立**做与单队模式相同的位置分配。
+**双队模式 + 随机分队**：为保证「每队 5 个位置互不重复」，不能简单地「洗牌后前 5 人一队」——那样很容易出现某队两个上单。实际做法是**发牌**：
+
+1. 打乱玩家顺序（这就是随机性的来源）。
+2. 队伍容量为 `ceil(n/2)` 与 `floor(n/2)`。
+3. 按打乱后的顺序逐个玩家发牌，候选队伍必须同时满足「还有空位」且「没有同位置的队友」；在候选里优先发给当前人数少的一队，并列时随机。
+4. 发不到的（例如 6 个人都要上单）返回 `DUPLICATE_POSITION` 并说明原因——这种输入本身无解。
+5. 未指定位置的玩家先占位，之后再从各队剩余位置里洗牌补齐。
+
+**双队模式 + 预先分队**：按 `player.team` 分组，每队独立做与单队模式相同的分配。
+
+**未指定队伍的玩家兜底算 1 队**（正常流程下 V3 会先拦下来）。
 
 ---
 
 ## 2. 位置分配算法
 
-对每一队：
+对**每一队**：
 
-1. 收集该队中已指定位置的玩家，写入 `taken` 集合。若某个位置被指定两次 → 触发 V3。
-2. `freeSlots = POSITIONS - taken`。
-3. 未指定的玩家列表 `unassigned`（长度必等于 `freeSlots.length`，由 V4 在页面侧保证人数与位置数一致）。
-4. `shuffle(freeSlots, rng)` 后按顺序一一指派给 `unassigned`。
+1. 收集该队中已指定位置的玩家，写入 `taken` 集合。若某个位置被指定两次 → 触发 V5。
+2. `freeSlots = POSITIONS − taken`，洗牌。
+3. 该队未指定位置的玩家按顺序从 `freeSlots` 依次取用（取所需个数即可，队伍不满 5 人时不会取完）。
+
+随机分队模式下，「分队」与「位置分配」是同一个发牌过程，见 §1。
 
 位置与玩家绑定后，后续所有随机都以「玩家 = 位置」为准。
 
@@ -249,7 +258,8 @@ interface BuildResult {
   champion: { heroId: string; name: string; alias: string; title: string; roles: string[] }
   spells: [SpellRef, SpellRef]
   starterItem: ItemRef
-  displayStarterItem?: ItemRef   // 仅辅助：云游图鉴的升级件
+  /** 仅辅助非空：云游图鉴的升级件 */
+  displayStarterItem: ItemRef | null
   legendaryItems: ItemRef[]      // 长度 6
   boots: ItemRef                 // 中路为升级款
   runes: {
