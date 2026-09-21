@@ -90,14 +90,11 @@ lol/
 │   │   ├── runes.ts
 │   │   └── generate.ts
 │   ├── components/
-│   │   ├── PlayerInputRow.vue
-│   │   ├── GlobalOptions.vue
-│   │   ├── BuildCard.vue
-│   │   ├── ItemSlot.vue
-│   │   └── HoverCard.vue
-│   ├── pages/index/index.vue
+│   │   ├── IconChip.vue        # 图标 + 悬停资料卡 + 图标加载失败的兜底
+│   │   └── BuildCard.vue       # 单份结果卡片（参考 hexfuser 排布）
+│   ├── pages/index/index.vue   # 输入面板 + 结果网格（表单状态就地管理）
 │   ├── static/
-│   ├── App.vue
+│   ├── App.vue                 # 全局样式与设计令牌（CSS 自定义属性）
 │   ├── main.ts
 │   ├── manifest.json
 │   ├── pages.json
@@ -120,16 +117,20 @@ lol/
 ## 4. 核心模块接口
 
 ```ts
-// core/types.ts —— 所有对外类型的唯一出处
-export type { Position, PlayerInput, GenerateInput, BuildResult,
+// core/types.ts —— 所有对外类型的唯一出处（只有类型，没有运行时值）
+export type { Position, TeamId, PlayerInput, GenerateInput, BuildResult,
               ValidationError, GenerateResult, DataBundle,
-              ChampionRef, ItemRef, RuneRef, SpellRef, StyleRef }
+              ChampionRef, ItemRef, RuneRef, SpellRef, StyleRef, RunePage }
+
+// core/constants.ts —— 运行时常量：位置顺序、中文标签、惩戒/闪现 ID、海克斯闪现罗网坐标
+export const POSITIONS, POSITION_LABELS, ROLE_LABELS, TEAM_SIZE,
+             LEGENDARY_ITEM_COUNT, SECONDARY_MINOR_SLOT_COUNT, SPELL_IDS, HEXFLASH
 
 // core/generate.ts —— 唯一入口
 export function generateBuilds(
   input: GenerateInput,
   data: DataBundle,
-  opts?: { seed?: number }
+  options?: { seed?: number },
 ): GenerateResult
 
 export type GenerateResult =
@@ -140,9 +141,11 @@ export type GenerateResult =
 export type Rng = () => number
 export function createRng(seed: number): Rng
 export const defaultRng: Rng
+export function createRandomSeed(): number
 export function pick<T>(arr: readonly T[], rng: Rng): T
 export function pickMany<T>(arr: readonly T[], n: number, rng: Rng): T[]  // 无放回
 export function shuffle<T>(arr: readonly T[], rng: Rng): T[]
+export function pickFromGroups<T>(groups: readonly (readonly T[])[], rng: Rng): T
 ```
 
 设计取向：**深模块**——`generateBuilds` 一个函数吞掉整个规则体系，调用方（页面）只需要知道 `GenerateInput` 和 `BuildResult`。规则细节全部封在 `core/` 内部，页面不认识任何 ID 常量。
@@ -151,9 +154,11 @@ export function shuffle<T>(arr: readonly T[], rng: Rng): T[]
 
 ## 5. 状态与展示
 
-- **状态**：页面内 `ref`/`reactive` 即可，不引 Pinia。状态只有三块：输入列表、全局开关、生成结果。
-- **展示**：`BuildCard.vue` 负责单份结果的排布，布局对齐 `hexfuser.com` 的卡片：位置行 → 英雄头像 → 召唤师技能 → 出门装 → 成装一行 + 鞋子 → 符文分隔线 → 主/副系与详细点法 → 三个小符文。
-- **资料卡**：`HoverCard.vue` 用绝对定位浮层实现，内容取自快照里的 `description/shortdesc/longdesc`，不请求任何第三方接口。移动端降级为点击展开。
+- **状态**：全部就地放在 `pages/index/index.vue` 里（`ref`/`reactive`），不引 Pinia。状态只有四块：玩家表单、显示开关、结果、当前 seed。
+- **展示**：`BuildCard.vue` 负责单份结果的排布，布局对齐 `hexfuser.com` 的卡片：表头（序号/名字/位置/队伍）→ 英雄 → 召唤师技能 → 出门装 → 成装一行 + 鞋子 → 符文分隔 → 主/副系与详细点法 → 三个小符文。
+- **资料卡**：`IconChip.vue` 自带的浮层，**纯 CSS `:hover`** 实现，不需要任何 JS 事件绑定。内容取自快照里的 `desc` / `short` / `long`，不请求任何第三方接口。代价是 v1 只对鼠标悬停生效，移动端要改成点击展开（P6）。
+- **图标兜底**：`<image>` 的 `@error` 置一个 flag，渲染成带首字的占位块，避免 CDN 不可达时整卡崩坏。
+- **设计令牌**：颜色只在 `App.vue` 的 `page` 选择器里定义一次（黑钢底 + 单点黄铜色），组件用 `var(--…)` 取用。
 
 ---
 

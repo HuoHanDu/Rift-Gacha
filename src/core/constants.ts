@@ -18,6 +18,16 @@ export const POSITION_LABELS: Record<Position, string> = {
   support: '辅助',
 }
 
+/** 官方英雄定位标签的中文名。 */
+export const ROLE_LABELS: Record<string, string> = {
+  fighter: '战士',
+  tank: '坦克',
+  mage: '法师',
+  assassin: '刺客',
+  marksman: '射手',
+  support: '辅助',
+}
+
 /** 每队人数上限。 */
 export const TEAM_SIZE = 5
 
