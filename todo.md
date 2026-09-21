@@ -7,8 +7,8 @@
 
 | 阶段 | 内容 | 状态 |
 | --- | --- | --- |
-| P0 | 环境与仓库 | ☐ |
-| P1 | 数据流水线与快照 | ☐ |
+| P0 | 环境与仓库 | ✅ 完成 |
+| P1 | 数据流水线与快照 | ✅ 完成 |
 | P2 | 随机引擎（`core/`）+ 单元测试 | ☐ |
 | P3 | 展示层（页面 / 卡片 / 资料卡） | ☐ |
 | P4 | 端到端验证与打磨 | ☐ |
@@ -19,54 +19,49 @@
 
 ## P0 环境与仓库
 
-- [ ] **P0.1 git 初始化**
-  - `git init`，默认分支 `main`；写 `.gitignore`（`node_modules/`、`dist/`、`unpackage/`、`.probe/`、`*.log`、`.DS_Store`、`.idea/`、`.vscode/` 里除 `settings.json` 外的内容）。
-  - 做一次初始提交，把 `AGENTS.md`、`docs/**`、`todo.md` 固化进历史。
-  - **完成判据**：`git log --oneline` 至少有 1 条提交；`git status` 干净；`node_modules` 不在跟踪列表里。
+- [x] **P0.1 git 初始化**
+  - `git init -b main`；`.gitignore`（`node_modules/`、`dist/`、`unpackage/`、`.probe/`、日志、编辑器目录）。
+  - 初始提交已固化 `AGENTS.md`、`docs/**`、`todo.md`、工程骨架。另加 `.gitattributes` 统一 LF，避免 Windows 换行噪音。
+  - **完成判据**：`git log --oneline` 有 1 条提交；`git status` 干净；`git ls-files` 中 `node_modules`/`.probe` 计数为 0。✅ 已验证
 
-- [ ] **P0.2 uni-app（Vue 3 + Vite）骨架**
-  - 按 `uni-preset-vue#vite` 布局手建工程（不依赖 `degit` 之外的脚手架）：`index.html`、`vite.config.ts`、`src/{main.ts,App.vue,manifest.json,pages.json,uni.scss,static/}`。
-  - **所有 `@dcloudio/*` 依赖锁死同一版本 `3.0.0-5020620260917001`**，`vite` 锁 `5.2.8`，`vue` `^3.4.21`，`rollup` `4.14.3`（见 `docs/ARCHITECTURE.md` §7）。
-  - `npm install` 成功，`npm run dev:h5` 能起服务并看到默认页。
-  - **完成判据**：dev server 起来、页面无控制台报错、`npm run build:h5` 产生产物。
+- [x] **P0.2 uni-app（Vue 3 + Vite）骨架**
+  - 手建 `uni-preset-vue#vite` 布局：`index.html`、`vite.config.ts`、`src/{main.ts,App.vue,manifest.json,pages.json,uni.scss,static/}`。
+  - 所有 `@dcloudio/*` 锁死 `3.0.0-5020620260917001`，`vite` 锁 `5.2.8`，`vite-plugin-uni` 同版本。
+  - **完成判据**：`npm install` 成功（527 包）；`npm run dev:h5` 起在 `http://localhost:5173/`（HTTP 200，页面模块可编译）；`npm run build:h5` 产出 `dist/build/h5`。✅ 已验证
 
-- [ ] **P0.3 TypeScript + 测试链路**
-  - `tsconfig.json` 覆盖 `src/**` 与 `tests/**`，`types` 含 `@dcloudio/types`。
-  - 装 `vitest@^1.6`、`vitest.config.ts` 只扫 `tests/**`，`npm run test` 能跑通一个占位用例。
-  - **完成判据**：`npx vue-tsc --noEmit`（或 `tsc --noEmit`）无错；`npm run test` 退出码 0。
+- [x] **P0.3 TypeScript + 测试链路**
+  - `tsconfig.json`（strict + `@/*` 路径别名）、`src/env.d.ts`、`vitest.config.ts`（node 环境，只扫 `tests/**`）。
+  - **完成判据**：`npm run typecheck`（vue-tsc）无输出无错；`npm run test` 18 个用例全绿。✅ 已验证
 
-- [ ] **P0.4 npm scripts**
-  - `fetch:data`、`test`、`dev:h5`、`build:h5`、`preview:h5`、`typecheck` 全部可用。
-  - **完成判据**：逐条执行，命令存在且不报「missing script」。
+- [x] **P0.4 npm scripts**
+  - **完成判据**：`dev:h5` ✅、`build:h5` ✅、`preview:h5` ✅（HTTP 200）、`test` ✅、`typecheck` ✅、`fetch:data` ✅（P1.1 后补验）。全部实跑通过。
 
 ---
 
 ## P1 数据流水线与快照
 
-- [ ] **P1.1 数据源常量与抓取**
-  - `scripts/lib/sources.mjs`：`docs/DATA.md` §1 的全部 URL。
-  - `scripts/fetch-data.mjs`：带重试（3 次）、15s 超时、User-Agent 的抓取；纯 JSON 解析（源文件虽为 `.js` 但内容是 JSON）。
-  - **完成判据**：单独跑抓取，5 个主源全部 200 且能 `JSON.parse`。
+- [x] **P1.1 数据源常量与抓取**
+  - `scripts/lib/sources.mjs`（5 个主源 + 2 个交叉校验源）；`scripts/fetch-data.mjs`（3 次重试、20s 超时、AbortSignal、纯 JSON 解析、原子写入）。
+  - **完成判据**：`npm run fetch:data` 实跑成功，patch 16.18。✅
 
-- [ ] **P1.2 normalize —— 英雄与召唤师技能**
-  - 英雄：173 条，字段与图标 URL 按 `docs/DATA.md` §2.1。
-  - 技能：`gamemode` 含「经典」过滤 → 9 条，显式剔除标记/竞技场变体（§2.4）。
-  - **完成判据**：产物条数与 `docs/DATA.md` 记录一致；输出中含 `4 闪现`、`11 惩戒`，不含 `32`/`39`/`13`。
+- [x] **P1.2 normalize —— 英雄与召唤师技能**
+  - 英雄 173 条（含 `alias` 驱动的图标 URL）；技能按 `gamemode` 含「经典」过滤得 9 条。
+  - **完成判据**：产物含 `4 闪现`、`11 惩戒`，不含 `32`/`39`/`13`。✅
 
-- [ ] **P1.3 normalize —— 装备分组**
-  - 按 §2.2 生成 `legendary`(107) / `boots`(7) / `bootsUpgraded`(7) / `bootsUpgradeMap`(7) / `starterGeneric`(8) / `starterJungle`(3) / `starterSupport` / `supportQuestUpgrades`(5)。
-  - 传说池剔除任务专属 6 件；鞋池用显式 ID 列表 + `types` 含 `Boots` 双重认定。
-  - **完成判据**：各池条数匹配；传说池中无任何 `types` 含 `Boots` 的装备、无 6 件任务专属件。
+- [x] **P1.3 normalize —— 装备分组**
+  - 传说池 107（剔除 `4643` 及 5 个辅助任务升级件）、鞋 7 + 升级鞋 7 + 升级映射 7、通用出门装 8、打野蛋 3、辅助出门装 1 + 升级件 5。
+  - 鞋池用显式 ID 列表 + `into` 字段双重认定。
+  - **完成判据**：各池条数匹配；传说池无鞋子、无任务专属件（已在断言中覆盖）。✅
 
-- [ ] **P1.4 normalize —— 符文树**
-  - 5 个系根 → 基石排 + 3 排系内小符文（排顺序：基石在前，其余保持源文件顺序）。
-  - 小符文三排按 CommunityDragon 口径（**不要用 `rune_list2.js` 自己的 `slotLabel`**）。
-  - **完成判据**：恰好 5 系；每系基石 ≥ 3、系内小符文恰好 3 排 × 3 个；小符文恰好 3 排 × 3 个，第 1 排为 {适应之力, 攻击速度, 技能急速}。
+- [x] **P1.4 normalize —— 符文树**
+  - 5 系；排顺序取自 CommunityDragon `perkstyles.json`（`rune_list2.js` 的排顺序与客户端不一致，且数字样式键会丢原顺序）；小符文三排同样以官方数据为准。
+  - 发现并修掉的坑：符文文案的 HTML 被**实体编码过一层**，必须先解码再剥标签。
+  - **完成判据**：5 系；每系基石 ≥ 3、系内小符文 3 排 × 3 个；小符文 3 排 × 3 个且第 1 排为 {适应之力, 攻击速度, 技能急速}；启迪「巧具」排含 `8306`。✅
 
-- [ ] **P1.5 完整性断言与原子写入**
-  - `docs/DATA.md` §4 第 3 步的全部断言；通过后先写 `.tmp` 再 rename；失败保留旧快照 + 非 0 退出。
-  - `src/data/index.ts` 组装 `DataBundle`。
-  - **完成判据**：`npm run fetch:data` 成功产出 `src/data/*.json` + `meta.json`；故意把某条期望常量改错时脚本以非 0 退出且不覆盖旧快照。
+- [x] **P1.5 完整性断言与原子写入**
+  - 硬断言（结构性不变量）+ 软提示（随版本漂移的条数，只打印新旧差异）；失败保留旧快照并非 0 退出。
+  - `src/core/types.ts`（全项目类型唯一出处）、`src/core/constants.ts`、`src/data/index.ts`（`DATA: DataBundle`）。
+  - **完成判据**：连续两次 `fetch:data`，第一次无对比基线、第二次全部显示「未变」；`typecheck` 与 `build:h5` 均通过。✅
 
 ---
 

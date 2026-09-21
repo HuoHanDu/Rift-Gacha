@@ -16,7 +16,7 @@
 | 装备分类扩展 | `https://game.gtimg.cn/images/lol/act/img/js/items_ext/items_ext.js` | 27 KB | `{ items_ext: [{ item_id, roles, category }] }` |
 | 符文（含树结构） | `https://game.gtimg.cn/images/lol/act/img/js/runeList/rune_list2.js` | 100 KB | `{ rune: { id: node } }` |
 | 召唤师技能 | `https://game.gtimg.cn/images/lol/act/img/js/summonerskillList/summonerskill_list.js` | 18 KB | `{ summonerskill: { id: {...} } }` |
-| 英雄详情（悬停资料卡备用） | `https://game.gtimg.cn/images/lol/act/img/js/hero/{heroId}.js` | ~60 KB/个 | `{ hero, skins, spells, version }` |
+| 英雄详情 | `https://game.gtimg.cn/images/lol/act/img/js/hero/{heroId}.js` | ~60 KB/个 | `{ hero, skins, spells, version }` —— **v1 不抓**，173 个文件太重；悬停资料卡只展示英雄的称号/本名/定位 |
 | 符文交叉校验 | `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/zh_cn/v1/perkstyles.json` | 18 KB | `{ schemaVersion, styles: [...] }` |
 | 符文文案交叉校验 | `.../global/zh_cn/v1/perks.json` | 102 KB | `[{ id, name, shortDesc, longDesc, iconPath }]` |
 
@@ -81,7 +81,10 @@
 | 8300 启迪 | 8351 冰川增幅 / 8360 启封的秘籍 / 8369 先攻 | 巧具、未来、超越 |
 | 8400 坚决 | 8437 不灭之握 / 8439 余震 / 8465 守护者 | 蛮力、抵抗、生机 |
 
-> `rune_list2.js` 里各系的排顺序与官方客户端展示顺序不一致（例如主宰的「狩猎」排在「基石」之前）。normalize 后按「基石排在前，其余 3 排保持源文件顺序」输出。
+> `rune_list2.js` 里各系的**排顺序与官方客户端展示顺序不一致**（例如主宰的「狩猎」排在「基石」之前，精密是 英武/战斗/传说 而官方是 英武/传说/战斗）。而且各排的 `childs` 是以符文 ID（数字样式的字符串）为键的对象，JS 会按数值升序迭代，源顺序本来也读不出来。
+> 因此 **normalize 的排顺序一律取自 CommunityDragon 的 `perkstyles.json`**（`slots` 数组即官方顺序），`rune_list2.js` 只负责提供名称、图标与文案。两者按符文 ID 对齐，对不上即报错。
+
+- **符文文案的坑**：`shortdesc` / `longdesc` 里的 HTML 被**实体编码过一层**（换行是 `&lt;br&gt;`，少数符文甚至是二次编码 `&amp;lt;`）。所以 `stripHtml` 必须**先解码实体、再剥标签**，否则页面上会直接显示 `<br>` 字面量。另外行内标签（`<b>`/`<i>`/`<speed>`/`<lol-uikit-tooltipped-keyword>`）要删而不补空格，否则会把词切开。
 
 - **小符文三排**（以 CommunityDragon 为准，`rune_list2.js` 自己的 `slotLabel` 标注有误，不要用）：
 
@@ -151,6 +154,7 @@
 
 // RuneRef
 { "id": "8005", "name": "强攻", "icon": "…", "short": "…", "long": "…" }
+// short / long 均已剥掉游戏内富文本，是可直接上屏的纯文本
 
 // spells.json
 [{ "id": "4", "name": "闪现", "icon": "…", "desc": "…", "cooldown": "300" }]
@@ -168,20 +172,32 @@ npm run fetch:data        # 抓取 → 写 src/data/*.json + meta.json
 
 脚本行为：
 
-1. 顺序拉取 §1 的 5 个主数据源（每个 3 次重试、15s 超时），以及 CommunityDragon 的两个校验源。
+1. **并行**拉取 §1 的 5 个主数据源与 2 个交叉校验源（每个 3 次重试、20s 超时、指数退避）。
 2. 执行 §2 的 normalize，得到各池。
-3. **完整性断言**（任一失败即中止，不写文件、不破坏旧快照）：
-   - 英雄数 ≥ 150
-   - 传说池 = 107 且不含任务专属 6 件、不含任何 `types` 含 `Boots` 的装备
-   - 未升级鞋恰好 7、升级鞋恰好 7、`bootsUpgradeMap` 覆盖全部 7 双
-   - 符文系恰好 5，每系基石 ≥ 3，每系系内小符文排恰好 3 排 × 3 个
-   - 小符文排恰好 3 排 × 3 个，且第 1 排为 {适应之力, 攻击速度, 技能急速}
-   - 峡谷召唤师技能中必须含 `4 闪现` 与 `11 惩戒`，且不含 `32`/`39`/`13`
-   - 与 CommunityDragon 交叉校验：5 个系 ID 与各系基石 ID 集合一致
-4. 断言全过后原子写入（先写 `.tmp` 再 rename）。
-5. 失败时在控制台打印**具体是哪条断言、期望值、实际值**，保留旧快照，并以非 0 退出码结束。
+3. **校验**（见下），失败即中止：不写任何文件、保留旧快照、非 0 退出码。
+4. 校验通过后**原子写入**（先写 `.json.tmp` 再 rename）。
+5. 与上一次的 `meta.json` 对比各池条数，打印差异。这条只是提示，不失败。
 
-因为阈值是硬编码的，**版本更新导致数量变化时脚本会失败**——这是有意为之：宁可让人来看一眼，也不要静默地把口径漂移写进快照。届时改 `scripts/lib/normalize.mjs` 里的期望常量并同步 `docs/RULES.md` 与 `AGENTS.md` 的版本口径。
+### 校验分两级
+
+**硬断言（结构性不变量，不满足即失败）**
+
+口径出了问题就一定会踩到这些，与版本无关：
+
+- 英雄数 ≥ 150；英雄 ID 无重复；每个英雄都有 `alias`（否则图标 URL 拼不出来）
+- 未升级鞋 = 7、升级鞋 = 7、升级映射 = 7 条且 `from ≠ to`；升级款与升级映射闭合
+- 通用出门装 = 8、打野蛋 = 3、辅助任务升级件 = 5
+- 传说池非空、ID 无重复、**不含任何 `types` 含 `Boots` 的装备**、**不含 6 件任务专属件**
+- 符文系 = 5；每系基石 ≥ 3、系内小符文 = 3 排 × 3 个
+- 小符文 = 3 排 × 3 个，且三排的名称与 ID 构成与登记口径逐项一致
+- 启迪系存在「巧具」排，且该排含 `8306` 海克斯科技闪现罗网
+- 峡谷召唤师技能 = 9，必含 `4 闪现` 与 `11 惩戒`，不含 `32`/`39`/`13`
+- 各系挂载的小符文三排内容必须完全一致（不一致说明官方改了结构）
+
+**软提示（随版本正常变化，只打印差异）**
+
+- 英雄数、传说池条数、以及所有池的条数变化都会以 `← 上次 N` 的形式打印出来。
+- 因为阈值硬编码，**结构性口径变化时脚本会失败**——这是有意为之：宁可让人来看一眼，也不要静默地把漂移写进快照。此时改 `scripts/lib/normalize.mjs` 的 `SPEC` 常量，并同步本文与 `docs/RULES.md`、`AGENTS.md` 的版本口径。
 
 ---
 

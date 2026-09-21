@@ -1,0 +1,25 @@
+{
+  "patch": "16.18",
+  "fetchedAt": "2026-09-21T18:27:43.454Z",
+  "counts": {
+    "champions": 173,
+    "legendary": 107,
+    "boots": 7,
+    "bootsUpgraded": 7,
+    "starterGeneric": 8,
+    "starterJungle": 3,
+    "supportQuestUpgrades": 5,
+    "spells": 9,
+    "styles": 5,
+    "shardRows": 3
+  },
+  "sources": {
+    "champions": "https://game.gtimg.cn/images/lol/act/img/js/heroList/hero_list.js",
+    "items": "https://game.gtimg.cn/images/lol/act/img/js/items/items.js",
+    "itemsExt": "https://game.gtimg.cn/images/lol/act/img/js/items_ext/items_ext.js",
+    "runes": "https://game.gtimg.cn/images/lol/act/img/js/runeList/rune_list2.js",
+    "spells": "https://game.gtimg.cn/images/lol/act/img/js/summonerskillList/summonerskill_list.js",
+    "perkStyles": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/zh_cn/v1/perkstyles.json",
+    "perks": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/zh_cn/v1/perks.json"
+  }
+}

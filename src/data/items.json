@@ -1,0 +1,1917 @@
+{
+  "legendary": [
+    {
+      "id": "2065",
+      "name": "舒瑞娅的战歌",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/2065.png",
+      "gold": 2200,
+      "types": [
+        "AbilityHaste",
+        "Active",
+        "CooldownReduction",
+        "ManaRegen",
+        "NonbootsMovement",
+        "SpellDamage"
+      ],
+      "desc": "50法术强度 15技能急速 4%移动速度 125%基础法力回复 鼓舞演讲 为附近友军们提供持续4秒的30%移动速度。",
+      "descHtml": "<mainText><stats><attention>50</attention>法术强度<br><attention>15</attention>技能急速<br><attention>4%</attention>移动速度<br><attention>125%</attention>基础法力回复</stats><br><br> <active>鼓舞演讲</active><br>为附近友军们提供持续4秒的<speed>30%移动速度</speed>。</mainText>"
+    },
+    {
+      "id": "2501",
+      "name": "霸王血铠",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/2501.png",
+      "gold": 3300,
+      "types": [
+        "Damage",
+        "Health"
+      ],
+      "desc": "30攻击力 550生命值 专横 获得相当于你2.5%额外生命值的攻击力。 报复 获得基于你的百分比已损失生命值的12%攻击力提升。",
+      "descHtml": "<mainText><stats><attention>30</attention>攻击力<br><attention>550</attention>生命值</stats><br><br><passive>专横</passive><br>获得相当于你2.5%<healing>额外生命值</healing>的<scaleAD>攻击力</scaleAD>。<br><br><passive>报复</passive><br>获得基于你的百分比已损失生命值的12%<scaleAD>攻击力</scaleAD>提升。</mainText>"
+    },
+    {
+      "id": "2502",
+      "name": "无终恨意",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/2502.png",
+      "gold": 2800,
+      "types": [
+        "AbilityHaste",
+        "Armor",
+        "CooldownReduction",
+        "Health"
+      ],
+      "desc": "400生命值 50护甲 15技能急速 苦楚 在与英雄的战斗状态下，每4秒对附近的敌方英雄们造成魔法伤害，并治疗自身相当于250%已造成伤害的生命值。",
+      "descHtml": "<mainText><stats><attention>400</attention>生命值<br><attention>50</attention>护甲<br><attention>15</attention>技能急速</stats><br><br><passive>苦楚</passive><br>在与英雄的战斗状态下，每4秒对附近的敌方英雄们造成<magicDamage>魔法伤害</magicDamage>，并治疗自身<healing>相当于250%已造成伤害的生命值</healing>。</mainText>"
+    },
+    {
+      "id": "2503",
+      "name": "黯炎火炬",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/2503.png",
+      "gold": 2800,
+      "types": [
+        "AbilityHaste",
+        "CooldownReduction",
+        "Mana",
+        "SpellDamage"
+      ],
+      "desc": "80法术强度 600法力 20技能急速 邪焰 伤害型技能造成额外魔法伤害，持续3秒。 黯炎 被你的邪焰影响的每个敌方英雄、史诗级野怪和大型野怪都会为你提供4%法术强度。",
+      "descHtml": "<mainText><stats><attention>80</attention>法术强度<br><attention> 600</attention>法力<br><attention>20</attention>技能急速</stats><br><br><passive>邪焰</passive><br>伤害型技能造成<magicDamage>额外魔法伤害</magicDamage>，持续3秒。<br><br><passive>黯炎</passive><br>被你的<passive>邪焰</passive>影响的每个敌方英雄、史诗级野怪和大型野怪都会为你提供<scaleAP>4%法术强度</scaleAP>。</mainText>"
+    },
+    {
+      "id": "2504",
+      "name": "败魔",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/2504.png",
+      "gold": 2900,
+      "types": [
+        "Health",
+        "HealthRegen",
+        "SpellBlock"
+      ],
+      "desc": "400生命值 80魔法抗性 100%基础生命回复 法师之祸 如果连续15秒没有受到魔法伤害，获得魔法护盾。",
+      "descHtml": "<mainText><stats><attention>400</attention>生命值<br><attention>80</attention>魔法抗性<br><attention>100%</attention>基础生命回复</stats><br><br><passive>法师之祸</passive><br>如果连续15秒没有受到魔法伤害，获得<shield>魔法护盾</shield>。 </mainText>"
+    },
+    {
+      "id": "2510",
+      "name": "黄昏与黎明",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/2510.png",
+      "gold": 3100,
+      "types": [
+        "AbilityHaste",
+        "AttackSpeed",
+        "Health",
+        "OnHit",
+        "SpellDamage"
+      ],
+      "desc": "300生命值 60法术强度 20技能急速 20%攻击速度 咒刃 施放技能后，你的下一次攻击会造成0额外魔法伤害并治疗你自身0 攻击特效然后将攻击特效施加额外的一次。",
+      "descHtml": "<mainText><stats><attention>300</attention>生命值<br><attention>60</attention>法术强度<br><attention>20</attention>技能急速<br><attention>20%</attention>攻击速度</stats><br><br><passive>咒刃</passive> <br>施放技能后，你的下一次攻击会造成<magicDamage>0额外魔法伤害</magicDamage>并<healing>治疗你自身0</healing> <OnHit>攻击特效</OnHit>然后将<OnHit>攻击特效</OnHit>施加额外的一次。</mainText>"
+    },
+    {
+      "id": "2512",
+      "name": "猎魔人弩箭",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/2512.png",
+      "gold": 2650,
+      "types": [
+        "AbilityHaste",
+        "AttackSpeed",
+        "CriticalStrike",
+        "NonbootsMovement"
+      ],
+      "desc": "45%攻击速度 25%暴击几率 4%移动速度 守夜 获得30终极技能急速。 开战弹幕 在施放你的终极技能后，你的下3次攻击获得50%攻击速度并且必定产生暴击，造成你的80%常规暴击伤害，持续8秒。如果一次攻击本应暴击，则此攻击转而造成15%额外真实伤害。",
+      "descHtml": "<mainText><stats><attention>45%</attention>攻击速度<br><attention>25%</attention>暴击几率<br><attention>4%</attention>移动速度</stats><br><br><passive>守夜</passive><br>获得30终极技能急速。<br><br><passive>开战弹幕</passive> <br>在施放你的终极技能后，你的下3次攻击获得<attackSpeed>50%攻击速度</attackSpeed>并且必定产生暴击，造成你的80%常规暴击伤害，持续8秒。如果一次攻击本应暴击，则此攻击转而造成<trueDamage>15%额外真实伤害</trueDamage>。</mainText>"
+    },
+    {
+      "id": "2517",
+      "name": "无穷饥渴",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/2517.png",
+      "gold": 3100,
+      "types": [
+        "AbilityHaste",
+        "Damage",
+        "LifeSteal",
+        "SpellVamp",
+        "Tenacity"
+      ],
+      "desc": "65攻击力 5%全能吸血 20%韧性 饥馑 获得技能急速，基于你的额外攻击力。 盛宴 如果一名在近期曾被你造成过伤害的英雄阵亡，则获得持续适中时长的全能吸血。",
+      "descHtml": "<mainText><stats><attention>65</attention>攻击力<br><attention> 5%</attention>全能吸血<br><attention>20%</attention>韧性</stats><br><br><passive>饥馑</passive><br>获得技能急速，基于你的额外攻击力。<br><br><passive>盛宴</passive><br>如果一名在近期曾被你造成过伤害的英雄阵亡，则获得持续适中时长的全能吸血。 </mainText>"
+    },
+    {
+      "id": "2520",
+      "name": "破垒者",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/2520.png",
+      "gold": 3000,
+      "types": [
+        "AbilityHaste",
+        "ArmorPenetration",
+        "Damage"
+      ],
+      "desc": "55攻击力 22穿甲 15技能急速 成型炸药 (0秒) 对一个英雄或史诗级野怪造成技能伤害时，会造成额外的0真实伤害。 破坏 参与击杀一个在3秒内被你造成过伤害的英雄后，提供持续90秒的【蓄意破坏】。在你拥有【蓄意破坏】时，你对史诗级野怪或防御塔的下一次攻击会在3秒里持续造成额外0真实伤害。",
+      "descHtml": "<mainText><stats><attention>55</attention>攻击力<br><attention> 22</attention>穿甲<br><attention>15</attention>技能急速</stats><br><br><passive>成型炸药</passive>  (0秒)<br>对一个英雄或史诗级野怪造成技能伤害时，会造成额外的<trueDamage>0真实伤害</trueDamage>。<br><br><passive>破坏</passive><br>参与击杀一个在3秒内被你造成过伤害的英雄后，提供持续90秒的【蓄意破坏】。在你拥有【蓄意破坏】时，你对史诗级野怪或防御塔的下一次攻击会在3秒里持续造成额外<trueDamage>0真实伤害</trueDamage>。 </mainText>"
+    },
+    {
+      "id": "2522",
+      "name": "实现器",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/2522.png",
+      "gold": 2800,
+      "types": [
+        "AbilityHaste",
+        "Mana",
+        "SpellDamage"
+      ],
+      "desc": "90法术强度 300法力 10技能急速 法力成真 (0秒) 在8秒的持续期间里，你的法力值获得强化。在强化状态下，你的技能花费100%额外法力值，你获得额外的0技能伤害、护盾值、治疗效果，并且你的基础技能的冷却时间转速加快30%。",
+      "descHtml": "<mainText><stats><attention>90</attention>法术强度<br><attention> 300</attention>法力<br><attention>10</attention>技能急速</stats><br><br> <active>法力成真</active>  (0秒)<br>在8秒的持续期间里，你的法力值获得强化。在强化状态下，你的技能花费100%额外法力值，你获得额外的0技能伤害、护盾值、治疗效果，并且你的基础技能的冷却时间转速加快30%。</mainText>"
+    },
+    {
+      "id": "2523",
+      "name": "海克斯镜片 C44",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/2523.png",
+      "gold": 2800,
+      "types": [
+        "CriticalStrike",
+        "Damage"
+      ],
+      "desc": "55攻击力 25%暴击几率 高倍望远镜 攻击造成至多10%额外伤害，基于敌人离你有多远 (在500码时达到最大伤害)。 奥术瞄准 当一个你在3秒内造成过伤害的英雄阵亡时，你获得持续8秒的100额外攻击距离。",
+      "descHtml": "<mainText><stats><attention>55</attention>攻击力<br><attention>25%</attention>暴击几率</stats><br><br><passive>高倍望远镜</passive><br>攻击造成至多10%额外伤害，基于敌人离你有多远 (在500码时达到最大伤害)。<br><br><passive>奥术瞄准</passive><br>当一个你在3秒内造成过伤害的英雄阵亡时，你获得持续8秒的100额外攻击距离。 </mainText>"
+    },
+    {
+      "id": "2524",
+      "name": "班德尔音管",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/2524.png",
+      "gold": 2300,
+      "types": [
+        "AbilityHaste",
+        "Armor",
+        "AttackSpeed",
+        "Health",
+        "NonbootsMovement",
+        "SpellBlock"
+      ],
+      "desc": "200生命值 15技能急速 20护甲 20魔法抗性 嘹亮旋律 减速或定身一个敌方英雄时会提供一个持续0秒的【嘹亮旋律】。【嘹亮旋律】会为你提供20移动速度。当你拥有【嘹亮旋律】时，附近的友军，包括你自己，获得0攻击速度。",
+      "descHtml": "<mainText><stats><attention>200</attention>生命值<br><attention>15</attention>技能急速<br><attention>20</attention>护甲<br><attention>20</attention>魔法抗性</stats><br><br><passive>嘹亮旋律</passive><br><keyword>减速</keyword>或<keyword>定身</keyword>一个敌方英雄时会提供一个持续0秒的【嘹亮旋律】。【嘹亮旋律】会为你提供<speed>20移动速度</speed>。当你拥有【嘹亮旋律】时，附近的友军，包括你自己，获得<attackSpeed>0攻击速度</attackSpeed>。</mainText>"
+    },
+    {
+      "id": "2525",
+      "name": "原生质护带",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/2525.png",
+      "gold": 2600,
+      "types": [
+        "AbilityHaste",
+        "Health",
+        "NonbootsMovement",
+        "Tenacity"
+      ],
+      "desc": "600生命值 20技能急速 救主灵刃 (0秒) 在受到将使你的生命值跌到30%以下的伤害时，获得持续5秒的0最大生命值，然后在此期间持续治疗0生命值。在回复生命值状态下，你获得15%体型增长、10%移动速度、以及25%韧性。",
+      "descHtml": "<mainText><stats><attention>600</attention>生命值<br><attention>20</attention>技能急速</stats><br><br><passive>救主灵刃</passive>  (0秒)<br>在受到将使你的生命值跌到30%以下的伤害时，获得持续5秒的<health>0最大生命值</health>，然后在此期间持续治疗<health>0生命值</health>。在回复生命值状态下，你获得15%体型增长、10%移动速度、以及25%韧性。 </mainText>"
+    },
+    {
+      "id": "2526",
+      "name": "耳语头环",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/2526.png",
+      "gold": 2250,
+      "types": [
+        "Health",
+        "Mana",
+        "ManaRegen"
+      ],
+      "desc": "200生命值 8%治疗和护盾强度 75%基础法力回复 300法力 和谐 获得0%治疗和护盾强度。 法力流 (8秒，最大5层) 技能在命中时会提供4最大法力值(对英雄时翻倍)。 在360最大法力值时转变为歌之权冠。",
+      "descHtml": "<mainText><stats><attention>200</attention>生命值<br><attention> 8%</attention>治疗和护盾强度<br><attention>75%</attention>基础法力回复<br><attention> 300</attention>法力</stats><br><br><passive>和谐</passive><br>获得0%治疗和护盾强度。<br><br><passive>法力流</passive>  (8秒，最大5层)<br>技能在命中时会提供<scaleMana>4最大法力值</scaleMana>(对英雄时翻倍)。<br>在<scaleMana>360最大法力值</scaleMana>时转变为<rarityLegendary>歌之权冠</rarityLegendary>。</mainText>"
+    },
+    {
+      "id": "3003",
+      "name": "大天使之杖",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3003.png",
+      "gold": 2900,
+      "types": [
+        "AbilityHaste",
+        "Mana",
+        "SpellDamage"
+      ],
+      "desc": "70法术强度 600法力 25技能急速 敬畏 获得相当于1%额外法力值的法术强度。 法力流 (8秒，最大5层充能) 技能在命中时提供5最大法力值(对英雄时翻倍)。 在360最大法力值时转变为炽天使之拥。",
+      "descHtml": "<mainText><stats><attention>70</attention>法术强度<br><attention> 600</attention>法力<br><attention>25</attention>技能急速</stats><br><br><passive>敬畏</passive><br>获得相当于<scaleMana>1%额外法力值</scaleMana>的法术强度。<br><br><passive>法力流</passive> (8秒，最大5层充能)<br>技能在命中时提供<scaleMana>5最大法力值</scaleMana>(对英雄时翻倍)。<br>在<scaleMana>360最大法力值</scaleMana>时转变为<rarityLegendary>炽天使之拥</rarityLegendary>。</mainText>"
+    },
+    {
+      "id": "3004",
+      "name": "魔宗",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3004.png",
+      "gold": 2900,
+      "types": [
+        "AbilityHaste",
+        "CooldownReduction",
+        "Damage",
+        "Mana",
+        "OnHit"
+      ],
+      "desc": "35攻击力 500法力 15技能急速 敬畏 获得0额外攻击力。 法力流 (8秒，最大4层) 普攻和技能在命中时会提供3最大法力值(对英雄时翻倍)。 在360最大法力值时转变为魔切。",
+      "descHtml": "<mainText><stats><attention>35</attention>攻击力<br><attention> 500</attention>法力<br><attention>15</attention>技能急速</stats><br><br><passive>敬畏</passive><br>获得<scaleAD>0额外攻击力</scaleAD>。<br><br><passive>法力流</passive>  (8秒，最大4层)<br>普攻和技能在命中时会提供<scaleMana>3最大法力值</scaleMana>(对英雄时翻倍)。<br>在<scaleMana>360最大法力值</scaleMana>时转变为<rarityLegendary>魔切</rarityLegendary>。</mainText>"
+    },
+    {
+      "id": "3026",
+      "name": "守护天使",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3026.png",
+      "gold": 3200,
+      "types": [
+        "Armor",
+        "Damage"
+      ],
+      "desc": "55攻击力 45护甲 重生 你的英雄在受到致命伤害时，会在凝滞4秒后原地复活，恢复50%基础生命值和100%最大法力值。",
+      "descHtml": "<mainText><stats><attention>55</attention>攻击力<br><attention>45</attention>护甲</stats><br><br><passive>重生</passive><br>你的英雄在受到致命伤害时，会在<keyword>凝滞</keyword>4秒后原地复活，恢复<healing>50%基础生命值</healing>和<scaleMana>100%最大法力值</scaleMana>。</mainText>"
+    },
+    {
+      "id": "3031",
+      "name": "无尽之刃",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3031.png",
+      "gold": 3500,
+      "types": [
+        "CriticalStrike",
+        "Damage"
+      ],
+      "desc": "75攻击力 25%暴击几率 30%暴击伤害",
+      "descHtml": "<mainText><stats><attention>75</attention>攻击力<br><attention>25%</attention>暴击几率<br><attention>30%</attention>暴击伤害</stats><br><br></mainText>"
+    },
+    {
+      "id": "3032",
+      "name": "育恩塔尔荒野箭",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3032.png",
+      "gold": 3000,
+      "types": [
+        "AttackSpeed",
+        "CriticalStrike",
+        "Damage"
+      ],
+      "desc": "50攻击力 45%攻击速度 0%暴击几率 熟能生巧 攻击时，永久获得暴击几率，至多至25%。 疾风骤雨 攻击一个敌方英雄时，获得持续6秒的30%攻击速度(30秒冷却时间)。 攻击可使这个冷却时间缩短1秒，这个缩减值会在暴击时提升至2秒。",
+      "descHtml": "<mainText><stats><attention>50</attention>攻击力<br><attention>45%</attention>攻击速度<br><attention>0%</attention>暴击几率</stats><br><br><passive>熟能生巧</passive><br>攻击时，永久获得暴击几率，至多至25%。<br><br><passive>疾风骤雨</passive> <br>攻击一个敌方英雄时，获得持续6秒的30%攻击速度(30秒冷却时间)。<br>攻击可使这个冷却时间缩短1秒，这个缩减值会在暴击时提升至2秒。</mainText>"
+    },
+    {
+      "id": "3033",
+      "name": "凡性的提醒",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3033.png",
+      "gold": 3000,
+      "types": [
+        "ArmorPenetration",
+        "CriticalStrike",
+        "Damage"
+      ],
+      "desc": "35攻击力 30%护甲穿透 25%暴击几率 重伤 对敌方英雄造成物理伤害时会施加40%重伤效果，持续3秒。",
+      "descHtml": "<mainText><stats><attention>35</attention>攻击力<br><attention>30%</attention>护甲穿透<br><attention>25%</attention>暴击几率</stats><br><br><passive>重伤</passive><br>对敌方英雄造成物理伤害时会施加<keyword>40%重伤</keyword>效果，持续3秒。</mainText>"
+    },
+    {
+      "id": "3036",
+      "name": "多米尼克领主的致意",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3036.png",
+      "gold": 3300,
+      "types": [
+        "ArmorPenetration",
+        "CriticalStrike",
+        "Damage"
+      ],
+      "desc": "35攻击力 35%护甲穿透 25%暴击几率 巨人杀手 基于敌方英雄的额外生命值，对其至多造成15%额外伤害。最大伤害加成在1500额外生命值时达成。",
+      "descHtml": "<mainText><stats><attention>35</attention>攻击力<br><attention>35%</attention>护甲穿透<br><attention>25%</attention>暴击几率</stats><br><br><passive>巨人杀手</passive><br>基于敌方英雄的额外生命值，对其至多造成15%额外伤害。最大伤害加成在1500额外生命值时达成。</mainText>"
+    },
+    {
+      "id": "3041",
+      "name": "梅贾的窃魂卷",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3041.png",
+      "gold": 1500,
+      "types": [
+        "Health",
+        "NonbootsMovement",
+        "SpellDamage"
+      ],
+      "desc": "20法术强度 100生命值 荣耀 参与击杀后提供荣耀层数，至多至25层。阵亡时损失10层荣耀。 每层荣耀提供5法术强度，并在10层或以上荣耀时提供10%移动速度。",
+      "descHtml": "<mainText><stats><attention>20</attention>法术强度<br><attention>100</attention>生命值</stats><br><br><passive>荣耀</passive><br><keyword>参与击杀</keyword>后提供<passive>荣耀</passive>层数，至多至25层。阵亡时损失10层<passive>荣耀</passive>。<br>每层<passive>荣耀</passive>提供<scaleAP>5法术强度</scaleAP>，并在10层或以上<passive>荣耀</passive>时提供<speed>10%移动速度</speed>。</mainText>"
+    },
+    {
+      "id": "3046",
+      "name": "幻影之舞",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3046.png",
+      "gold": 2650,
+      "types": [
+        "AttackSpeed",
+        "CriticalStrike",
+        "NonbootsMovement"
+      ],
+      "desc": "65%攻击速度 25%暴击几率 10%移动速度 幽影华尔兹变为幽灵状态。",
+      "descHtml": "<mainText><stats><attention>65%</attention>攻击速度<br><attention>25%</attention>暴击几率<br><attention>10%</attention>移动速度</stats><br><br><passive>幽影华尔兹</passive>变为<keyword>幽灵</keyword>状态。</mainText>"
+    },
+    {
+      "id": "3050",
+      "name": "基克的聚合",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3050.png",
+      "gold": 2200,
+      "types": [
+        "AbilityHaste",
+        "Armor",
+        "Health",
+        "SpellBlock"
+      ],
+      "desc": "300生命值 25护甲 25魔法抗性 10技能急速 霜火风暴 施放你的终极技能时会召唤一个风暴环绕于你5秒。这个风暴对敌方英雄们造成每秒30魔法伤害和30%减速。",
+      "descHtml": "<mainText><stats><attention>300</attention>生命值<br><attention>25</attention>护甲<br><attention>25</attention>魔法抗性<br><attention>10</attention>技能急速</stats><br><br><passive>霜火风暴</passive><br>施放你的终极技能时会召唤一个风暴环绕于你5秒。这个风暴对敌方英雄们造成每秒<magicDamage>30魔法伤害</magicDamage>和30%<keyword>减速</keyword>。</mainText>"
+    },
+    {
+      "id": "3053",
+      "name": "斯特拉克的挑战护手",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3053.png",
+      "gold": 3200,
+      "types": [
+        "Damage",
+        "Health",
+        "Tenacity"
+      ],
+      "desc": "400生命值 20%韧性 抓人双爪 获得额外攻击力。 救主灵刃 在受到将使你的生命值跌到30%以下的伤害时，提供持续4.5秒的不断衰减的护盾值。",
+      "descHtml": "<mainText><stats><attention>400</attention>生命值<br><attention>20%</attention>韧性</stats><br><br><passive>抓人双爪</passive><br>获得<scaleAD>额外攻击力</scaleAD>。<br><br><passive>救主灵刃</passive><br>在受到将使你的生命值跌到30%以下的伤害时，提供持续4.5秒的<shield>不断衰减的护盾值</shield>。</mainText>"
+    },
+    {
+      "id": "3065",
+      "name": "振奋盔甲",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3065.png",
+      "gold": 2700,
+      "types": [
+        "AbilityHaste",
+        "CooldownReduction",
+        "Health",
+        "HealthRegen",
+        "SpellBlock"
+      ],
+      "desc": "400生命值 50魔法抗性 10技能急速 100%基础生命回复 无拘活力 你身上的治疗和护盾效果提升25%。",
+      "descHtml": "<mainText><stats><attention>400</attention>生命值<br><attention>50</attention>魔法抗性<br><attention>10</attention>技能急速<br><attention>100%</attention>基础生命回复</stats><br><br><passive>无拘活力</passive><br>你身上的治疗和护盾效果提升25%。</mainText>"
+    },
+    {
+      "id": "3068",
+      "name": "日炎圣盾",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3068.png",
+      "gold": 2800,
+      "types": [
+        "AbilityHaste",
+        "Armor",
+        "Aura",
+        "Health"
+      ],
+      "desc": "350生命值 50护甲 10技能急速 献祭 承受或造成伤害后，每秒对附近敌人造成魔法伤害，持续3秒。",
+      "descHtml": "<mainText><stats><attention>350</attention>生命值<br><attention>50</attention>护甲<br><attention>10</attention>技能急速</stats><br><br><passive>献祭</passive><br>承受或造成伤害后，每秒对附近敌人造成<magicDamage>魔法伤害</magicDamage>，持续3秒。 </mainText>"
+    },
+    {
+      "id": "3071",
+      "name": "黑色切割者",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3071.png",
+      "gold": 3000,
+      "types": [
+        "AbilityHaste",
+        "ArmorPenetration",
+        "CooldownReduction",
+        "Damage",
+        "Health",
+        "NonbootsMovement",
+        "OnHit"
+      ],
+      "desc": "45攻击力 400生命值 20技能急速 切割 对英雄造成物理伤害时会将该目标的护甲降低6%，持续6秒(可叠加5次)。 热烈 造成物理伤害时会提供持续2秒的0移动速度。",
+      "descHtml": "<mainText><stats><attention>45</attention>攻击力<br><attention>400</attention>生命值<br><attention>20</attention>技能急速</stats><br><br><passive>切割</passive><br>对英雄造成<physicalDamage>物理伤害</physicalDamage>时会将该目标的<scaleArmor>护甲降低6%</scaleArmor>，持续6秒(可叠加5次)。<br><br><passive>热烈</passive><br>造成<physicalDamage>物理伤害</physicalDamage>时会提供持续2秒的<speed>0移动速度</speed>。</mainText>"
+    },
+    {
+      "id": "3072",
+      "name": "饮血剑",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3072.png",
+      "gold": 3400,
+      "types": [
+        "Damage",
+        "LifeSteal"
+      ],
+      "desc": "80攻击力 15%生命偷取 灵液护盾 将来自你的生命偷取的溢出治疗效果转化为护盾值。",
+      "descHtml": "<mainText><stats><attention>80</attention>攻击力<br><attention>15%</attention>生命偷取</stats><br><br><passive>灵液护盾</passive><br>将来自你的生命偷取的溢出治疗效果转化为<shield>护盾值</shield>。</mainText>"
+    },
+    {
+      "id": "3073",
+      "name": "海克斯注力刚壁",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3073.png",
+      "gold": 3000,
+      "types": [
+        "AbilityHaste",
+        "AttackSpeed",
+        "CooldownReduction",
+        "Damage",
+        "Health",
+        "NonbootsMovement"
+      ],
+      "desc": "40攻击力 20%攻击速度 450生命值 海克斯充能 获得30终极技能急速。 过载 在施放你的终极技能后，获得持续8秒的0%攻击速度和0%移动速度。",
+      "descHtml": "<mainText><stats><attention>40</attention>攻击力<br><attention>20%</attention>攻击速度<br><attention>450</attention>生命值</stats><br><br><passive>海克斯充能</passive><br>获得30终极技能急速。<br><br><passive>过载</passive> <br>在施放你的终极技能后，获得持续8秒的<attackSpeed>0%攻击速度</attackSpeed>和<speed>0%移动速度</speed>。 </mainText>"
+    },
+    {
+      "id": "3074",
+      "name": "贪欲九头蛇",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3074.png",
+      "gold": 3300,
+      "types": [
+        "AbilityHaste",
+        "CooldownReduction",
+        "Damage",
+        "LifeSteal",
+        "OnHit"
+      ],
+      "desc": "65攻击力 15技能急速 12%生命偷取 顺劈 攻击会对附近的敌人们造成物理伤害。 血斩 对你周围的敌人们造成物理伤害。 你的生命偷取会作用于此伤害。",
+      "descHtml": "<mainText><stats><attention>65</attention>攻击力<br><attention>15</attention>技能急速<br><attention>12%</attention>生命偷取</stats><br><br><passive>顺劈</passive><br>攻击会对附近的敌人们造成<physicalDamage>物理伤害</physicalDamage>。 <active>血斩</active><br>对你周围的敌人们造成<physicalDamage>物理伤害</physicalDamage>。<br>你的生命偷取会作用于此伤害。</mainText>"
+    },
+    {
+      "id": "3075",
+      "name": "荆棘之甲",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3075.png",
+      "gold": 2450,
+      "types": [
+        "Armor",
+        "Health"
+      ],
+      "desc": "150生命值 75护甲 荆棘 在被一次攻击命中后，对攻击者造成魔法伤害，并且如果目标是英雄，还会施加持续3秒的40%重伤效果。",
+      "descHtml": "<mainText><stats><attention>150</attention>生命值<br><attention>75</attention>护甲</stats><br><br><passive>荆棘</passive><br>在被一次攻击命中后，对攻击者造成<magicDamage>魔法伤害</magicDamage>，并且如果目标是英雄，还会施加持续3秒的40%<keyword>重伤</keyword>效果。</mainText>"
+    },
+    {
+      "id": "3078",
+      "name": "三相之力",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3078.png",
+      "gold": 3333,
+      "types": [
+        "AbilityHaste",
+        "AttackSpeed",
+        "CooldownReduction",
+        "Damage",
+        "Health",
+        "NonbootsMovement",
+        "OnHit"
+      ],
+      "desc": "36攻击力 30%攻击速度 333生命值 15技能急速 咒刃 施放技能后，你的下一次普通攻击会造成额外物理伤害攻击特效。 加快 攻击一个单位时会提供持续2秒的20移动速度。",
+      "descHtml": "<mainText><stats><attention>36</attention>攻击力<br><attention>30%</attention>攻击速度<br><attention>333</attention>生命值<br><attention>15</attention>技能急速</stats><br><br><passive>咒刃</passive><br>施放技能后，你的下一次普通攻击会造成<physicalDamage>额外物理伤害</physicalDamage><OnHit>攻击特效</OnHit>。<br> <br><passive>加快</passive><br>攻击一个单位时会提供持续2秒的<speed>20移动速度</speed>。</mainText>"
+    },
+    {
+      "id": "3083",
+      "name": "狂徒铠甲",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3083.png",
+      "gold": 3100,
+      "types": [
+        "Health",
+        "HealthRegen"
+      ],
+      "desc": "1000生命值 100%基础生命回复 狂徒之心 如果你拥有2000额外生命值，并且在8秒内没有受到伤害，则每秒回复0生命值。 狂徒之活力 获得额外生命值，相当于你12%的装备生命值(0)。",
+      "descHtml": "<mainText><stats><attention>1000</attention>生命值<br><attention>100%</attention>基础生命回复</stats><br><br><passive>狂徒之心</passive> <br>如果你拥有2000额外生命值，并且在8秒内没有受到伤害，则每秒回复<healing>0</healing>生命值。<br><br><passive>狂徒之活力</passive><br>获得额外生命值，相当于你12%的装备生命值(<healing>0</healing>)。</mainText>"
+    },
+    {
+      "id": "3084",
+      "name": "心之钢",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3084.png",
+      "gold": 3000,
+      "types": [
+        "Health",
+        "HealthRegen"
+      ],
+      "desc": "900生命值 100%基础生命回复 庞然吞食 每个目标 (0秒) 如果一个敌方英雄在附近度过了若干秒，那么你的下一次对其打出的攻击会造成70外加你的6%最大生命值的额外物理伤害，并为你提供相当于10%该伤害的最大生命值。 歌利亚巨人 每有1000最大生命值，获得3%体型提升，至多至30%。",
+      "descHtml": "<mainText><stats><attention>900</attention>生命值<br><attention>100%</attention>基础生命回复</stats><br><br><passive>庞然吞食</passive> 每个目标 (0秒)<br>如果一个敌方英雄在附近度过了若干秒，那么你的下一次对其打出的攻击会造成<physicalDamage>70外加你的6%</physicalDamage>最大生命值的<physicalDamage>额外物理伤害</physicalDamage>，并为你提供相当于<scaleHealth>10%</scaleHealth>该伤害的<scaleHealth>最大生命值</scaleHealth>。<br><br><passive>歌利亚巨人</passive><br>每有<scaleHealth>1000最大生命值</scaleHealth>，获得3%体型提升，至多至30%。 </mainText>"
+    },
+    {
+      "id": "3085",
+      "name": "卢安娜的飓风",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3085.png",
+      "gold": 2650,
+      "types": [
+        "AttackSpeed",
+        "CriticalStrike",
+        "NonbootsMovement",
+        "OnHit"
+      ],
+      "desc": "40%攻击速度 25%暴击几率 5%移动速度 风怒 攻击对目标附近的2个额外敌人发射弩箭。 每根弩箭造成物理伤害并施加攻击特效。",
+      "descHtml": "<mainText><stats><attention>40%</attention>攻击速度<br><attention>25%</attention>暴击几率<br><attention>5%</attention>移动速度</stats><br><br><passive>风怒</passive><br>攻击对目标附近的2个额外敌人发射弩箭。<br>每根弩箭造成<physicalDamage>物理伤害</physicalDamage>并施加<OnHit>攻击特效</OnHit>。</mainText>"
+    },
+    {
+      "id": "3087",
+      "name": "斯塔缇克电刃",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3087.png",
+      "gold": 3000,
+      "types": [
+        "AttackSpeed",
+        "Damage",
+        "NonbootsMovement",
+        "OnHit",
+        "SpellDamage"
+      ],
+      "desc": "45攻击力 45法术强度 30%攻击速度 4%移动速度 电火花 你的盈能攻击会发射连锁闪电，造成 附带攻击特效，并且对附近的目标们造成魔法伤害。 电疗 普通攻击提供额外盈能层数。",
+      "descHtml": "<mainText><stats><attention>45</attention>攻击力<br><attention>45</attention>法术强度<br><attention>30%</attention>攻击速度<br><attention>4%</attention>移动速度</stats><br><br><passive>电火花</passive><br>你的<keyword>盈能攻击</keyword>会发射连锁闪电，造成 <OnHit>附带攻击</OnHit>特效，并且对附近的目标们造成<magicDamage>魔法伤害</magicDamage>。<br><br><passive>电疗</passive> <br>普通攻击提供额外<keyword>盈能</keyword>层数。</mainText>"
+    },
+    {
+      "id": "3089",
+      "name": "灭世者的死亡之帽",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3089.png",
+      "gold": 3500,
+      "types": [
+        "SpellDamage"
+      ],
+      "desc": "130法术强度 魔法乐章 使你的总法术强度提升30%。",
+      "descHtml": "<mainText><stats><attention>130</attention>法术强度</stats><br><br><passive>魔法乐章</passive><br>使你的总<scaleAP>法术强度提升30%</scaleAP>。</mainText>"
+    },
+    {
+      "id": "3091",
+      "name": "智慧末刃",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3091.png",
+      "gold": 2800,
+      "types": [
+        "AttackSpeed",
+        "OnHit",
+        "SpellBlock",
+        "Tenacity"
+      ],
+      "desc": "50%攻击速度 45魔法抗性 20%韧性 喧争 普攻造成额外魔法伤害 攻击特效。",
+      "descHtml": "<mainText><stats><attention>50%</attention>攻击速度<br><attention>45</attention>魔法抗性<br><attention>20%</attention>韧性</stats><br><br><passive>喧争</passive><br>普攻造成<magicDamage>额外魔法伤害</magicDamage> <OnHit>攻击特效</OnHit>。</mainText>"
+    },
+    {
+      "id": "3094",
+      "name": "疾射火炮",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3094.png",
+      "gold": 2650,
+      "types": [
+        "AttackSpeed",
+        "CriticalStrike",
+        "NonbootsMovement"
+      ],
+      "desc": "35%攻击速度 25%暴击几率 4%移动速度 神射手 你的盈能攻击造成40额外魔法伤害并获得35%额外攻击距离。",
+      "descHtml": "<mainText><stats><attention>35%</attention>攻击速度<br><attention>25%</attention>暴击几率<br><attention>4%</attention>移动速度</stats><br><br><passive>神射手</passive><br>你的<keyword>盈能攻击</keyword>造成<magicDamage>40额外魔法伤害</magicDamage>并获得35%额外攻击距离。</mainText>"
+    },
+    {
+      "id": "3097",
+      "name": "岚切",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3097.png",
+      "gold": 3200,
+      "types": [
+        "AttackSpeed",
+        "CriticalStrike",
+        "Damage",
+        "NonbootsMovement"
+      ],
+      "desc": "50攻击力 20%攻击速度 25%暴击几率 盈能 移动和攻击会生成一次盈能攻击。 弩箭 你的盈能攻击附带0额外魔法伤害并提供持续1.5秒的45%移动速度。",
+      "descHtml": "<mainText><stats><attention>50</attention>攻击力<br><attention>20%</attention>攻击速度<br><attention>25%</attention>暴击几率</stats><br><br><passive>盈能</passive><br>移动和攻击会生成一次<keyword>盈能攻击</keyword>。<br><br><passive>弩箭</passive><br>你的<keyword>盈能攻击</keyword>附带<magicDamage>0额外魔法伤害</magicDamage>并提供持续1.5秒的<speed>45%移动速度</speed>。<br></mainText>"
+    },
+    {
+      "id": "3100",
+      "name": "巫妖之祸",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3100.png",
+      "gold": 2900,
+      "types": [
+        "AbilityHaste",
+        "NonbootsMovement",
+        "OnHit",
+        "SpellDamage"
+      ],
+      "desc": "100法术强度 6%移动速度 10技能急速 咒刃 施放技能后，你的下一次攻击会造成额外魔法伤害攻击特效。",
+      "descHtml": "<mainText><stats><attention>100</attention>法术强度<br><attention>6%</attention>移动速度<br><attention>10</attention>技能急速</stats><br><br><passive>咒刃</passive><br>施放技能后，你的下一次攻击会造成<magicDamage>额外魔法伤害</magicDamage><OnHit>攻击特效</OnHit>。</mainText>"
+    },
+    {
+      "id": "3102",
+      "name": "女妖面纱",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3102.png",
+      "gold": 3000,
+      "types": [
+        "SpellBlock",
+        "SpellDamage"
+      ],
+      "desc": "105法术强度 40魔法抗性 废除 提供一层法术护盾来格挡下一个敌方技能。",
+      "descHtml": "<mainText><stats><attention>105</attention>法术强度<br><attention>40</attention>魔法抗性</stats><br><br><passive>废除</passive><br>提供一层法术护盾来格挡下一个敌方技能。</mainText>"
+    },
+    {
+      "id": "3107",
+      "name": "救赎",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3107.png",
+      "gold": 2300,
+      "types": [
+        "AbilityHaste",
+        "CooldownReduction",
+        "ManaRegen",
+        "SpellDamage"
+      ],
+      "desc": "30法术强度 15技能急速 100%基础法力回复 10%治疗和护盾强度 干涉 在2.5秒后，为友方单位们回复150 - 350生命值，并对敌方英雄们造成10%最大生命值的真实伤害。",
+      "descHtml": "<mainText><stats><attention>30</attention>法术强度<br><attention>15</attention>技能急速<br><attention>100%</attention>基础法力回复<br><attention> 10%</attention>治疗和护盾强度</stats><br><br> <active>干涉</active> <br>在2.5秒后，为友方单位们回复<healing>150 - 350生命值</healing>，并对敌方英雄们造成<trueDamage>10%最大生命值的真实伤害</trueDamage>。</mainText>"
+    },
+    {
+      "id": "3109",
+      "name": "骑士之誓",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3109.png",
+      "gold": 2300,
+      "types": [
+        "AbilityHaste",
+        "Active",
+        "Armor",
+        "Aura",
+        "CooldownReduction",
+        "Health",
+        "HealthRegen"
+      ],
+      "desc": "200生命值 40护甲 10技能急速 100%基础生命回复 牺牲 当你的誓约者在附近时，将其所受的14%伤害转移到你身上，并为你提供相当于其对英雄的12%已造成伤害值的治疗效果。 立誓 (0秒) 指定一名友方英雄作为你的誓约者。",
+      "descHtml": "<mainText><stats><attention>200</attention>生命值<br><attention>40</attention>护甲<br><attention>10</attention>技能急速<br><attention>100%</attention>基础生命回复</stats><br><br><passive>牺牲</passive><br>当你的<attention>誓约者</attention>在附近时，将其所受的14%伤害转移到你身上，并为你提供相当于其对英雄的12%已造成伤害值的<healing>治疗效果</healing>。 <active>立誓</active> (0秒)<br>指定一名友方英雄作为你的<attention>誓约者</attention>。</mainText>"
+    },
+    {
+      "id": "3110",
+      "name": "冰霜之心",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3110.png",
+      "gold": 2500,
+      "types": [
+        "AbilityHaste",
+        "Armor",
+        "Aura",
+        "CooldownReduction",
+        "Mana"
+      ],
+      "desc": "75护甲 400法力 20技能急速 凛冬之抚 使附近敌方英雄的攻击速度降低20%。",
+      "descHtml": "<mainText><stats><attention>75</attention>护甲<br><attention> 400</attention>法力<br><attention>20</attention>技能急速</stats><br><br><passive>凛冬之抚</passive><br>使附近敌方英雄的<attackSpeed>攻击速度</attackSpeed>降低<attackSpeed>20%</attackSpeed>。</mainText>"
+    },
+    {
+      "id": "3115",
+      "name": "纳什之牙",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3115.png",
+      "gold": 2900,
+      "types": [
+        "AbilityHaste",
+        "AttackSpeed",
+        "OnHit",
+        "SpellDamage"
+      ],
+      "desc": "80法术强度 50%攻击速度 15技能急速 艾卡西亚之咬 普攻造成额外魔法伤害 攻击特效。",
+      "descHtml": "<mainText><stats><attention>80</attention>法术强度<br><attention>50%</attention>攻击速度<br><attention>15</attention>技能急速</stats><br><br><passive>艾卡西亚之咬</passive><br>普攻造成<magicDamage>额外魔法伤害</magicDamage> <OnHit>攻击特效</OnHit>。</mainText>"
+    },
+    {
+      "id": "3116",
+      "name": "瑞莱的冰晶节杖",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3116.png",
+      "gold": 2600,
+      "types": [
+        "Health",
+        "Slow",
+        "SpellDamage"
+      ],
+      "desc": "65法术强度 400生命值 凝霜 伤害型技能会使敌人减速30%，持续1秒。",
+      "descHtml": "<mainText><stats><attention>65</attention>法术强度<br><attention>400</attention>生命值</stats><br><br><passive>凝霜</passive><br>伤害型技能会使敌人<keyword>减速</keyword>30%，持续1秒。</mainText>"
+    },
+    {
+      "id": "3118",
+      "name": "残疫",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3118.png",
+      "gold": 2700,
+      "types": [
+        "AbilityHaste",
+        "Mana",
+        "SpellDamage"
+      ],
+      "desc": "90法术强度 600法力 15技能急速 蔑视 获得20终极技能急速。 憎恨之雾 在用你的终极技能对一个英雄造成伤害时，灼烧其脚下的地面3秒，每秒造成魔法伤害并削减其魔法抗性。",
+      "descHtml": "<mainText><stats><attention>90</attention>法术强度<br><attention> 600</attention>法力<br><attention>15</attention>技能急速</stats><br><br><passive>蔑视</passive><br>获得20终极技能急速。<br><br><passive>憎恨之雾</passive><br>在用你的终极技能对一个英雄造成伤害时，灼烧其脚下的地面3秒，每秒造成<magicDamage>魔法伤害</magicDamage>并削减其<scaleMR>魔法抗性</scaleMR>。<br></mainText>"
+    },
+    {
+      "id": "3119",
+      "name": "凛冬之临",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3119.png",
+      "gold": 2400,
+      "types": [
+        "AbilityHaste",
+        "Health",
+        "Mana"
+      ],
+      "desc": "550生命值 500法力 15技能急速 敬畏 获得0生命值。 法力流 (8秒，最大4层) 普攻和技能在命中时会提供3最大法力值(对英雄时翻倍)。 在360最大法力值时转变为末日寒冬。",
+      "descHtml": "<mainText><stats><attention>550</attention>生命值<br><attention> 500</attention>法力<br><attention>15</attention>技能急速</stats><br><br><passive>敬畏</passive><br>获得<scaleHealth>0生命值</scaleHealth>。<br><br><passive>法力流</passive>  (8秒，最大4层)<br>普攻和技能在命中时会提供<scaleMana>3最大法力值</scaleMana>(对英雄时翻倍)。<br>在<scaleMana>360最大法力值</scaleMana>时转变为<rarityLegendary>末日寒冬</rarityLegendary>。</mainText>"
+    },
+    {
+      "id": "3124",
+      "name": "鬼索的狂暴之刃",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3124.png",
+      "gold": 3000,
+      "types": [
+        "AttackSpeed",
+        "Damage",
+        "OnHit",
+        "SpellDamage"
+      ],
+      "desc": "30攻击力 30法术强度 25%攻击速度 怨怒 攻击造成30额外魔法伤害攻击特效。 沸腾打击 攻击会提供8%攻击速度，持续4秒(可叠加4次)。 在满层状态下，每第三次攻击会附带2次攻击特效。",
+      "descHtml": "<mainText><stats><attention>30</attention>攻击力<br><attention>30</attention>法术强度<br><attention>25%</attention>攻击速度</stats><br><br><passive>怨怒</passive><br>攻击造成<magicDamage>30额外魔法伤害<OnHit>攻击特效</OnHit></magicDamage>。<br><br><passive>沸腾打击</passive><br>攻击会提供<attackSpeed>8%攻击速度</attackSpeed>，持续4秒(可叠加4次)。<br>在满层状态下，每第三次攻击会附带2次<OnHit>攻击特效</OnHit>。</mainText>"
+    },
+    {
+      "id": "3135",
+      "name": "虚空之杖",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3135.png",
+      "gold": 3000,
+      "types": [
+        "MagicPenetration",
+        "SpellDamage"
+      ],
+      "desc": "95法术强度 40%法术穿透",
+      "descHtml": "<mainText><stats><attention>95</attention>法术强度<br><attention>40%</attention>法术穿透</stats><br><br></mainText>"
+    },
+    {
+      "id": "3137",
+      "name": "蜕生",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3137.png",
+      "gold": 3000,
+      "types": [
+        "AbilityHaste",
+        "MagicPenetration",
+        "SpellDamage"
+      ],
+      "desc": "75法术强度 30%法术穿透 20技能急速 死中焕生 每当一个敌方英雄在被你造成伤害后的3秒内阵亡时，在其所在位置生成一个新星，来为友军们治疗生命值。",
+      "descHtml": "<mainText><stats><attention>75</attention>法术强度<br><attention>30%</attention>法术穿透<br><attention>20</attention>技能急速</stats><br><br><passive>死中焕生</passive><br>每当一个敌方英雄在被你造成伤害后的3秒内阵亡时，在其所在位置生成一个新星，来为友军们<healing>治疗生命值</healing>。</mainText>"
+    },
+    {
+      "id": "3139",
+      "name": "水银弯刀",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3139.png",
+      "gold": 3200,
+      "types": [
+        "Active",
+        "Damage",
+        "LifeSteal",
+        "NonbootsMovement",
+        "SpellBlock",
+        "Tenacity"
+      ],
+      "desc": "50攻击力 35魔法抗性 10%生命偷取 主动 水银 移除所有控制类减益效果(浮空除外)，并提供移动速度。",
+      "descHtml": "<mainText><stats><attention>50</attention>攻击力<br><attention>35</attention>魔法抗性<br><attention>10%</attention>生命偷取</stats><br><br><br><br> <active>主动</active> <br><active>水银</active><br>移除所有控制类减益效果(<keyword>浮空</keyword>除外)，并提供移动速度。</mainText>"
+    },
+    {
+      "id": "3142",
+      "name": "幽梦之灵",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3142.png",
+      "gold": 2800,
+      "types": [
+        "Active",
+        "ArmorPenetration",
+        "Damage",
+        "NonbootsMovement"
+      ],
+      "desc": "55攻击力 18穿甲 4%移动速度 鬼影萦绕 非战斗状态期间获得0移动速度。 鬼魂步伐 提供移动速度和幽灵状态，持续0秒。",
+      "descHtml": "<mainText><stats><attention>55</attention>攻击力<br><attention> 18</attention>穿甲<br><attention>4%</attention>移动速度</stats><br><br><passive>鬼影萦绕</passive><br>非战斗状态期间获得<speed>0移动速度</speed>。<br><br> <active>鬼魂步伐</active><br>提供<speed>移动速度</speed>和<keyword>幽灵状态</keyword>，持续0秒。</mainText>"
+    },
+    {
+      "id": "3143",
+      "name": "兰顿之兆",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3143.png",
+      "gold": 2700,
+      "types": [
+        "Active",
+        "Armor",
+        "Health",
+        "Slow"
+      ],
+      "desc": "350生命值 75护甲 复原力 所受的来自暴击的伤害降低30%。 谦卑 对附近敌人造成持续2秒的70%减速。",
+      "descHtml": "<mainText><stats><attention>350</attention>生命值<br><attention>75</attention>护甲</stats><br><br><passive>复原力</passive><br>所受的来自暴击的伤害降低30%。<br> <active>谦卑</active><br>对附近敌人造成持续2秒的70%<keyword>减速</keyword>。</mainText>"
+    },
+    {
+      "id": "3146",
+      "name": "海克斯科技枪刃",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3146.png",
+      "gold": 3000,
+      "types": [
+        "Active",
+        "Damage",
+        "LifeSteal",
+        "SpellDamage",
+        "SpellVamp"
+      ],
+      "desc": "80法术强度 40攻击力 10%全能吸血 主动 (0秒) 闪电弹 震击目标敌方英雄，造成0魔法伤害和持续1.5秒的25%减速。",
+      "descHtml": "<mainText><stats><attention>80</attention>法术强度<br><attention>40</attention>攻击力<br><attention> 10%</attention>全能吸血</stats><br><br><br><br> <active>主动</active>  (0秒)<br><active>闪电弹</active><br>震击目标敌方英雄，造成0魔法伤害和持续1.5秒的25%减速。</mainText>"
+    },
+    {
+      "id": "3152",
+      "name": "海克斯科技火箭腰带",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3152.png",
+      "gold": 2650,
+      "types": [
+        "AbilityHaste",
+        "Active",
+        "CooldownReduction",
+        "Health",
+        "NonbootsMovement",
+        "SpellDamage"
+      ],
+      "desc": "60法术强度 350生命值 20技能急速 超音速 朝着目标方向冲刺，释放多颗魔法弹，魔法弹造成魔法伤害。",
+      "descHtml": "<mainText><stats><attention>60</attention>法术强度<br><attention>350</attention>生命值<br><attention>20</attention>技能急速</stats><br><br> <active>超音速</active><br>朝着目标方向冲刺，释放多颗魔法弹，魔法弹造成<magicDamage>魔法伤害</magicDamage>。</mainText>"
+    },
+    {
+      "id": "3153",
+      "name": "破败王者之刃",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3153.png",
+      "gold": 3200,
+      "types": [
+        "AttackSpeed",
+        "Damage",
+        "LifeSteal",
+        "OnHit",
+        "Slow"
+      ],
+      "desc": "40攻击力 25%攻击速度 10%生命偷取 雾之锋 攻击造成一部分敌人当前生命值的额外物理伤害 攻击特效。 抓挠之影 攻击一位英雄3次会对其造成持续1秒的30%减速。",
+      "descHtml": "<mainText><stats><attention>40</attention>攻击力<br><attention>25%</attention>攻击速度<br><attention>10%</attention>生命偷取</stats><br><br><passive>雾之锋</passive><br>攻击造成<physicalDamage>一部分</physicalDamage>敌人当前生命值的<physicalDamage>额外物理伤害</physicalDamage> <OnHit>攻击特效</OnHit>。<br><br><passive>抓挠之影</passive><br>攻击一位英雄3次会对其造成持续1秒的30%<status>减速</status>。</mainText>"
+    },
+    {
+      "id": "3156",
+      "name": "玛莫提乌斯之噬",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3156.png",
+      "gold": 3100,
+      "types": [
+        "AbilityHaste",
+        "Damage",
+        "LifeSteal",
+        "SpellBlock",
+        "SpellVamp"
+      ],
+      "desc": "60攻击力 15技能急速 40魔法抗性 救主灵刃 在受到将使你的生命值跌到30%以下的魔法伤害时，提供持续3秒的魔法伤害护盾和持续到战斗状态结束的10%全能吸血。",
+      "descHtml": "<mainText><stats><attention>60</attention>攻击力<br><attention>15</attention>技能急速<br><attention>40</attention>魔法抗性</stats><br><br><passive>救主灵刃</passive><br>在受到将使你的生命值跌到30%以下的魔法伤害时，提供持续3秒的<shield>魔法伤害护盾</shield>和持续到战斗状态结束的<lifeSteal>10%全能吸血</lifeSteal>。</mainText>"
+    },
+    {
+      "id": "3157",
+      "name": "中娅沙漏",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3157.png",
+      "gold": 3250,
+      "types": [
+        "Active",
+        "Armor",
+        "SpellDamage"
+      ],
+      "desc": "105法术强度 50护甲 时间停止 进入凝滞状态2.5秒。",
+      "descHtml": "<mainText><stats><attention>105</attention>法术强度<br><attention>50</attention>护甲</stats><br><br><br> <br><active>时间停止</active><br>进入<keyword>凝滞</keyword>状态2.5秒。</mainText>"
+    },
+    {
+      "id": "3161",
+      "name": "朔极之矛",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3161.png",
+      "gold": 3100,
+      "types": [
+        "AbilityHaste",
+        "Damage",
+        "Health"
+      ],
+      "desc": "45攻击力 450生命值 龙之力量 获得25基础技能急速。 专注意志 使用技能造成伤害会使你的英雄技能和被动伤害提升3%，持续6秒。（叠加4次）。",
+      "descHtml": "<mainText><stats><attention>45</attention>攻击力<br><attention>450</attention>生命值</stats><br><br><passive>龙之力量</passive><br>获得25基础技能急速。<br><br><passive>专注意志</passive><br>使用技能造成伤害会使你的英雄技能和被动伤害提升3%，持续6秒。（叠加4次）。</mainText>"
+    },
+    {
+      "id": "3165",
+      "name": "莫雷洛秘典",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3165.png",
+      "gold": 2850,
+      "types": [
+        "AbilityHaste",
+        "CooldownReduction",
+        "Health",
+        "SpellDamage"
+      ],
+      "desc": "75法术强度 350生命值 15技能急速 重伤 对敌方英雄造成魔法伤害时会施加持续3秒的40%重伤效果。",
+      "descHtml": "<mainText><stats><attention>75</attention>法术强度<br><attention>350</attention>生命值<br><attention>15</attention>技能急速</stats><br><br><passive>重伤</passive><br>对敌方英雄造成<magicDamage>魔法伤害</magicDamage>时会施加持续3秒的<keyword>40%重伤</keyword>效果。</mainText>"
+    },
+    {
+      "id": "3179",
+      "name": "黯影阔剑",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3179.png",
+      "gold": 2800,
+      "types": [
+        "AbilityHaste",
+        "ArmorPenetration",
+        "CooldownReduction",
+        "Damage",
+        "Vision"
+      ],
+      "desc": "60攻击力 18穿甲 15技能急速 夜行者 未被敌人看见达一小段时间后，你对英雄的下一次攻击造成额外真实伤害。 封锁 在你处在敌方侦察守卫和陷阱附近时，将其短暂显形。在显形守卫状态下，你的攻击对其造成额外伤害。",
+      "descHtml": "<mainText><stats><attention>60</attention>攻击力<br><attention> 18</attention>穿甲<br><attention>15</attention>技能急速</stats><br><br><passive>夜行者</passive><br>未被敌人看见达一小段时间后，你对英雄的下一次攻击造成额外<trueDamage>真实伤害</trueDamage>。<br><br><passive>封锁</passive> <br>在你处在敌方侦察守卫和陷阱附近时，将其短暂显形。在显形守卫状态下，你的攻击对其造成额外伤害。</mainText>"
+    },
+    {
+      "id": "3181",
+      "name": "破舰者",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3181.png",
+      "gold": 3000,
+      "types": [
+        "Damage",
+        "Health",
+        "NonbootsMovement"
+      ],
+      "desc": "40攻击力 500生命值 4%移动速度 船长 对英雄和史诗级野怪的每第五次攻击造成额外物理伤害，对建筑物造成更多伤害。 登舰小组 附近的友军攻城兵和超级士兵获得护甲和魔法抗性。",
+      "descHtml": "<mainText><stats><attention>40</attention>攻击力<br><attention>500</attention>生命值<br><attention>4%</attention>移动速度</stats><br><br><passive>船长</passive><br>对英雄和史诗级野怪的每第五次攻击造成<physicalDamage>额外物理伤害</physicalDamage>，对建筑物造成更多伤害。<br><br><passive>登舰小组</passive><br>附近的友军攻城兵和超级士兵获得<scaleArmor>护甲</scaleArmor>和<scaleMR>魔法抗性</scaleMR>。</mainText>"
+    },
+    {
+      "id": "3190",
+      "name": "钢铁烈阳之匣",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3190.png",
+      "gold": 2200,
+      "types": [
+        "AbilityHaste",
+        "Active",
+        "Armor",
+        "Aura",
+        "Health",
+        "MagicResist",
+        "SpellBlock"
+      ],
+      "desc": "200生命值 30护甲 30魔法抗性 10技能急速 虔诚 为附近友军提供290 - 360护盾值，在2.5秒里持续衰减。",
+      "descHtml": "<mainText><stats><attention>200</attention>生命值<br><attention>30</attention>护甲<br><attention>30</attention>魔法抗性<br><attention>10</attention>技能急速</stats><br><br> <active>虔诚</active><br>为附近友军提供<shield>290 - 360护盾值</shield>，在2.5秒里持续衰减。</mainText>"
+    },
+    {
+      "id": "3222",
+      "name": "米凯尔的祝福",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3222.png",
+      "gold": 2300,
+      "types": [
+        "AbilityHaste",
+        "Active",
+        "CooldownReduction",
+        "Health",
+        "ManaRegen",
+        "Tenacity"
+      ],
+      "desc": "250生命值 100%基础法力回复 12%治疗和护盾强度 15技能急速 纯化 移除一名友方英雄身上的所有控制类减益效果(滞空和压制除外)并为其回复100 - 250生命值。",
+      "descHtml": "<mainText><stats><attention>250</attention>生命值<br><attention>100%</attention>基础法力回复<br><attention> 12%</attention>治疗和护盾强度<br><attention>15</attention>技能急速</stats><br><br> <active>纯化</active> <br>移除一名友方英雄身上的所有控制类减益效果(<keyword>滞空</keyword>和<keyword>压制</keyword>除外)并为其回复<healing>100 - 250生命值</healing>。</mainText>"
+    },
+    {
+      "id": "3302",
+      "name": "界弓",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3302.png",
+      "gold": 3000,
+      "types": [
+        "ArmorPenetration",
+        "AttackSpeed",
+        "Damage",
+        "MagicPenetration",
+        "OnHit"
+      ],
+      "desc": "30攻击力 35%攻击速度 晦影 攻击造成0额外魔法伤害 攻击特效。 交相 对抗英雄时，在光明特效和黑暗特效之间轮换：附带光明特效的攻击提供持续5秒的护甲和魔抗。附带黑暗特效的攻击提供持续5秒的10%护甲穿透和法术穿透。",
+      "descHtml": "<mainText><stats><attention>30</attention>攻击力<br><attention>35%</attention>攻击速度</stats><br><br><passive>晦影</passive><br>攻击造成<magicDamage>0额外魔法伤害</magicDamage> <OnHit>攻击特效</OnHit>。<br><br><passive>交相</passive><br>对抗英雄时，在<keywordMajor>光明</keywordMajor>特效和<keywordMajor>黑暗</keywordMajor>特效之间轮换：<li>附带<keywordMajor>光明</keywordMajor>特效的攻击提供持续5秒的<scaleArmor>护甲</scaleArmor>和<scaleMR>魔抗</scaleMR>。<li>附带<keywordMajor>黑暗</keywordMajor>特效的攻击提供持续5秒的10%<scaleArmor>护甲穿透</scaleArmor>和<scaleMR>法术穿透</scaleMR>。 </mainText>"
+    },
+    {
+      "id": "3504",
+      "name": "炽热香炉",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3504.png",
+      "gold": 2200,
+      "types": [
+        "AttackSpeed",
+        "ManaRegen",
+        "NonbootsMovement",
+        "SpellDamage"
+      ],
+      "desc": "45法术强度 10%治疗和护盾强度 125%基础法力回复 4%移动速度 圣洁化 对一名友方英雄施加治疗或护盾时，会使你们两个都获得持续6秒的强化，提供25%攻击速度和20魔法伤害 攻击特效。",
+      "descHtml": "<mainText><stats><attention>45</attention>法术强度<br><attention> 10%</attention>治疗和护盾强度<br><attention>125%</attention>基础法力回复<br><attention>4%</attention>移动速度</stats><br><br><passive>圣洁化</passive><br>对一名友方英雄施加治疗或护盾时，会使你们两个都获得持续6秒的强化，提供<attackSpeed>25%攻击速度</attackSpeed>和<magicDamage>20魔法伤害</magicDamage> <OnHit>攻击特效</OnHit>。</mainText>"
+    },
+    {
+      "id": "3508",
+      "name": "夺萃之镰",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3508.png",
+      "gold": 3050,
+      "types": [
+        "AbilityHaste",
+        "CooldownReduction",
+        "CriticalStrike",
+        "Damage",
+        "ManaRegen",
+        "OnHit"
+      ],
+      "desc": "50攻击力 20技能急速 25%暴击几率 咒刃 施放技能后，你的下一次普通攻击会造成额外物理伤害并提供法力值 攻击特效。",
+      "descHtml": "<mainText><stats><attention>50</attention>攻击力<br><attention>20</attention>技能急速<br><attention>25%</attention>暴击几率</stats><br><br><passive>咒刃</passive> <br>施放技能后，你的下一次普通攻击会造成<physicalDamage>额外物理伤害</physicalDamage>并提供<scaleMana>法力值</scaleMana> <OnHit>攻击特效</OnHit>。</mainText>"
+    },
+    {
+      "id": "3742",
+      "name": "亡者的板甲",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3742.png",
+      "gold": 2900,
+      "types": [
+        "Armor",
+        "Health",
+        "NonbootsMovement",
+        "Slow"
+      ],
+      "desc": "350生命值 55护甲 4%移动速度 沉船者 在移动时，积攒至多20额外移动速度。你的下一次攻击会释放掉已积攒的移动速度来造成额外物理伤害。 永不沉没 使所受的减速效果的效能降低15%。",
+      "descHtml": "<mainText><stats><attention>350</attention>生命值<br><attention>55</attention>护甲<br><attention>4%</attention>移动速度</stats><br><br><passive>沉船者</passive><br>在移动时，积攒至多<speed>20额外移动速度</speed>。你的下一次攻击会释放掉已积攒的移动速度来造成<physicalDamage>额外物理伤害</physicalDamage>。<br><br><passive>永不沉没</passive><br>使所受的<keyword>减速</keyword>效果的效能降低15%。</mainText>"
+    },
+    {
+      "id": "3748",
+      "name": "巨型九头蛇",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3748.png",
+      "gold": 3300,
+      "types": [
+        "Damage",
+        "Health",
+        "HealthRegen",
+        "OnHit"
+      ],
+      "desc": "40攻击力 600生命值 顺劈 攻击附带物理伤害并对目标身后的敌人们造成物理伤害。 刚斩 强化你的下一次顺劈，使其造成额外物理伤害 攻击特效并对目标身后的敌人们造成额外物理伤害。",
+      "descHtml": "<mainText><stats><attention>40</attention>攻击力<br><attention>600</attention>生命值</stats><br><br><passive>顺劈</passive><br>攻击附带<physicalDamage>物理伤害</physicalDamage>并对目标身后的敌人们造成物理伤害。<br> <active>刚斩</active><br>强化你的下一次<passive>顺劈</passive>，使其造成<physicalDamage>额外物理伤害</physicalDamage> <OnHit>攻击特效</OnHit>并对目标身后的敌人们造成<physicalDamage>额外物理伤害</physicalDamage>。</mainText>"
+    },
+    {
+      "id": "3814",
+      "name": "夜之锋刃",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3814.png",
+      "gold": 3000,
+      "types": [
+        "ArmorPenetration",
+        "Damage",
+        "Health"
+      ],
+      "desc": "50攻击力 15穿甲 250生命值 废除 提供一层法术护盾来格挡下一个敌方技能。",
+      "descHtml": "<mainText><stats><attention>50</attention>攻击力<br><attention> 15</attention>穿甲<br><attention>250</attention>生命值</stats><br><br><passive>废除</passive><br>提供一层法术护盾来格挡下一个敌方技能。</mainText>"
+    },
+    {
+      "id": "4005",
+      "name": "帝国指令",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/4005.png",
+      "gold": 2400,
+      "types": [
+        "AbilityHaste",
+        "CooldownReduction",
+        "ManaRegen",
+        "SpellDamage"
+      ],
+      "desc": "60法术强度 15技能急速 150%基础法力回复 控制 你的带有定身效果的那些技能获得 20技能急速。 命令 在定身一个敌方英雄时，为其打上标记，施加持续4秒的7%易损。",
+      "descHtml": "<mainText><stats><attention>60</attention>法术强度<br><attention>15</attention>技能急速<br><attention>150%</attention>基础法力回复</stats><br><br><passive>控制</passive><br>你的带有<keyword>定身</keyword>效果的那些技能获得 20技能急速。<br><br><passive>命令</passive><br>在<keyword>定身</keyword>一个敌方英雄时，为其打上标记，施加持续4秒的7%<Keyword>易损</Keyword>。<br></mainText>"
+    },
+    {
+      "id": "4401",
+      "name": "自然之力",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/4401.png",
+      "gold": 2800,
+      "types": [
+        "Health",
+        "NonbootsMovement",
+        "SpellBlock"
+      ],
+      "desc": "400生命值 55魔法抗性 4%移动速度 坚定 受到8次来自英雄的魔法伤害后，获得70魔法抗性和6%额外移动速度。",
+      "descHtml": "<mainText><stats><attention>400</attention>生命值<br><attention>55</attention>魔法抗性<br><attention>4%</attention>移动速度</stats><br><br><passive>坚定</passive><br>受到8次来自英雄的魔法伤害后，获得<scaleMR>70魔法抗性</scaleMR>和<speed>6%额外移动速度</speed>。</mainText>"
+    },
+    {
+      "id": "4628",
+      "name": "视界专注",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/4628.png",
+      "gold": 2700,
+      "types": [
+        "AbilityHaste",
+        "SpellDamage"
+      ],
+      "desc": "75法术强度 25技能急速 高能射击 在对600码或更远的英雄造成技能伤害时，将其显形6秒。 专注 在高能射击触发时，显形目标1400码内的所有其它敌方英雄3秒。",
+      "descHtml": "<mainText><stats><attention>75</attention>法术强度<br><attention>25</attention>技能急速</stats><br><br><passive>高能射击</passive><br>在对600码或更远的英雄造成技能伤害时，将其<keywordStealth>显形</keywordStealth>6秒。<br><br><passive>专注</passive><br>在<passive>高能射击</passive>触发时，<keywordStealth>显形</keywordStealth>目标1400码内的所有其它敌方英雄3秒。</mainText>"
+    },
+    {
+      "id": "4629",
+      "name": "星界驱驰",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/4629.png",
+      "gold": 3000,
+      "types": [
+        "AbilityHaste",
+        "Health",
+        "NonbootsMovement",
+        "SpellDamage"
+      ],
+      "desc": "70法术强度 350生命值 25技能急速 4%移动速度 咒舞 对英雄造成魔法伤害或真实伤害时会提供移动速度，持续4秒。",
+      "descHtml": "<mainText><stats><attention>70</attention>法术强度<br><attention>350</attention>生命值<br><attention>25</attention>技能急速<br><attention>4%</attention>移动速度</stats><br><br><passive>咒舞</passive><br>对英雄造成<magicDamage>魔法伤害</magicDamage>或<trueDamage>真实伤害</trueDamage>时会提供<speed>移动速度</speed>，持续4秒。 </mainText>"
+    },
+    {
+      "id": "4633",
+      "name": "裂隙制造者",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/4633.png",
+      "gold": 3100,
+      "types": [
+        "CooldownReduction",
+        "Health",
+        "SpellDamage",
+        "SpellVamp"
+      ],
+      "desc": "70法术强度 350生命值 15技能急速 虚空腐蚀 在与敌方英雄作战时，每过1秒，就会造成2%额外伤害，至多至8%。在最大强度时，获得全能吸血。 虚空灌注 获得相当于你2%额外生命值的法术强度。",
+      "descHtml": "<mainText><stats><attention>70</attention>法术强度<br><attention>350</attention>生命值<br><attention>15</attention>技能急速</stats><br><br><passive>虚空腐蚀</passive><br>在与敌方英雄作战时，每过1秒，就会造成2%额外伤害，至多至8%。在最大强度时，获得<omnivamp>全能吸血</omnivamp>。<br><br><passive>虚空灌注</passive><br>获得相当于你2%<scaleHealth>额外生命值</scaleHealth>的<scaleAP>法术强度</scaleAP>。</mainText>"
+    },
+    {
+      "id": "4645",
+      "name": "影焰",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/4645.png",
+      "gold": 3200,
+      "types": [
+        "MagicPenetration",
+        "SpellDamage"
+      ],
+      "desc": "110法术强度 15法术穿透 余烬绽放 魔法伤害和真实伤害会暴击低于40%生命值的敌人，造成20%提升伤害。",
+      "descHtml": "<mainText><stats><attention>110</attention>法术强度<br><attention>15</attention>法术穿透</stats><br><br><passive>余烬绽放</passive><br><magicDamage>魔法伤害</magicDamage>和<trueDamage>真实伤害</trueDamage>会<attention>暴击</attention>低于40%生命值的敌人，造成20%提升伤害。 </mainText>"
+    },
+    {
+      "id": "4646",
+      "name": "风暴狂涌",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/4646.png",
+      "gold": 2800,
+      "types": [
+        "GoldPer",
+        "MagicPenetration",
+        "NonbootsMovement",
+        "SpellDamage"
+      ],
+      "desc": "90法术强度 15法术穿透 6%移动速度 风暴掠袭 在2.5秒内对一个英雄造成相当于其25%最大生命值的伤害时，对其施加风啸。 风啸 在2秒后，造成魔法伤害。如果目标在风啸触发前阵亡，那么它会对附近的敌人们造成伤害。",
+      "descHtml": "<mainText><stats><attention>90</attention>法术强度<br><attention>15</attention>法术穿透<br><attention>6%</attention>移动速度</stats><br><br><passive>风暴掠袭</passive> <br>在2.5秒内对一个英雄造成相当于其25%最大生命值的伤害时，对其施加<passive>风啸</passive>。<br><br><passive>风啸</passive><br>在2秒后，造成<magicDamage>魔法伤害</magicDamage>。如果目标在<passive>风啸</passive>触发前阵亡，那么它会对附近的敌人们造成伤害。</mainText>"
+    },
+    {
+      "id": "6333",
+      "name": "死亡之舞",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/6333.png",
+      "gold": 3300,
+      "types": [
+        "AbilityHaste",
+        "Armor",
+        "Damage"
+      ],
+      "desc": "60攻击力 50护甲 15技能急速 无视痛苦 所受的一部分伤害会以流血形式在3秒里持续扣除。 蔑视 如果一名在过去3秒内曾被你造成过伤害的英雄阵亡，会净化无视痛苦的剩余伤害，并在2秒里持续为你回复生命值。",
+      "descHtml": "<mainText><stats><attention>60</attention>攻击力<br><attention>50</attention>护甲<br><attention>15</attention>技能急速</stats><br><br><passive>无视痛苦</passive><br>所受的一部分伤害会以流血形式在3秒里持续扣除。<br><br><passive>蔑视</passive><br>如果一名在过去3秒内曾被你造成过伤害的英雄阵亡，会净化<passive>无视痛苦</passive>的剩余伤害，并在2秒里持续为你回复<healing>生命值</healing>。</mainText>"
+    },
+    {
+      "id": "6609",
+      "name": "炼金朋克链锯剑",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/6609.png",
+      "gold": 3000,
+      "types": [
+        "AbilityHaste",
+        "CooldownReduction",
+        "Damage",
+        "Health"
+      ],
+      "desc": "45攻击力 450生命值 15技能急速 劈削 对敌方英雄造成物理伤害时会施加40%重伤效果，持续3秒。",
+      "descHtml": "<mainText><stats><attention>45</attention>攻击力<br><attention>450</attention>生命值<br><attention>15</attention>技能急速</stats><br><br><passive>劈削</passive><br>对敌方英雄造成物理伤害时会施加<keyword>40%重伤</keyword>效果，持续3秒。</mainText>"
+    },
+    {
+      "id": "6610",
+      "name": "焚天",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/6610.png",
+      "gold": 3100,
+      "types": [
+        "AbilityHaste",
+        "CooldownReduction",
+        "Damage",
+        "Health"
+      ],
+      "desc": "40攻击力 400生命值 10技能急速 光盾打击 你对一个英雄打出的第一次攻击会暴击并回复生命值。",
+      "descHtml": "<mainText><stats><attention>40</attention>攻击力<br><attention>400</attention>生命值<br><attention>10</attention>技能急速</stats><br><br><passive>光盾打击</passive><br>你对一个英雄打出的第一次攻击会<attention>暴击</attention>并<healing>回复生命值</healing>。</mainText>"
+    },
+    {
+      "id": "6616",
+      "name": "流水法杖",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/6616.png",
+      "gold": 2250,
+      "types": [
+        "AbilityHaste",
+        "CooldownReduction",
+        "ManaRegen",
+        "SpellDamage"
+      ],
+      "desc": "35法术强度 10%治疗和护盾强度 125%基础法力回复 10技能急速 湍流 当你为一名友军提供治疗或护盾效果时，你和你的目标都会获得持续6秒的40法术强度和15技能急速。",
+      "descHtml": "<mainText><stats><attention>35</attention>法术强度<br><attention> 10%</attention>治疗和护盾强度<br><attention>125%</attention>基础法力回复<br><attention>10</attention>技能急速</stats><br><br><passive>湍流</passive><br>当你为一名友军提供治疗或护盾效果时，你和你的目标都会获得持续6秒的<magicDamage>40法术强度</magicDamage>和<attention>15技能急速</attention>。</mainText>"
+    },
+    {
+      "id": "6617",
+      "name": "月石再生器",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/6617.png",
+      "gold": 2200,
+      "types": [
+        "AbilityHaste",
+        "CooldownReduction",
+        "Health",
+        "ManaRegen",
+        "SpellDamage"
+      ],
+      "desc": "25法术强度 200生命值 20技能急速 125%基础法力回复 星光恩典 对一名友军的治疗或护盾会连锁至另一名友方英雄(你自己除外)，提供相当于 30%原治疗值的治疗效果或 35%原护盾值的护盾效果。",
+      "descHtml": "<mainText><stats><attention>25</attention>法术强度<br><attention>200</attention>生命值<br><attention>20</attention>技能急速<br><attention>125%</attention>基础法力回复</stats><br><br><passive>星光恩典</passive><br>对一名友军的治疗或护盾会连锁至另一名友方英雄(你自己除外)，提供相当于<healing> 30%</healing>原治疗值的治疗效果或<shield> 35%</shield>原护盾值的护盾效果。</mainText>"
+    },
+    {
+      "id": "6620",
+      "name": "海力亚的回响",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/6620.png",
+      "gold": 2200,
+      "types": [
+        "AbilityHaste",
+        "CooldownReduction",
+        "Health",
+        "ManaRegen",
+        "SpellDamage"
+      ],
+      "desc": "35法术强度 200生命值 20技能急速 125%基础法力回复 灵魂吸取 获得【灵魂充能】，数额相当于对英雄的30%折前伤害值。为一位友军提供治疗或护盾时，会消耗所有灵魂充能来回复生命值。",
+      "descHtml": "<mainText><stats><attention>35</attention>法术强度<br><attention>200</attention>生命值<br><attention>20</attention>技能急速<br><attention>125%</attention>基础法力回复</stats><br><br><passive>灵魂吸取</passive><br>获得【灵魂充能】，数额相当于对英雄的30%折前伤害值。为一位友军提供治疗或护盾时，会消耗所有<passive>灵魂充能</passive>来回复<healing>生命值</healing>。</mainText>"
+    },
+    {
+      "id": "6621",
+      "name": "黎明核心",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/6621.png",
+      "gold": 2500,
+      "types": [
+        "ManaRegen",
+        "SpellDamage"
+      ],
+      "desc": "45法术强度 16%治疗和护盾强度 100%基础法力回复 最初之光 每100%基础法力回复获得2%治疗和护盾强度和10法术强度。",
+      "descHtml": "<mainText><stats><attention>45</attention>法术强度<br><attention> 16%</attention>治疗和护盾强度<br><attention>100%</attention>基础法力回复</stats><br><br><passive>最初之光</passive><br>每100%基础法力回复获得<healing>2%治疗和护盾强度</healing>和<scaleAP>10法术强度</scaleAP>。</mainText>"
+    },
+    {
+      "id": "6631",
+      "name": "挺进破坏者",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/6631.png",
+      "gold": 3300,
+      "types": [
+        "AttackSpeed",
+        "Damage",
+        "Health",
+        "Slow"
+      ],
+      "desc": "40攻击力 25%攻击速度 450生命值 顺劈 攻击会对附近的敌人们造成物理伤害。 破阵冲击波 对附近的敌人们造成物理伤害和35%减速。 每命中一个英雄就会获得持续衰减的35%移动速度，持续3秒。",
+      "descHtml": "<mainText><stats><attention>40</attention>攻击力<br><attention>25%</attention>攻击速度<br><attention>450</attention>生命值</stats><br><br><passive>顺劈</passive><br>攻击会对附近的敌人们造成<physicalDamage>物理伤害</physicalDamage>。<br> <active>破阵冲击波</active><br>对附近的敌人们造成<physicalDamage>物理伤害</physicalDamage>和35%<status>减速</status>。<br>每命中一个英雄就会获得<speed>持续衰减的35%移动速度</speed>，持续3秒。</mainText>"
+    },
+    {
+      "id": "6653",
+      "name": "兰德里的折磨",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/6653.png",
+      "gold": 3000,
+      "types": [
+        "Health",
+        "SpellDamage"
+      ],
+      "desc": "60法术强度 300生命值 折磨 伤害型技能会灼烧敌人，每秒造成2%最大生命值的魔法伤害，持续3秒。 受苦 在与敌方英雄作战时，每过1秒，就会造成2%额外伤害，至多至6%。",
+      "descHtml": "<mainText><stats><attention>60</attention>法术强度<br><attention>300</attention>生命值</stats><br><br><passive>折磨</passive><br>伤害型技能会灼烧敌人，每秒造成<magicDamage>2%最大生命值的魔法伤害</magicDamage>，持续3秒。<br><br><passive>受苦</passive><br>在与敌方英雄作战时，每过1秒，就会造成2%额外伤害，至多至6%。</mainText>"
+    },
+    {
+      "id": "6655",
+      "name": "卢登的回声",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/6655.png",
+      "gold": 2750,
+      "types": [
+        "AbilityHaste",
+        "CooldownReduction",
+        "Mana",
+        "SpellDamage"
+      ],
+      "desc": "100法术强度 600法力 10技能急速 回声 伤害型技能会发射6道回声，对目标和附近的敌人造成额外魔法伤害。剩余回声会对主要目标发射，造成20%伤害。",
+      "descHtml": "<mainText><stats><attention>100</attention>法术强度<br><attention> 600</attention>法力<br><attention>10</attention>技能急速</stats><br><br><passive>回声</passive><br>伤害型技能会发射6道回声，对目标和附近的敌人造成<magicDamage>额外魔法伤害</magicDamage>。剩余回声会对主要目标发射，造成20%伤害。<br></mainText>"
+    },
+    {
+      "id": "6657",
+      "name": "时光之杖",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/6657.png",
+      "gold": 2600,
+      "types": [
+        "Health",
+        "HealthRegen",
+        "Mana",
+        "ManaRegen",
+        "SpellDamage"
+      ],
+      "desc": "45法术强度 350生命值 500法力 时无限 这件装备每60秒获得10生命值、30法力值和3法术强度，至多至10层。在达到最大层数时，还会使英雄等级提升1级。 永恒 承受来自英雄的伤害时，回复相当于10%伤害值的法力值。 施放一个技能时，为自身治疗相当于25%法力消耗的生命值。",
+      "descHtml": "<mainText><stats><attention>45</attention>法术强度<br><attention>350</attention>生命值<br><attention> 500</attention>法力</stats><br><br><passive>时无限</passive><br>这件装备每60秒获得<scaleHealth>10生命值</scaleHealth>、<scaleMana>30法力值</scaleMana>和<scaleAP>3法术强度</scaleAP>，至多至10层。在达到最大层数时，还会使英雄等级提升1级。<br><br><passive>永恒</passive><br>承受来自英雄的伤害时，回复相当于<scaleMana>10%</scaleMana>伤害值的<scaleMana>法力值</scaleMana>。<br>施放一个技能时，<healing>为自身治疗相当于25%法力消耗的生命值</healing>。</mainText>"
+    },
+    {
+      "id": "6662",
+      "name": "冰脉护手",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/6662.png",
+      "gold": 2900,
+      "types": [
+        "AbilityHaste",
+        "Armor",
+        "CooldownReduction",
+        "Health",
+        "OnHit",
+        "Slow"
+      ],
+      "desc": "300生命值 50护甲 15技能急速 咒刃 在施放一个技能后，你的下一次攻击造成额外物理伤害攻击特效并生成一个持续2秒的冰冷地带，这个地带可造成减速。",
+      "descHtml": "<mainText><stats><attention>300</attention>生命值<br><attention>50</attention>护甲<br><attention>15</attention>技能急速</stats><br><br><passive>咒刃</passive><br>在施放一个技能后，你的下一次攻击造成<physicalDamage>额外物理伤害</physicalDamage><OnHit>攻击特效</OnHit>并生成一个持续2秒的冰冷地带，这个地带可造成<status>减速</status>。</mainText>"
+    },
+    {
+      "id": "6664",
+      "name": "璀璨回响",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/6664.png",
+      "gold": 2800,
+      "types": [
+        "AbilityHaste",
+        "Aura",
+        "Health",
+        "HealthRegen",
+        "MagicResist",
+        "SpellBlock"
+      ],
+      "desc": "400生命值 40魔法抗性 10技能急速 100%基础生命回复 献祭 承受或造成伤害后，每秒对附近敌人造成魔法伤害，持续3秒。 荒弃 击杀一个敌人时，会在其周围造成魔法伤害。",
+      "descHtml": "<mainText><stats><attention>400</attention>生命值<br><attention>40</attention>魔法抗性<br><attention>10</attention>技能急速<br><attention>100%</attention>基础生命回复</stats><br><br><passive>献祭</passive><br>承受或造成伤害后，每秒对附近敌人造成<magicDamage>魔法伤害</magicDamage>，持续3秒。<br><br><passive>荒弃</passive><br>击杀一个敌人时，会在其周围造成<magicDamage>魔法伤害</magicDamage>。</mainText>"
+    },
+    {
+      "id": "6665",
+      "name": "千变者贾修",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/6665.png",
+      "gold": 3200,
+      "types": [
+        "Armor",
+        "Health",
+        "MagicResist",
+        "SpellBlock"
+      ],
+      "desc": "350生命值 45护甲 45魔法抗性 虚空生物的复原力 在与英雄战斗5秒后，使你的额外护甲和魔法抗性提升30%，持续到战斗结束为止。",
+      "descHtml": "<mainText><stats><attention>350</attention>生命值<br><attention>45</attention>护甲<br><attention>45</attention>魔法抗性</stats><br><br><passive>虚空生物的复原力</passive><br>在与英雄战斗5秒后，使你的额外<scaleArmor>护甲</scaleArmor>和<scaleMR>魔法抗性</scaleMR>提升30%，持续到战斗结束为止。<br><br></mainText>"
+    },
+    {
+      "id": "6672",
+      "name": "海妖杀手",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/6672.png",
+      "gold": 3000,
+      "types": [
+        "AttackSpeed",
+        "Damage",
+        "NonbootsMovement",
+        "OnHit"
+      ],
+      "desc": "45攻击力 40%攻击速度 4%移动速度 放倒它 每第三次攻击造成额外物理伤害攻击特效，这个伤害会基于目标的已损失生命值获得提升。",
+      "descHtml": "<mainText><stats><attention>45</attention>攻击力<br><attention>40%</attention>攻击速度<br><attention>4%</attention>移动速度</stats><br><br><passive>放倒它</passive><br>每第三次攻击造成<physicalDamage>额外物理伤害</physicalDamage><OnHit>攻击特效</OnHit>，这个伤害会基于目标的已损失生命值获得提升。</mainText>"
+    },
+    {
+      "id": "6673",
+      "name": "不朽盾弓",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/6673.png",
+      "gold": 3000,
+      "types": [
+        "CriticalStrike",
+        "Damage"
+      ],
+      "desc": "55攻击力 25%暴击几率 救主灵刃 在受到将使你的生命值跌到30%以下的伤害时，提供持续3秒的护盾值。",
+      "descHtml": "<mainText><stats><attention>55</attention>攻击力<br><attention>25%</attention>暴击几率</stats><br><br><passive>救主灵刃</passive><br>在受到将使你的生命值跌到30%以下的伤害时，提供持续3秒的<shield>护盾值</shield>。</mainText>"
+    },
+    {
+      "id": "6675",
+      "name": "纳沃利烁刃",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/6675.png",
+      "gold": 2650,
+      "types": [
+        "AttackSpeed",
+        "CriticalStrike",
+        "NonbootsMovement"
+      ],
+      "desc": "40%攻击速度 25%暴击几率 4%移动速度 超凡入圣 攻击会使各基础技能的冷却时间缩短15%剩余冷却时间。",
+      "descHtml": "<mainText><stats><attention>40%</attention>攻击速度<br><attention>25%</attention>暴击几率<br><attention>4%</attention>移动速度</stats><br><br><passive>超凡入圣</passive><br>攻击会使各基础技能的冷却时间缩短<attention>15%</attention>剩余冷却时间。</mainText>"
+    },
+    {
+      "id": "6676",
+      "name": "收集者",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/6676.png",
+      "gold": 3000,
+      "types": [
+        "ArmorPenetration",
+        "CriticalStrike",
+        "Damage"
+      ],
+      "desc": "50攻击力 10穿甲 25%暴击几率 死 你的伤害会处决低于5%生命值的英雄。 税 击杀英雄时提供25额外金币。",
+      "descHtml": "<mainText><stats><attention>50</attention>攻击力<br><attention> 10</attention>穿甲<br><attention>25%</attention>暴击几率</stats><br><br><passive>死</passive><br>你的伤害会处决低于5%生命值的英雄。<br><br><passive>税</passive><br>击杀英雄时提供<gold>25额外金币</gold>。</mainText>"
+    },
+    {
+      "id": "6692",
+      "name": "星蚀",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/6692.png",
+      "gold": 2900,
+      "types": [
+        "AbilityHaste",
+        "CooldownReduction",
+        "Damage"
+      ],
+      "desc": "60攻击力 15技能急速 永升之月 在2秒内用2次独立的攻击或技能命中一名英雄时，会为你提供持续2秒的护盾值。",
+      "descHtml": "<mainText><stats><attention>60</attention>攻击力<br><attention>15</attention>技能急速</stats><br><br><passive>永升之月</passive><br>在2秒内用2次独立的攻击或技能命中一名英雄时，会为你提供持续2秒的<shield>护盾值</shield>。</mainText>"
+    },
+    {
+      "id": "6694",
+      "name": "赛瑞尔达的怨恨",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/6694.png",
+      "gold": 3000,
+      "types": [
+        "AbilityHaste",
+        "ArmorPenetration",
+        "CooldownReduction",
+        "Damage"
+      ],
+      "desc": "45攻击力 35%护甲穿透 15技能急速 严寒 伤害型技能会对低于50%生命值的敌人造成持续1秒的30%减速。",
+      "descHtml": "<mainText><stats><attention>45</attention>攻击力<br><attention>35%</attention>护甲穿透<br><attention>15</attention>技能急速</stats><br><br><passive>严寒</passive><br>伤害型技能会对低于50%生命值的敌人造成持续1秒的30%<status>减速</status>。</mainText>"
+    },
+    {
+      "id": "6695",
+      "name": "巨蛇之牙",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/6695.png",
+      "gold": 2500,
+      "types": [
+        "ArmorPenetration",
+        "Damage"
+      ],
+      "desc": "55攻击力 15穿甲 掠盾者 对一名敌方英雄造成伤害时，会使其获得的护盾值降低0%，持续3秒。 如果该敌方英雄尚未被掠盾者影响，会使其身上的所有护盾降低0%。",
+      "descHtml": "<mainText><stats><attention>55</attention>攻击力<br><attention> 15</attention>穿甲</stats><br><br><passive>掠盾者</passive><br>对一名敌方英雄造成伤害时，会使其获得的护盾值降低0%，持续3秒。<br>如果该敌方英雄尚未被<passive>掠盾者</passive>影响，会使其身上的所有护盾降低0%。</mainText>"
+    },
+    {
+      "id": "6696",
+      "name": "公理圆弧",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/6696.png",
+      "gold": 2750,
+      "types": [
+        "AbilityHaste",
+        "ArmorPenetration",
+        "Damage"
+      ],
+      "desc": "55攻击力 18穿甲 20技能急速 涌动 在你对一名敌方英雄造成伤害后，如果该英雄在3秒内阵亡，则会返还你的终极技能的一些总冷却时间。",
+      "descHtml": "<mainText><stats><attention>55</attention>攻击力<br><attention> 18</attention>穿甲<br><attention>20</attention>技能急速</stats><br><br><passive>涌动</passive><br>在你对一名敌方英雄造成伤害后，如果该英雄在3秒内阵亡，则会返还你的终极技能的一些总冷却时间。</mainText>"
+    },
+    {
+      "id": "6697",
+      "name": "狂妄",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/6697.png",
+      "gold": 2800,
+      "types": [
+        "AbilityHaste",
+        "Active",
+        "ArmorPenetration",
+        "CooldownReduction",
+        "Damage"
+      ],
+      "desc": "55攻击力 18穿甲 10技能急速 盛名 如果一名在过去3秒内曾被你造成过伤害的英雄阵亡，则获得持续90秒的12+3x已击杀英雄数的攻击力。",
+      "descHtml": "<mainText><stats><attention>55</attention>攻击力<br><attention> 18</attention>穿甲<br><attention>10</attention>技能急速</stats><br><br><passive>盛名</passive><br>如果一名在过去3秒内曾被你造成过伤害的英雄阵亡，则获得持续90秒的<physicalDamage>12+3x已击杀英雄数的攻击力</physicalDamage>。</mainText>"
+    },
+    {
+      "id": "6698",
+      "name": "亵渎九头蛇",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/6698.png",
+      "gold": 2850,
+      "types": [
+        "AbilityHaste",
+        "Active",
+        "ArmorPenetration",
+        "CooldownReduction",
+        "Damage"
+      ],
+      "desc": "55攻击力 18穿甲 10技能急速 顺劈 攻击会对附近的敌人们造成物理伤害。 邪斩 对你附近的敌人们造成物理伤害。",
+      "descHtml": "<mainText><stats><attention>55</attention>攻击力<br><attention> 18</attention>穿甲<br><attention>10</attention>技能急速</stats><br><br><passive>顺劈</passive><br>攻击会对附近的敌人们造成<physicalDamage>物理伤害</physicalDamage>。<br> <active>邪斩</active><br>对你附近的敌人们造成<physicalDamage>物理伤害</physicalDamage>。</mainText>"
+    },
+    {
+      "id": "6699",
+      "name": "电震涡流剑",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/6699.png",
+      "gold": 3000,
+      "types": [
+        "AbilityHaste",
+        "Active",
+        "ArmorPenetration",
+        "CooldownReduction",
+        "Damage"
+      ],
+      "desc": "55攻击力 10穿甲 10技能急速 通电 用技能对一名敌人造成伤害会触发盈能(充能完毕时)。 苍穹 你的盈能攻击造成相当于%目标当前生命值的额外物理伤害，并为你提供持续4秒的 额外穿甲。",
+      "descHtml": "<mainText><stats><attention>55</attention>攻击力<br><attention> 10</attention>穿甲<br><attention>10</attention>技能急速</stats><br><br><passive>通电</passive><br>用技能对一名敌人造成伤害会触发<keyword>盈能</keyword>(充能完毕时)。<br><br><passive>苍穹</passive><br>你的<keyword>盈能攻击</keyword>造成相当于<physicalDamage>%目标当前生命值的额外物理伤害</physicalDamage>，并为你提供持续4秒的 <scaleLethality>额外穿甲</scaleLethality>。</mainText>"
+    },
+    {
+      "id": "8010",
+      "name": "放血者的诅咒",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/8010.png",
+      "gold": 2900,
+      "types": [
+        "CooldownReduction",
+        "Health",
+        "MagicPenetration",
+        "SpellDamage"
+      ],
+      "desc": "65法术强度 400生命值 15技能急速 恶劣衰朽 用技能或被动对英雄造成魔法伤害时，会对其造成持续6秒的7.5%魔法抗性削减。(可叠加4次)。",
+      "descHtml": "<mainText><stats><attention>65</attention>法术强度<br><attention>400</attention>生命值<br><attention>15</attention>技能急速</stats><br><br><passive>恶劣衰朽</passive><br>用技能或被动对英雄造成<magicDamage>魔法伤害</magicDamage>时，会对其造成持续6秒的<scaleMR>7.5%魔法抗性削减</scaleMR>。(可叠加4次)。</mainText>"
+    },
+    {
+      "id": "8020",
+      "name": "深渊面具",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/8020.png",
+      "gold": 2650,
+      "types": [
+        "AbilityHaste",
+        "CooldownReduction",
+        "Health",
+        "MagicResist",
+        "SpellBlock"
+      ],
+      "desc": "350生命值 45魔法抗性 15技能急速 损毁 使附近的敌方英雄承受12%额外魔法伤害。",
+      "descHtml": "<mainText><stats><attention>350</attention>生命值<br><attention>45</attention>魔法抗性<br><attention>15</attention>技能急速</stats><br><br><passive>损毁</passive><br>使附近的敌方英雄承受12%额外<magicDamage>魔法伤害</magicDamage>。</mainText>"
+    }
+  ],
+  "boots": [
+    {
+      "id": "3006",
+      "name": "狂战士胫甲",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3006.png",
+      "gold": 1100,
+      "types": [
+        "AttackSpeed",
+        "Boots"
+      ],
+      "desc": "30%攻击速度 45移动速度",
+      "descHtml": "<mainText><stats><attention>30%</attention>攻击速度<br><attention>45</attention>移动速度</stats><br><br></mainText>"
+    },
+    {
+      "id": "3008",
+      "name": "暴食胫甲",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3008.png",
+      "gold": 1000,
+      "types": [
+        "Boots",
+        "LifeSteal",
+        "SpellVamp"
+      ],
+      "desc": "45移动速度 4%全能吸血 杀戮 参与击杀英雄后获得0.6%全能吸血，可叠加至多10次。",
+      "descHtml": "<mainText><stats><attention>45</attention>移动速度<br><attention> 4%</attention>全能吸血</stats><br><br><passive>杀戮</passive><br>参与击杀英雄后获得0.6%全能吸血，可叠加至多10次。</mainText>"
+    },
+    {
+      "id": "3009",
+      "name": "轻灵之靴",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3009.png",
+      "gold": 1000,
+      "types": [
+        "Boots"
+      ],
+      "desc": "55移动速度 迅捷步 将减速效果的效能降低25%。",
+      "descHtml": "<mainText><stats><attention>55</attention>移动速度</stats><br><br><passive>迅捷步</passive><br>将<keyword>减速</keyword>效果的效能降低25%。</mainText>"
+    },
+    {
+      "id": "3020",
+      "name": "法师之靴",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3020.png",
+      "gold": 1100,
+      "types": [
+        "Boots",
+        "MagicPenetration"
+      ],
+      "desc": "12法术穿透 45移动速度",
+      "descHtml": "<mainText><stats><attention>12</attention>法术穿透<br><attention>45</attention>移动速度</stats><br><br></mainText>"
+    },
+    {
+      "id": "3047",
+      "name": "铁板靴",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3047.png",
+      "gold": 1200,
+      "types": [
+        "Armor",
+        "Boots"
+      ],
+      "desc": "25护甲 45移动速度 镀板 使即将到来的攻击伤害降低10%。",
+      "descHtml": "<mainText><stats><attention>25</attention>护甲<br><attention>45</attention>移动速度</stats><br><br><passive>镀板</passive><br>使即将到来的攻击伤害降低10%。</mainText>"
+    },
+    {
+      "id": "3111",
+      "name": "水银之靴",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3111.png",
+      "gold": 1250,
+      "types": [
+        "Boots",
+        "SpellBlock",
+        "Tenacity"
+      ],
+      "desc": "20魔法抗性 45移动速度 30%韧性",
+      "descHtml": "<mainText><stats><attention>20</attention>魔法抗性<br><attention>45</attention>移动速度<br><attention>30%</attention>韧性</stats><br><br></mainText>"
+    },
+    {
+      "id": "3158",
+      "name": "明朗之靴",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3158.png",
+      "gold": 900,
+      "types": [
+        "Boots",
+        "CooldownReduction"
+      ],
+      "desc": "10技能急速 45移动速度 艾欧尼亚的洞悉 获得10召唤师技能急速。",
+      "descHtml": "<mainText><stats><attention>10</attention>技能急速<br><attention>45</attention>移动速度</stats><br><br><passive>艾欧尼亚的洞悉</passive><br>获得10召唤师技能急速。<br><br></mainText>"
+    }
+  ],
+  "bootsUpgraded": [
+    {
+      "id": "3172",
+      "name": "炮铜胫甲",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3172.png",
+      "gold": 1100,
+      "types": [
+        "AttackSpeed",
+        "LifeSteal",
+        "NonbootsMovement"
+      ],
+      "desc": "45%攻击速度 45移动速度 5%生命偷取",
+      "descHtml": "<mainText><stats><attention>45%</attention>攻击速度<br><attention>45</attention>移动速度<br><attention>5%</attention>生命偷取</stats><br><br></mainText>"
+    },
+    {
+      "id": "3168",
+      "name": "不朽之路",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3168.png",
+      "gold": 1000,
+      "types": [
+        "Boots",
+        "LifeSteal",
+        "SpellVamp"
+      ],
+      "desc": "45移动速度 4%全能吸血 杀戮 参与击杀英雄后获得0.6%全能吸血，可叠加至多10次。 现在到永远 在一半生命值以上时，造成4%额外伤害。 在一半生命值以下时，获得12%额外治疗值、护盾值和回复。",
+      "descHtml": "<mainText><stats><attention>45</attention>移动速度<br><attention> 4%</attention>全能吸血</stats><br><br><passive>杀戮</passive><br>参与击杀英雄后获得0.6%全能吸血，可叠加至多10次。<br><br><passive>现在到永远</passive><br>在一半生命值以上时，造成4%额外伤害。<br><br>在一半生命值以下时，获得12%额外治疗值、护盾值和回复。</mainText>"
+    },
+    {
+      "id": "3170",
+      "name": "迅速进军",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3170.png",
+      "gold": 1000,
+      "types": [
+        "Boots"
+      ],
+      "desc": "65移动速度 迅捷步 将减速效果的效能降低25%。 诺克萨斯的狂热 获得相当于你5%移动速度的适应之力。",
+      "descHtml": "<mainText><stats><attention>65</attention>移动速度</stats><br><br><passive>迅捷步</passive><br>将<keyword>减速</keyword>效果的效能降低25%。<br><br><passive>诺克萨斯的狂热</passive><br>获得相当于你5%<speed>移动速度</speed>的适应之力。</mainText>"
+    },
+    {
+      "id": "3175",
+      "name": "灵能使之靴",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3175.png",
+      "gold": 1100,
+      "types": [
+        "Boots",
+        "MagicPenetration"
+      ],
+      "desc": "20法术穿透 8%法术穿透 45移动速度",
+      "descHtml": "<mainText><stats><attention>20</attention>法术穿透<br><attention>8%</attention>法术穿透<br><attention>45</attention>移动速度</stats><br><br></mainText>"
+    },
+    {
+      "id": "3174",
+      "name": "装甲战靴",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3174.png",
+      "gold": 1200,
+      "types": [
+        "Armor",
+        "Boots"
+      ],
+      "desc": "35护甲 45移动速度 镀板 使即将到来的攻击伤害降低10%。 诺克萨斯的耐久 (0秒) 在受到来自英雄的物理伤害后，获得一个持续5秒的0物理护盾。",
+      "descHtml": "<mainText><stats><attention>35</attention>护甲<br><attention>45</attention>移动速度</stats><br><br><passive>镀板</passive><br>使即将到来的攻击伤害降低10%。<br><br><passive>诺克萨斯的耐久</passive>  (0秒)<br>在受到来自英雄的物理伤害后，获得一个持续5秒的<shield>0</shield><physicalDamage>物理</physicalDamage><shield>护盾</shield>。</mainText>"
+    },
+    {
+      "id": "3173",
+      "name": "带链碾碎者",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3173.png",
+      "gold": 1250,
+      "types": [
+        "Boots",
+        "MagicResist",
+        "SpellBlock",
+        "Tenacity"
+      ],
+      "desc": "25魔法抗性 45移动速度 30%韧性 诺克萨斯的不懈 (0秒) 在受到来自英雄的魔法伤害后，获得一个持续5秒的0魔法护盾。",
+      "descHtml": "<mainText><stats><attention>25</attention>魔法抗性<br><attention>45</attention>移动速度<br><attention>30%</attention>韧性</stats><br><br><passive>诺克萨斯的不懈</passive> (0秒)<br>在受到来自英雄的魔法伤害后，获得一个持续5秒的<shield>0</shield><magicDamage>魔法</magicDamage><shield>护盾</shield>。</mainText>"
+    },
+    {
+      "id": "3171",
+      "name": "猩红明朗",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3171.png",
+      "gold": 900,
+      "types": [
+        "Boots",
+        "CooldownReduction"
+      ],
+      "desc": "20技能急速 45移动速度 艾欧尼亚的洞悉 获得20召唤师技能急速。 诺克萨斯的急速 用技能增强或保护友军、用技能对敌军造成伤害或者施放召唤师技能会提供持续4秒的0移动速度。 【诺克萨斯的急速】每次施放技能只能被触发1次。",
+      "descHtml": "<mainText><stats><attention>20</attention>技能急速<br><attention>45</attention>移动速度</stats><br><br><passive>艾欧尼亚的洞悉</passive><br>获得20召唤师技能急速。<br><br><passive>诺克萨斯的急速</passive><br>用技能增强或保护友军、用技能对敌军造成伤害或者施放召唤师技能会提供持续4秒的<speed>0移动速度</speed>。<br><br><rules>【诺克萨斯的急速】每次施放技能只能被触发1次。</rules></mainText>"
+    }
+  ],
+  "bootsUpgradeMap": {
+    "3006": "3172",
+    "3008": "3168",
+    "3009": "3170",
+    "3020": "3175",
+    "3047": "3174",
+    "3111": "3173",
+    "3158": "3171"
+  },
+  "starterGeneric": [
+    {
+      "id": "1054",
+      "name": "多兰之盾",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/1054.png",
+      "gold": 450,
+      "types": [
+        "Health",
+        "HealthRegen",
+        "Lane"
+      ],
+      "desc": "110生命值 耐久专注 每5秒回复4生命值。 在承受来自英雄的伤害后，在8秒里回复生命值。 帮助之手 攻击对小兵造成5额外物理伤害。",
+      "descHtml": "<mainText><stats><attention>110</attention>生命值</stats><br><br><passive>耐久专注</passive><br>每5秒回复<healing>4生命值</healing>。<br>在承受来自英雄的伤害后，在8秒里回复<healing>生命值</healing>。<br><passive>帮助之手</passive><br>攻击对小兵造成<physicalDamage>5额外物理伤害</physicalDamage>。</mainText>"
+    },
+    {
+      "id": "1055",
+      "name": "多兰之刃",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/1055.png",
+      "gold": 450,
+      "types": [
+        "Damage",
+        "Health",
+        "Lane",
+        "LifeSteal",
+        "SpellVamp"
+      ],
+      "desc": "10攻击力 80生命值 2.5%全能吸血",
+      "descHtml": "<mainText><stats><attention>10</attention>攻击力<br><attention>80</attention>生命值<br><attention> 2.5%</attention>全能吸血</stats><br><br></mainText>"
+    },
+    {
+      "id": "1056",
+      "name": "多兰之戒",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/1056.png",
+      "gold": 400,
+      "types": [
+        "Health",
+        "Lane",
+        "ManaRegen",
+        "SpellDamage"
+      ],
+      "desc": "18法术强度 90生命值 汲取 每秒回复1法力值，在对一名敌方英雄造成伤害后，提升至每秒2法力值，持续5秒。如果你不能获得法力值，则转而治疗45%此数值的生命值。 帮助之手 攻击会对小兵造成5额外物理伤害。",
+      "descHtml": "<mainText><stats><attention>18</attention>法术强度<br><attention>90</attention>生命值</stats><br><br><passive>汲取</passive><br>每秒回复<scaleMana>1法力值</scaleMana>，在对一名敌方英雄造成伤害后，提升至每秒<scaleMana>2法力值</scaleMana>，持续5秒。如果你不能获得法力值，则转而<healing>治疗45%</healing>此数值的生命值。<br><br><passive>帮助之手</passive><br>攻击会对小兵造成<physicalDamage>5额外物理伤害</physicalDamage>。</mainText>"
+    },
+    {
+      "id": "1082",
+      "name": "黑暗封印",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/1082.png",
+      "gold": 350,
+      "types": [
+        "Health",
+        "Lane",
+        "SpellDamage"
+      ],
+      "desc": "15法术强度 50生命值 荣耀 参与击杀后提供荣耀层数，至多至10层。阵亡时损失5层荣耀。 每层荣耀提供4法术强度。",
+      "descHtml": "<mainText><stats><attention>15</attention>法术强度<br><attention>50</attention>生命值</stats><br><br><passive>荣耀</passive><br><keyword>参与击杀</keyword>后提供<passive>荣耀</passive>层数，至多至10层。阵亡时损失5层<passive>荣耀</passive>。<br>每层<passive>荣耀</passive>提供<scaleAP>4法术强度</scaleAP>。</mainText>"
+    },
+    {
+      "id": "1083",
+      "name": "萃取",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/1083.png",
+      "gold": 450,
+      "types": [
+        "Damage",
+        "Lane",
+        "OnHit"
+      ],
+      "desc": "7攻击力 收割 回复3生命值攻击特效。 击杀小兵时提供1金币，至多至100。达到上限时提供额外的350金币。",
+      "descHtml": "<mainText><stats><attention>7</attention>攻击力</stats><br><br><passive>收割</passive><br>回复<healing>3生命值</healing><OnHit>攻击特效</OnHit>。<br>击杀小兵时提供<gold>1金币</gold>，至多至<gold>100</gold>。达到上限时提供额外的<gold>350金币</gold>。<br></mainText>"
+    },
+    {
+      "id": "1086",
+      "name": "多兰之弓",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/1086.png",
+      "gold": 400,
+      "types": [
+        "AttackSpeed",
+        "Damage",
+        "Lane",
+        "SpellVamp"
+      ],
+      "desc": "8攻击力 15%攻击速度 1.5%全能吸血",
+      "descHtml": "<mainText><stats><attention>8</attention>攻击力<br><attention>15%</attention>攻击速度<br><attention> 1.5%</attention>全能吸血</stats><br><br></mainText>"
+    },
+    {
+      "id": "1120",
+      "name": "多兰之盔",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/1120.png",
+      "gold": 450,
+      "types": [
+        "Armor",
+        "Health",
+        "Lane",
+        "SpellBlock"
+      ],
+      "desc": "150生命值 8护甲 8魔法抗性 帮助之手 攻击会对小兵造成5额外物理伤害。",
+      "descHtml": "<mainText><stats><attention>150</attention>生命值<br><attention>8</attention>护甲<br><attention>8</attention>魔法抗性</stats><br><br><passive>帮助之手</passive><br>攻击会对小兵造成<physicalDamage>5额外物理伤害</physicalDamage>。</mainText>"
+    },
+    {
+      "id": "3070",
+      "name": "女神之泪",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3070.png",
+      "gold": 400,
+      "types": [
+        "Mana",
+        "ManaRegen"
+      ],
+      "desc": "240法力 法力流 (8秒，最大4层) 技能在命中时会提供3最大法力值(对英雄时翻倍)，至多至360。 帮助之手 攻击会对小兵造成额外的5物理伤害。",
+      "descHtml": "<mainText><stats><attention> 240</attention>法力</stats><br><br><passive>法力流</passive>  (8秒，最大4层)<br>技能在命中时会提供<scaleMana>3最大法力值</scaleMana>(对英雄时翻倍)，至多至<scaleMana>360</scaleMana>。<br><br><passive>帮助之手</passive><br>攻击会对小兵造成额外的<physicalDamage>5物理伤害</physicalDamage>。</mainText>"
+    }
+  ],
+  "starterJungle": [
+    {
+      "id": "1101",
+      "name": "焰爪猫幼崽",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/1101.png",
+      "gold": 450,
+      "types": [
+        "Jungle"
+      ],
+      "desc": "灵兽同伴 召唤一个焰爪猫来协助你对抗野怪。 这个灵兽同伴会随着你狩猎野怪而成长，从而强化你的惩戒。在完全成长时，它会完成你的打野任务并且周期性地为你的下一个攻击或技能进行注魔，以对敌人造成灼烧和减速效果。击杀大型野怪后会让这个效果立刻就绪。",
+      "descHtml": "<mainText><stats></stats><br><br><passive>灵兽同伴</passive><br>召唤一个焰爪猫来协助你对抗野怪。<br><br>这个灵兽同伴会随着你狩猎野怪而成长，从而强化你的<spellName>惩戒</spellName>。在完全成长时，它会完成你的打野任务并且周期性地为你的下一个攻击或技能进行注魔，以对敌人造成灼烧和<status>减速</status>效果。击杀大型野怪后会让这个效果立刻就绪。</mainText>"
+    },
+    {
+      "id": "1102",
+      "name": "风行狐幼体",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/1102.png",
+      "gold": 450,
+      "types": [
+        "Jungle"
+      ],
+      "desc": "灵兽同伴 召唤一个风行狐来协助你对抗野怪。 这个灵兽同伴会随着你狩猎野怪而成长，从而强化你的惩戒。在完全成长时，它会完成你的打野任务并且在进入草丛的同时提供移动速度，移动速度的数额会在击杀大型野怪后提升。",
+      "descHtml": "<mainText><stats></stats><br><br><passive>灵兽同伴</passive><br>召唤一个风行狐来协助你对抗野怪。<br><br>这个灵兽同伴会随着你狩猎野怪而成长，从而强化你的<spellName>惩戒</spellName>。在完全成长时，它会完成你的打野任务并且在进入草丛的同时提供<speed>移动速度</speed>，移动速度的数额会在击杀大型野怪后提升。</mainText>"
+    },
+    {
+      "id": "1103",
+      "name": "踏苔蜥幼苗",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/1103.png",
+      "gold": 450,
+      "types": [
+        "Jungle"
+      ],
+      "desc": "灵兽同伴 召唤一个踏苔蜥来协助你对抗野怪。 这个灵兽同伴会随着你狩猎野怪而成长，从而强化你的惩戒。在完全成长时，它会完成你的打野任务并且在脱离战斗时和击杀野怪后提供一个护盾。",
+      "descHtml": "<mainText><stats></stats><br><br><passive>灵兽同伴</passive><br>召唤一个踏苔蜥来协助你对抗野怪。<br><br>这个灵兽同伴会随着你狩猎野怪而成长，从而强化你的<spellName>惩戒</spellName>。在完全成长时，它会完成你的打野任务并且在脱离战斗时和击杀野怪后提供一个护盾。</mainText>"
+    }
+  ],
+  "starterSupport": {
+    "id": "3865",
+    "name": "云游图鉴",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/item/3865.png",
+    "gold": 400,
+    "types": [
+      "GoldPer",
+      "Health",
+      "Lane",
+      "ManaRegen",
+      "Vision"
+    ],
+    "desc": "30生命值\n25%基础生命回复\n25%基础法力回复\n3金币/10秒\n\n辅助任务\n使用这个装备赚取400金币来将其转变为符文罗盘。\n分享财富(20秒，最大3层充能)\n\n在一名友方英雄附近时，对敌方英雄造成伤害或者击杀小兵即可获得金币。\n- 对英雄或建筑物进行的伤害型技能和攻击会提供(22)金币;\n- 以任意方式击杀一个小兵会为你提供15金币并为相距最近的友方英雄提供击杀金币，\n在已方任一成员用这件装备击杀了过多数量的小兵时，这件装备会降低来自小兵的金币。\n“去找，就终会找到。",
+    "descHtml": ""
+  },
+  "supportQuestUpgrades": [
+    {
+      "id": "3869",
+      "name": "星界据守",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3869.png",
+      "gold": 400,
+      "types": [
+        "GoldPer",
+        "Health",
+        "HealthRegen",
+        "Lane",
+        "ManaRegen",
+        "Vision"
+      ],
+      "desc": "200生命值 75%基础生命回复 75%基础法力回复 9金币/10秒 神峰庇佑 使所承受的来自英雄的伤害降低，受到来自英雄的伤害后会存留2秒。当这个效果结束时，对附近敌人造成持续1.5秒的50%减速。 主动 (4层充能) 放置一个隐形的侦察守卫来提供视野。",
+      "descHtml": "<mainText><stats><attention>200</attention>生命值<br><attention>75%</attention>基础生命回复<br><attention>75%</attention>基础法力回复<br><attention>9</attention>金币/10秒</stats><br><br><passive>神峰庇佑</passive><br>使所承受的来自英雄的伤害降低，受到来自英雄的伤害后会存留2秒。当这个效果结束时，对附近敌人造成持续1.5秒的50%减速。<br> <active>主动</active> (4层充能)<br>放置一个<keyword>隐形</keyword>的侦察守卫来提供视野。</mainText>"
+    },
+    {
+      "id": "3870",
+      "name": "圆梦使者",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3870.png",
+      "gold": 400,
+      "types": [
+        "GoldPer",
+        "Health",
+        "HealthRegen",
+        "Lane",
+        "ManaRegen",
+        "Vision"
+      ],
+      "desc": "200生命值 75%基础生命回复 75%基础法力回复 9金币/10秒 圆梦使者 为另一个友军提供治疗或护盾时，美梦泡泡会飞向目标队友，持续3秒。该友军的下一次攻击造成额外魔法伤害 攻击特效并且所受的下一段伤害降低。 主动 (4层充能) 放置一个隐形的侦察守卫来提供视野。",
+      "descHtml": "<mainText><stats><attention>200</attention>生命值<br><attention>75%</attention>基础生命回复<br><attention>75%</attention>基础法力回复<br><attention>9</attention>金币/10秒</stats><br><br><passive>圆梦使者</passive><br>为另一个友军提供治疗或护盾时，美梦泡泡会飞向目标队友，持续3秒。该友军的下一次攻击造成<magicDamage>额外魔法伤害</magicDamage> <OnHit>攻击特效</OnHit>并且所受的下一段伤害降低。 <active>主动</active> (4层充能)<br>放置一个<keyword>隐形</keyword>的侦察守卫来提供视野。</mainText>"
+    },
+    {
+      "id": "3871",
+      "name": "扎兹沙克的溃口",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3871.png",
+      "gold": 400,
+      "types": [
+        "GoldPer",
+        "Health",
+        "HealthRegen",
+        "Lane",
+        "ManaRegen",
+        "Vision"
+      ],
+      "desc": "200生命值 75%基础生命回复 75%基础法力回复 9金币/10秒 虚空扩爆 对英雄造成技能伤害会引发一次爆炸，造成魔法伤害。 主动 (4层充能) 放置一个隐形的侦察守卫来提供视野。",
+      "descHtml": "<mainText><stats><attention>200</attention>生命值<br><attention>75%</attention>基础生命回复<br><attention>75%</attention>基础法力回复<br><attention>9</attention>金币/10秒</stats><br><br><passive>虚空扩爆</passive><br>对英雄造成技能伤害会引发一次爆炸，造成<magicDamage>魔法伤害</magicDamage>。<br><br> <active>主动</active> (4层充能)<br>放置一个<keyword>隐形</keyword>的侦察守卫来提供视野。</mainText>"
+    },
+    {
+      "id": "3876",
+      "name": "摩天雪橇",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3876.png",
+      "gold": 400,
+      "types": [
+        "GoldPer",
+        "Health",
+        "HealthRegen",
+        "Lane",
+        "ManaRegen",
+        "Vision"
+      ],
+      "desc": "200生命值 75%基础生命回复 75%基础法力回复 9金币/10秒 雪橇出击 减速或定身一名处在友军附近的敌方英雄时，会为你和附近的一名友军回复生命值并提供在2.5秒里持续衰减的20%移动速度。 主动 (4层充能) 放置一个隐形的侦察守卫来提供视野。",
+      "descHtml": "<mainText><stats><attention>200</attention>生命值<br><attention>75%</attention>基础生命回复<br><attention>75%</attention>基础法力回复<br><attention>9</attention>金币/10秒</stats><br><br><passive>雪橇出击</passive><br><keyword>减速</keyword>或<keyword>定身</keyword>一名处在友军附近的敌方英雄时，会为你和附近的一名友军回复<healing>生命值</healing>并提供在2.5秒里持续衰减的<speed>20%移动速度</speed>。  <active>主动</active> (4层充能)<br>放置一个<keyword>隐形</keyword>的侦察守卫来提供视野。</mainText>"
+    },
+    {
+      "id": "3877",
+      "name": "血鸣",
+      "icon": "https://game.gtimg.cn/images/lol/act/img/item/3877.png",
+      "gold": 400,
+      "types": [
+        "GoldPer",
+        "Health",
+        "HealthRegen",
+        "Lane",
+        "ManaRegen",
+        "Vision"
+      ],
+      "desc": "200生命值 75%基础生命回复 75%基础法力回复 9金币/10秒 咒刃 施放技能后，你的下一次普通攻击会造成额外物理伤害攻击特效。如果目标是英雄，则使其承受的伤害提升，持续4秒。 主动 (4层充能) 放置一个隐形的侦察守卫来提供视野。",
+      "descHtml": "<mainText><stats><attention>200</attention>生命值<br><attention>75%</attention>基础生命回复<br><attention>75%</attention>基础法力回复<br><attention>9</attention>金币/10秒</stats><br><br><passive>咒刃</passive><br>施放技能后，你的下一次普通攻击会造成<physicalDamage>额外物理伤害</physicalDamage><OnHit>攻击特效</OnHit>。如果目标是英雄，则使其承受的伤害提升，持续4秒。 <active>主动</active> (4层充能)<br>放置一个<keyword>隐形</keyword>的侦察守卫来提供视野。</mainText>"
+    }
+  ]
+}
