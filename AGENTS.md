@@ -110,9 +110,17 @@
 ## 五、常用命令
 
 ```bash
-npm run fetch:data     # 抓取并生成 src/data/*.json 快照
-npm run test           # 跑随机引擎单元测试
-npm run dev:h5         # 启动 Web 开发服务器
+npm run dev:h5         # 启动 Web 开发服务器（http://localhost:5173）
 npm run build:h5       # 构建 Web 产物到 dist/build/h5
-npm run preview:h5     # 本地静态预览构建产物
+npm run serve:dist     # 零依赖静态服务器，预览构建产物（:4180）
+npm run preview:h5     # vite preview 预览构建产物（:4173）
+npm run test           # 跑随机引擎与渲染的单元测试
+npm run typecheck      # TypeScript 类型检查
+npm run fetch:data     # 抓取并生成 src/data/*.json 快照
+npm run sample -- 10   # 在终端打印一次 10 人随机结果，用来核对规则
 ```
+
+## 六、当前进度
+
+`todo.md` 的 P0–P5 已完成（环境/数据/引擎/展示/验证/文档）。改动前先看 `todo.md` 的「进度总览」，
+新增规则请同步补 `tests/` 用例与 `docs/RULES.md` 对应小节。
