@@ -8,10 +8,10 @@
 # - 目录约定与 `scripts/deploy.ps1` 完全一致：releases/<时间戳> + current 软链，回滚只需切软链。
 #
 # 需要的仓库 secrets（Settings → Secrets and variables → Actions）：
-#   SSH_HOST         58.87.93.111
+#   SSH_HOST         <你的服务器IP>
 #   SSH_USER         ubuntu
 #   SSH_KEY          专用部署私钥（不要用你自己的登录私钥）
-#   SSH_KNOWN_HOSTS  ssh-keyscan -p 22 58.87.93.111 的输出
+#   SSH_KNOWN_HOSTS  ssh-keyscan -p 22 <你的服务器IP> 的输出
 #
 # 没有配 secrets 时，deploy job 会失败，但 verify job 仍然能给你构建结果。
 
@@ -90,7 +90,23 @@ jobs:
         with:
           name: h5
 
+      # 首次推到 GitHub 时很可能还没配 secrets。这一步让 deploy 变成「没配就跳过」，
+      # 而不是直接红掉——verify 的构建结果依然可用。
+      - name: 检查部署配置
+        id: check
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+        run: |
+          if [ -n "$SSH_HOST" ]; then
+            echo "configured=true" >> "$GITHUB_OUTPUT"
+            echo "已配置 SSH_HOST，将执行发布"
+          else
+            echo "configured=false" >> "$GITHUB_OUTPUT"
+            echo "::warning::未配置 SSH_HOST / SSH_USER / SSH_KEY / SSH_KNOWN_HOSTS，本次跳过发布（verify 的构建产物仍可在 Artifacts 下载）"
+          fi
+
       - name: 准备 SSH
+        if: steps.check.outputs.configured == 'true'
         run: |
           set -euo pipefail
           mkdir -p ~/.ssh
@@ -100,6 +116,7 @@ jobs:
           chmod 644 ~/.ssh/known_hosts
 
       - name: 上传并切换版本
+        if: steps.check.outputs.configured == 'true'
         env:
           SSH_HOST: ${{ secrets.SSH_HOST }}
           SSH_USER: ${{ secrets.SSH_USER }}

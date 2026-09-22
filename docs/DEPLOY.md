@@ -11,8 +11,8 @@
 
 | 项 | 值 |
 | --- | --- |
-| 域名 | `lol.huohandu.cn`（A 记录 → `58.87.93.111`） |
-| 服务器 | `ssh tencent` → `58.87.93.111`，Ubuntu 22.04 LTS，nginx 1.18.0 |
+| 域名 | `lol.huohandu.cn`（A 记录 → `<你的服务器IP>`） |
+| 服务器 | `ssh tencent` → `<你的服务器IP>`，Ubuntu 22.04 LTS，nginx 1.18.0 |
 | 站点根 | `/var/www/lol.huohandu.cn/current`（软链） |
 | 版本目录 | `/var/www/lol.huohandu.cn/releases/<yyyyMMdd-HHmmss>/`，保留最近 5 个 |
 | nginx 配置 | `/etc/nginx/sites-available/lol.huohandu.cn` → 软链到 `sites-enabled/` |
@@ -264,7 +264,7 @@ npm run build:h5
 
 问：能不能把代码传到 GitHub 或 Docker Hub，让服务器自己拉取部署？
 
-**能，四条路都可行。** 目标服务器 `58.87.93.111` 已实测具备：`git`、`node`(npm)、`rsync`、`docker` + `docker compose v2.27.1`，且 **Docker Hub 可直连**，磁盘余量 25 GB。所以限制不在工具，而在「你想让谁承担构建」和「谁来触发」。
+**能，四条路都可行。** 目标服务器 `<你的服务器IP>` 已实测具备：`git`、`node`(npm)、`rsync`、`docker` + `docker compose v2.27.1`，且 **Docker Hub 可直连**，磁盘余量 25 GB。所以限制不在工具，而在「你想让谁承担构建」和「谁来触发」。
 
 ### 方案对比
 
@@ -291,10 +291,10 @@ npm run build:h5
 
 | Secret | 值 |
 | --- | --- |
-| `SSH_HOST` | `58.87.93.111` |
+| `SSH_HOST` | `<你的服务器IP>` |
 | `SSH_USER` | `ubuntu` |
 | `SSH_KEY` | **专用部署私钥**（下面生成），不要用你自己的登录私钥 |
-| `SSH_KNOWN_HOSTS` | `ssh-keyscan -p 22 58.87.93.111` 的输出 |
+| `SSH_KNOWN_HOSTS` | `ssh-keyscan -p 22 <你的服务器IP>` 的输出 |
 
 生成专用部署密钥：
 
@@ -336,7 +336,7 @@ docker push <user>/lol-random:latest
 docker run -d --name lol-random -p 8081:80 --restart unless-stopped <user>/lol-random:latest
 ```
 
-**这里有个必须注意的坑**：服务器 80/443 已经被**宿主机 nginx** 占着（它还托管着 `huohandu.cn`、`dsh.huohandu.cn` 等 7 个站点）。所以容器不能再抢 80，只有两条路：
+**这里有个必须注意的坑**：服务器 80/443 已经被**宿主机 nginx** 占着（这台机器上还有若干其它站点）。所以容器不能再抢 80，只有两条路：
 
 1. 容器映射到 8081，宿主 nginx 用 `proxy_pass http://127.0.0.1:8081;` 转发 —— 简单，但多一跳；
 2. 容器接入宿主 nginx 所在的 docker 网络，由 nginx 直接 `proxy_pass http://lol-random:80;` —— 少一跳，但要改现有网络拓扑。
