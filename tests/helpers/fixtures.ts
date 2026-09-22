@@ -61,6 +61,26 @@ export function assertInvariants(result: BuildResult, data: DataBundle): void {
     if (bootIds.has(item.id) || upgradedBootIds.has(item.id)) fail(`成装里出现了鞋子 ${item.name}`)
   }
 
+  // 唯一词条互斥（docs/RULES.md §5.4）：同属任一组的两件不能同时出现
+  const pickedIds = new Set(result.legendaryItems.map((i) => i.id))
+  data.items.uniqueGroups.forEach((group, index) => {
+    const hit = group.filter((id) => pickedIds.has(id))
+    if (hit.length > 1) {
+      const names = hit.map((id) => data.items.legendary.find((i) => i.id === id)?.name ?? id)
+      fail(`唯一词条组 #${index + 1} 同时出现了 ${names.join(' 与 ')}`)
+    }
+  })
+
+  // 远程专属（docs/RULES.md §5.5）
+  if (!result.champion.ranged) {
+    for (const id of data.items.rangedOnly) {
+      if (pickedIds.has(id)) {
+        const name = data.items.legendary.find((i) => i.id === id)?.name ?? id
+        fail(`近战英雄 ${result.champion.title} 出了远程专属装备 ${name}`)
+      }
+    }
+  }
+
   // 鞋子
   if (result.position === 'mid') {
     if (!upgradedBootIds.has(result.boots.id)) fail(`中路鞋子 ${result.boots.name} 不是升级款`)

@@ -11,7 +11,7 @@ import { mkdir, readFile, rename, unlink, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
-import { CROSS_CHECK, SOURCES } from './lib/sources.mjs'
+import { championUrl, CROSS_CHECK, SOURCES } from './lib/sources.mjs'
 import {
   SPEC,
   normalizeChampions,
@@ -49,6 +49,36 @@ async function fetchJson(url, label, { retries = 3, timeoutMs = 20000 } = {}) {
     }
   }
   throw new Error(`抓取 ${label} 失败（${retries} 次尝试）：${lastError?.message}`)
+}
+
+/**
+ * 逐个抓英雄的 `tacticalInfo.attackType`，返回 Map<heroId, 'melee'|'ranged'>。
+ *
+ * 173 次请求，所以限并发（默认 8）并复用 fetchJson 的重试。
+ * 任何一个英雄拿不到分类就整体失败——**宁可失败也不要猜**，
+ * 猜错会让近战英雄随机出卢安娜的飓风。
+ */
+async function fetchAttackTypes(heroes, concurrency = 8) {
+  const result = new Map()
+  const queue = [...heroes]
+
+  async function worker() {
+    while (queue.length > 0) {
+      const hero = queue.shift()
+      const heroId = String(hero.heroId)
+      const raw = await fetchJson(championUrl(heroId), `英雄 ${heroId} ${hero.alias}`)
+      const attackType = raw?.tacticalInfo?.attackType
+      if (attackType !== 'melee' && attackType !== 'ranged') {
+        throw new Error(
+          `英雄 ${heroId} ${hero.alias} 的 tacticalInfo.attackType 异常：${JSON.stringify(attackType)}`,
+        )
+      }
+      result.set(heroId, attackType)
+    }
+  }
+
+  await Promise.all(Array.from({ length: Math.min(concurrency, queue.length) }, () => worker()))
+  return result
 }
 
 // ---------------------------------------------------------------- 断言
@@ -177,9 +207,12 @@ async function main() {
     fetchJson(CROSS_CHECK.perks, '符文交叉校验(perks)'),
   ])
 
+  process.stdout.write('抓取英雄近战/远程分类（每人一次请求，约 173 次）…\n')
+  const attackTypes = await fetchAttackTypes(heroRaw.hero)
+
   process.stdout.write('规格化…\n')
   const snapshot = {
-    champions: normalizeChampions(heroRaw),
+    champions: normalizeChampions(heroRaw, attackTypes),
     items: normalizeItems(itemsRaw, itemsExtRaw),
     runes: normalizeRunes(runesRaw, cdStyles, cdPerks),
     spells: normalizeSpells(spellsRaw),

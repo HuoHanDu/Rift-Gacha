@@ -54,7 +54,7 @@ export function generateBuilds(
 
     const spells = pickSpells(position, data.spells, input.banSmiteForNonJungle, rng)
 
-    const items = pickItems(position, data.items, rng)
+    const items = pickItems(position, champion, data.items, rng)
 
     // 召唤师技能必须先于符文生成：海克斯科技闪现罗网要判断是否带闪现（docs/RULES.md §6.5）。
     const hasFlash = spells.some((spell) => spell.id === SPELL_IDS.flash)

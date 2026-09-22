@@ -161,6 +161,22 @@ function onTap() {
   display: block;
 }
 
+/*
+ * 触屏设备上彻底关掉浮层。
+ *
+ * 移动端浏览器的 :hover 是"粘住"的——点一下会命中 hover 并一直保留，
+ * 于是底部的详情弹层出来了，格子上还残留一个浮层；浮层是居中定位的，
+ * 靠左的图标会被挤出屏幕。
+ *
+ * 触屏已经有弹层承担详情职责，这里直接不显示。用 `hover: none` 而不是
+ * 宽度断点：平板也有宽屏，但它们同样是触屏、同样没有真正的 hover。
+ */
+@media (hover: none) {
+  .chip__tip {
+    display: none !important;
+  }
+}
+
 .chip__tip-name {
   display: block;
   font-size: 13px;

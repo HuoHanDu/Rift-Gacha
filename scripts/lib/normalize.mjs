@@ -53,6 +53,66 @@ export const SPEC = {
     minorSlotSize: 3,
     championsMin: 150,
   },
+
+  /**
+   * docs/RULES.md §5.4 —— 「唯一词条」互斥组。
+   *
+   * 组内任意两件不能同时出现在一个玩家的装备栏里（共享同一个「唯一：xxx」词条）。
+   * 一件装备可以出现在多个组里：界弓同时带「唯一：枯萎」和「唯一：夺命」，
+   * 所以它同时和两组的所有成员冲突；而两组之间（除界弓外）互不冲突。
+   *
+   * 这些「唯一」词条在官方资料里并不体现，只能按名字登记。
+   */
+  uniqueGroupsByName: [
+    // 唯一：救主灵刃
+    // 大天使之杖本身没有这条，但它叠满后进化的炽天使之杖有，所以也要算进来
+    ['斯特拉克的挑战护手', '玛莫提乌斯之噬', '不朽盾弓', '原生质护带', '大天使之杖'],
+    // 唯一：献祭
+    ['璀璨回响', '日炎圣盾'],
+    // 唯一：顺劈
+    ['亵渎九头蛇', '挺进破坏者', '贪欲九头蛇', '巨型九头蛇'],
+    // 唯一：咒刃
+    ['巫妖之祸', '冰脉护手', '夺萃之镰', '三相之力', '黄昏与黎明'],
+    // 唯一：枯萎
+    ['放血者的诅咒', '虚空之杖', '蜕生', '界弓'],
+    // 唯一：废除（法术护盾）
+    ['女妖面纱', '夜之锋刃'],
+    // 唯一：夺命
+    ['凡性的提醒', '黑色切割者', '赛瑞尔达的怨恨', '多米尼克领主的致意', '界弓'],
+  ],
+
+  /**
+   * 眼泪系装备（女神之泪升级件）。
+   *
+   * 这四件都带「法力流」，而它们叠满后的进化件**没有**这个效果，
+   * 所以四件彼此**可以**同时出（游戏里只是必须先把一件叠满）。
+   * 因此它们不在任何互斥组里——唯一例外是大天使之杖，
+   * 它的进化件炽天使之杖带「救主灵刃」，所以出现在上面第一组里。
+   */
+  tearItemsByName: ['大天使之杖', '凛冬之临', '耳语头环', '魔宗'],
+
+  /** docs/RULES.md §5.5 —— 只有远程英雄能出的装备 */
+  rangedOnlyByName: ['卢安娜的飓风'],
+
+  /**
+   * 英雄近战/远程的抽样断言。
+   *
+   * 数据源是官方客户端分类（CD 的 `tacticalInfo.attackType`），**不能用攻击距离数值推断**：
+   * 锤石射程 450 却属于远程，洛 300 却是近战。
+   * LoL Wiki 的 Range type 页也写了「没有严格规则，可能是任意划分的」。
+   * 这几条是防「数据源悄悄变了」的探针。
+   */
+  attackTypeProbes: [
+    { heroId: '1', alias: 'Annie', ranged: true },
+    { heroId: '55', alias: 'Katarina', ranged: false },
+    { heroId: '6', alias: 'Urgot', ranged: true },
+    { heroId: '412', alias: 'Thresh', ranged: true },
+    { heroId: '497', alias: 'Rakan', ranged: false },
+    { heroId: '10', alias: 'Kayle', ranged: false },
+  ],
+
+  /** 远程英雄数量的合理区间（用于发现数据源异常，不是精确断言） */
+  rangedChampionBand: { min: 60, max: 110 },
 }
 
 // ---------------------------------------------------------------- 工具
@@ -112,20 +172,56 @@ function expect(condition, message) {
 
 // ---------------------------------------------------------------- 英雄
 
-export function normalizeChampions(raw) {
+/**
+ * @param raw hero_list.js
+ * @param attackTypes Map<heroId, 'melee'|'ranged'>，来自官方客户端数据（CD）。
+ *   缺失时抛错——宁可失败也不要猜，猜错会让近战英雄随机出卢安娜的飓风。
+ */
+export function normalizeChampions(raw, attackTypes) {
   const list = raw?.hero
   expect(Array.isArray(list), 'hero_list.js 结构异常：缺少 hero 数组')
+  expect(attackTypes instanceof Map, '缺少 attackType 数据，无法判定近战/远程')
 
-  return list
-    .map((hero) => ({
-      heroId: String(hero.heroId),
-      name: hero.name ?? '',
-      alias: hero.alias ?? '',
-      title: hero.title ?? '',
-      roles: toArray(hero.roles).map(String),
-      icon: `${ICON_BASE}/champion/${hero.alias}.png`,
-    }))
+  const champions = list
+    .map((hero) => {
+      const heroId = String(hero.heroId)
+      const attackType = attackTypes.get(heroId)
+      expect(
+        attackType === 'melee' || attackType === 'ranged',
+        `英雄 ${heroId} ${hero.alias} 缺少 attackType（实际：${attackType}）`,
+      )
+      return {
+        heroId,
+        name: hero.name ?? '',
+        alias: hero.alias ?? '',
+        title: hero.title ?? '',
+        roles: toArray(hero.roles).map(String),
+        icon: `${ICON_BASE}/champion/${hero.alias}.png`,
+        ranged: attackType === 'ranged',
+      }
+    })
     .sort((a, b) => Number(a.heroId) - Number(b.heroId))
+
+  // 探针：数据源悄悄变了要立刻发现，而不是等玩家发现「卡特能出飓风了」
+  for (const probe of SPEC.attackTypeProbes) {
+    const champion = champions.find((c) => c.heroId === probe.heroId)
+    expect(champion, `探针英雄 ${probe.heroId} 不在英雄列表里`)
+    expect(
+      champion.ranged === probe.ranged,
+      `英雄 ${probe.heroId} ${probe.alias} 的 attackType 与探针不符：期望 ${
+        probe.ranged ? 'ranged' : 'melee'
+      }，实际 ${champion.ranged ? 'ranged' : 'melee'}`,
+    )
+  }
+
+  const rangedCount = champions.filter((c) => c.ranged).length
+  const band = SPEC.rangedChampionBand
+  expect(
+    rangedCount >= band.min && rangedCount <= band.max,
+    `远程英雄数 ${rangedCount} 落在合理区间 [${band.min}, ${band.max}] 之外，怀疑数据源异常`,
+  )
+
+  return champions
 }
 
 // ---------------------------------------------------------------- 召唤师技能
@@ -203,6 +299,28 @@ export function normalizeItems(rawItems, rawItemsExt) {
 
   const starterRef = (id) => toRef(get(id))
 
+  // 把「按名字登记的互斥组 / 远程专属件」解析成 ID，并断言名字真的存在。
+  // 用名字写是为了可读（和 docs/RULES.md 对齐），用 ID 输出是为了 core 不认中文。
+  const legendaryIds = new Set(legendary.map((item) => item.id))
+  const idByName = new Map(legendary.map((item) => [item.name, item.id]))
+
+  const resolveName = (name, label) => {
+    const id = idByName.get(name)
+    expect(id, `${label}里的装备「${name}」不在传说池中（可能改名了或被移出池子）`)
+    return id
+  }
+
+  const uniqueGroups = SPEC.uniqueGroupsByName.map((group, index) =>
+    group.map((name) => resolveName(name, `唯一词条互斥组 #${index + 1}`)),
+  )
+
+  // 互斥组里的每件都必须在传说池里，否则 core 里的过滤会白做
+  for (const group of uniqueGroups) {
+    for (const id of group) expect(legendaryIds.has(id), `互斥组里的 ${id} 不在传说池中`)
+  }
+
+  const rangedOnly = SPEC.rangedOnlyByName.map((name) => resolveName(name, '远程专属'))
+
   return {
     legendary,
     boots,
@@ -212,6 +330,8 @@ export function normalizeItems(rawItems, rawItemsExt) {
     starterJungle: SPEC.starterJungle.map(starterRef),
     starterSupport: starterRef(SPEC.supportStarter),
     supportQuestUpgrades: SPEC.supportQuestUpgrades.map(starterRef),
+    uniqueGroups,
+    rangedOnly,
   }
 }
 

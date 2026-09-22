@@ -24,6 +24,12 @@ export interface ChampionRef {
   title: string
   roles: string[]
   icon: string
+  /**
+   * 远程还是近战。来源是官方客户端数据的 `tacticalInfo.attackType`
+   * （CD，zh_cn），**不能用攻击距离数值推断**——锤石射程 450 但属于远程，
+   * 洛 300 却是近战，Wiki 明确写了「没有严格规则，可能是任意划分的」。
+   */
+  ranged: boolean
 }
 
 export interface ItemRef {
@@ -88,6 +94,18 @@ export interface ItemsSnapshot {
   starterSupport: ItemRef
   /** 辅助出门装的展示用升级件。 */
   supportQuestUpgrades: ItemRef[]
+  /**
+   * 「唯一词条」互斥组（docs/RULES.md §5.4）。
+   *
+   * 组内任意两件不能同时出现在一个玩家的装备栏里——它们共享一个「唯一：xxx」词条。
+   * 一件装备可以出现在多个组里（例如界弓同时有「唯一：枯萎」和「唯一：夺命」），
+   * 那时它和两个组的所有成员都冲突，但两个组之间（除界弓外）互不冲突。
+   *
+   * 判定方式是「两件装备是否同属任一组」，不是「组内所有装备两两冲突」的传递闭包。
+   */
+  uniqueGroups: string[][]
+  /** 只有远程英雄能出的装备 ID（如卢安娜的飓风）。 */
+  rangedOnly: string[]
 }
 
 export interface RunesSnapshot {

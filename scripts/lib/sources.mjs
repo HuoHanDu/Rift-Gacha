@@ -29,3 +29,17 @@ export const CROSS_CHECK = {
 
 /** 图标 CDN 前缀（英雄头像 / 装备 / 符文 / 召唤师技能都从这里取，不落盘）。 */
 export const ICON_BASE = 'https://game.gtimg.cn/images/lol/act/img'
+
+/**
+ * 英雄近战/远程分类：官方客户端数据的 `tacticalInfo.attackType`。
+ *
+ * 为什么必须单独抓、且**不能**用 gtimg 的 `attackrange` 数值推断：
+ * 锤石射程 450 却属于**远程**，洛 300 却是**近战**——数值分不出来。
+ * LoL Wiki 的 Range type 页也写明「没有严格规则，可能是任意划分的」。
+ *
+ * 代价是每个英雄一次请求（约 173 次）。只在刷新快照时跑，可以接受；
+ * 用并发限制 + 重试控制压力。
+ */
+export function championUrl(heroId) {
+  return `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/zh_cn/v1/champions/${heroId}.json`
+}

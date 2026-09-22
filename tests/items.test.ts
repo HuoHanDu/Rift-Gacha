@@ -4,6 +4,9 @@ import { createRng } from '../src/core/random'
 import type { Position } from '../src/core/types'
 import { DATA } from './helpers/fixtures'
 
+/** 测试用英雄：取一个远程的，池子最全（能出远程专属件） */
+const HERO = DATA.champions.find((c) => c.ranged)!
+
 const SEEDS = 500
 
 function ids(items: { id: string }[]): string[] {
@@ -17,7 +20,7 @@ describe('pickItems —— 成装', () => {
     const bootIds = new Set([...ids(DATA.items.boots), ...ids(DATA.items.bootsUpgraded)])
 
     for (let seed = 1; seed <= SEEDS; seed++) {
-      const picks = pickItems('top', DATA.items, createRng(seed))
+      const picks = pickItems('top', HERO, DATA.items, createRng(seed))
       expect(picks.legendaryItems).toHaveLength(6)
       expect(new Set(ids(picks.legendaryItems)).size).toBe(6)
       for (const item of picks.legendaryItems) {
@@ -34,7 +37,7 @@ describe('pickItems —— 出门装', () => {
     const allowed = new Set(ids(DATA.items.supportQuestUpgrades))
     const seen = new Set<string>()
     for (let seed = 1; seed <= SEEDS; seed++) {
-      const picks = pickItems('support', DATA.items, createRng(seed))
+      const picks = pickItems('support', HERO, DATA.items, createRng(seed))
       expect(picks.starterItem.id).toBe(DATA.items.starterSupport.id)
       expect(picks.displayStarterItem).not.toBeNull()
       expect(allowed.has(picks.displayStarterItem!.id)).toBe(true)
@@ -47,7 +50,7 @@ describe('pickItems —— 出门装', () => {
     const allowed = new Set(ids(DATA.items.starterJungle))
     const seen = new Set<string>()
     for (let seed = 1; seed <= SEEDS; seed++) {
-      const picks = pickItems('jungle', DATA.items, createRng(seed))
+      const picks = pickItems('jungle', HERO, DATA.items, createRng(seed))
       expect(allowed.has(picks.starterItem.id)).toBe(true)
       expect(picks.displayStarterItem).toBeNull()
       seen.add(picks.starterItem.id)
@@ -60,7 +63,7 @@ describe('pickItems —— 出门装', () => {
     const seen = new Set<string>()
     for (const position of ['top', 'mid', 'adc'] as Position[]) {
       for (let seed = 1; seed <= SEEDS; seed++) {
-        const picks = pickItems(position, DATA.items, createRng(seed))
+        const picks = pickItems(position, HERO, DATA.items, createRng(seed))
         expect(allowed.has(picks.starterItem.id)).toBe(true)
         expect(picks.displayStarterItem).toBeNull()
         seen.add(picks.starterItem.id)
@@ -76,16 +79,16 @@ describe('pickItems —— 鞋子', () => {
     const upgraded = new Set(ids(DATA.items.bootsUpgraded))
 
     for (let seed = 1; seed <= SEEDS; seed++) {
-      expect(upgraded.has(pickItems('mid', DATA.items, createRng(seed)).boots.id)).toBe(true)
+      expect(upgraded.has(pickItems('mid', HERO, DATA.items, createRng(seed)).boots.id)).toBe(true)
       for (const position of ['top', 'jungle', 'adc', 'support'] as Position[]) {
-        expect(base.has(pickItems(position, DATA.items, createRng(seed)).boots.id)).toBe(true)
+        expect(base.has(pickItems(position, HERO, DATA.items, createRng(seed)).boots.id)).toBe(true)
       }
     }
   })
 
   it('中路的升级款与随机到的未升级款一一对应', () => {
     for (let seed = 1; seed <= SEEDS; seed++) {
-      const mid = pickItems('mid', DATA.items, createRng(seed))
+      const mid = pickItems('mid', HERO, DATA.items, createRng(seed))
       // 同一 seed 下中路与非中路抽到的未升级鞋是同一个位置上的随机结果，
       // 这里直接核对映射表本身。
       const baseId = Object.keys(DATA.items.bootsUpgradeMap).find(
@@ -99,10 +102,58 @@ describe('pickItems —— 鞋子', () => {
     const seen = new Set<string>()
     const seenUpgraded = new Set<string>()
     for (let seed = 1; seed <= SEEDS; seed++) {
-      seen.add(pickItems('top', DATA.items, createRng(seed)).boots.id)
-      seenUpgraded.add(pickItems('mid', DATA.items, createRng(seed)).boots.id)
+      seen.add(pickItems('top', HERO, DATA.items, createRng(seed)).boots.id)
+      seenUpgraded.add(pickItems('mid', HERO, DATA.items, createRng(seed)).boots.id)
     }
     expect(seen.size).toBe(7)
     expect(seenUpgraded.size).toBe(7)
+  })
+})
+
+describe('pickItems —— 唯一词条互斥与远程专属（docs/RULES.md §5.4 / §5.5）', () => {
+  const MELEE = DATA.champions.find((c) => !c.ranged)!
+  const RUNNANS = DATA.items.rangedOnly[0]
+  const runnansName = DATA.items.legendary.find((i) => i.id === RUNNANS)!.name
+
+  it('近战英雄永远不会随机到远程专属装备', () => {
+    let hits = 0
+    for (let seed = 1; seed <= 2000; seed++) {
+      const picks = pickItems('top', MELEE, DATA.items, createRng(seed))
+      if (picks.legendaryItems.some((i) => i.id === RUNNANS)) hits++
+    }
+    expect(hits).toBe(0)
+    expect(runnansName).toBe('卢安娜的飓风')
+  })
+
+  it('远程英雄能随机到该装备（确认不是被整体排除掉了）', () => {
+    let hits = 0
+    for (let seed = 1; seed <= 500; seed++) {
+      const picks = pickItems('top', HERO, DATA.items, createRng(seed))
+      if (picks.legendaryItems.some((i) => i.id === RUNNANS)) hits++
+    }
+    expect(hits).toBeGreaterThan(0)
+  })
+
+  it('互斥组内任意两件都不会同时出现', () => {
+    const heroes = [HERO, MELEE]
+    for (const hero of heroes) {
+      for (let seed = 1; seed <= 500; seed++) {
+        const ids = new Set(
+          pickItems('top', hero, DATA.items, createRng(seed)).legendaryItems.map((i) => i.id),
+        )
+        for (const [index, group] of DATA.items.uniqueGroups.entries()) {
+          expect(group.filter((id) => ids.has(id)).length).toBeLessThanOrEqual(1)
+          expect(index).toBeGreaterThanOrEqual(0)
+        }
+      }
+    }
+  })
+
+  it('互斥组之间不会互相牵连：不共享词条的组可以同时出现', () => {
+    // 界弓同时属于「枯萎」和「夺命」两组，这里只验证它自己会同时挡住两边
+    const jieGong = DATA.items.legendary.find((i) => i.name === '界弓')
+    expect(jieGong).toBeDefined()
+    const belongs = DATA.items.uniqueGroups.filter((g) => g.includes(jieGong!.id))
+    expect(belongs.length).toBe(2)
   })
 })
