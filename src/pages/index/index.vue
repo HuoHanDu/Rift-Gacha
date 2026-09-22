@@ -194,9 +194,11 @@
       </view>
 
       <view class="footer">
+        <!-- Riot 同人政策第 6 条要求的声明，必须原样保留英文，见 docs/RIGHTS.md -->
+        <text class="footer__notice">{{ RIOT_FAN_NOTICE }}</text>
         <text class="footer__text">
           非官方娱乐工具。数据来自官方公开接口（game.gtimg.cn / CommunityDragon），
-          版权归 Riot Games 与腾讯所有。图标实时取自官方 CDN。
+          英雄、装备、符文等美术资源版权归 Riot Games 与腾讯所有，图标实时取自官方 CDN。
         </text>
       </view>
     </view>
@@ -206,7 +208,7 @@
 <script setup lang="ts">
 import { computed, onUnmounted, reactive, ref, shallowRef, watch } from 'vue'
 import BuildCard from '../../components/BuildCard.vue'
-import { POSITION_LABELS, POSITIONS } from '../../core/constants'
+import { POSITION_LABELS, POSITIONS, RIOT_FAN_NOTICE } from '../../core/constants'
 import { generateBuilds } from '../../core/generate'
 import { createRng } from '../../core/random'
 import type { BuildResult, GenerateInput, PlayerInput, Position, TeamId } from '../../core/types'
@@ -717,6 +719,16 @@ function roll() {
 .footer {
   padding-top: 14px;
   border-top: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Riot 同人政策要求的声明：要比周围文字显眼，不能藏 */
+.footer__notice {
+  font-size: 12px;
+  color: var(--ink-muted);
+  line-height: 1.6;
 }
 
 .footer__text {

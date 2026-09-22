@@ -55,3 +55,21 @@ export const HEXFLASH = {
 
 /** 默认队伍编号（单队模式下所有人都是 1 队）。 */
 export const DEFAULT_TEAM: TeamId = 1
+
+/** 项目标题：也是下面那份 Riot 声明里 [The title of your Project] 的取值。 */
+export const PROJECT_TITLE = '峡谷全随机构筑器'
+
+/**
+ * Riot 同人政策（Legal Jibber Jabber）第 6 条要求「醒目地」包含的声明。
+ *
+ * 政策原文：
+ *   If you share your Project with others, please conspicuously include the following notice:
+ *   [The title of your Project] was created under Riot Games' "Legal Jibber Jabber" policy
+ *   using assets owned by Riot Games.  Riot Games does not endorse or sponsor this project.
+ *
+ * 来源：https://www.riotgames.com/en/legal （Last Updated: August 2018）
+ *
+ * 这段是**法律声明**：必须原样保留英文，不要翻译、改写或省略。
+ * 相关合规要点见 docs/RIGHTS.md。
+ */
+export const RIOT_FAN_NOTICE = `${PROJECT_TITLE} was created under Riot Games' "Legal Jibber Jabber" policy using assets owned by Riot Games. Riot Games does not endorse or sponsor this project.`

@@ -12,7 +12,12 @@
 
 数据取自官方公开接口的静态快照（`game.gtimg.cn`，即 101 数据站使用的同一批数据），图片实时热链官方 CDN。
 
-> 非官方娱乐项目。数据版权归 Riot Games 与腾讯所有。
+---
+
+峡谷全随机构筑器 was created under Riot Games' "Legal Jibber Jabber" policy using assets owned by Riot Games. Riot Games does not endorse or sponsor this project.
+
+> 英雄、装备、符文等美术资源版权归 Riot Games 与腾讯所有。本项目为非商业同人工具，不收费、无付费墙。
+> 完整的权利说明与合规约束见 [`docs/RIGHTS.md`](docs/RIGHTS.md)。
 
 ---
 
@@ -46,6 +51,7 @@ npm run dev:h5      # → http://localhost:5173/
 │   ├── RULES.md         # 随机规则的实现权威规范
 │   ├── ARCHITECTURE.md  # 分层、模块接口、未来接后端的接缝
 │   ├── DATA.md          # 数据源、抓取口径、快照 schema
+│   ├── RIGHTS.md        # 第三方权利与合规（Riot 同人政策逐条对照）
 │   ├── DEPLOY.md        # 部署文档（含 CI/CD 方案对比）
 │   └── MINIPROGRAM.md   # 微信小程序：可行性、依赖版本坑、上架待办
 ├── .github/workflows/   # GitHub Actions：构建 + 校验 + 发布

@@ -11,6 +11,7 @@ import { createSSRApp, h } from 'vue'
 import { describe, expect, it } from 'vitest'
 import BuildCard from '../src/components/BuildCard.vue'
 import IndexPage from '../src/pages/index/index.vue'
+import { RIOT_FAN_NOTICE } from '../src/core/constants'
 import { generateBuilds } from '../src/core/generate'
 import { createRng } from '../src/core/random'
 import type { BuildResult, GenerateInput } from '../src/core/types'
@@ -176,6 +177,15 @@ describe('首页渲染', () => {
       expect(html).toContain(label)
     }
     expect(html).toContain('非官方娱乐工具')
+    // Riot 同人政策第 6 条要求的声明必须出现在页面上（见 docs/RIGHTS.md）。
+    // 这是一条**合规断言**，不是文案测试：比对渲染出的文本与常量本身，
+    // 所以翻译、改写、删除都会让它红。HTML 会把 ' 和 " 转义，所以先解码。
+    const text = html
+      .replace(/&#39;/g, "'")
+      .replace(/&quot;/g, '"')
+      .replace(/&amp;/g, '&')
+    expect(text).toContain(RIOT_FAN_NOTICE)
+    expect(RIOT_FAN_NOTICE).toContain('Legal Jibber Jabber')
     expect(html).not.toContain('undefined')
   })
 })

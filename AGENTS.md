@@ -115,9 +115,13 @@
 
 ### 4.4 数据与版权
 
-- 只使用公开 CDN 的静态数据（`game.gtimg.cn`）与官方符文数据（CommunityDragon）作交叉校验。
-- 项目为非商业娱乐用途；页面上标注数据来源与「非官方」声明。
-- 图片一律热链，不把 Riot/腾讯的美术资源打包进仓库。
+**逐条对照与硬性约束见 `docs/RIGHTS.md`**（Riot 同人政策 "Legal Jibber Jabber" 的原文摘录 + 我们的落地）。三条最容易踩的：
+
+1. `src/core/constants.ts` 的 `RIOT_FAN_NOTICE` 是 Riot 政策第 6 条**要求原样、醒目出现**的声明。**不要翻译、改写、删除**；页面页脚与 README 都要有它。`tests/render.test.ts` 有断言守着。
+2. 官方美术资源**一律热链** `game.gtimg.cn`，不落盘、不打包进仓库。
+3. **不要在仓库名、topics、关键词、域名里使用 Riot 商标**（`league of legends` / `lol` / `summoners rift` 等作为商标使用）。不要引入付费墙、众筹、订阅这类被明文禁止的变现方式。
+
+政策只允许在 **website / stream / video** 上做被动广告；**小程序与 App 形态被 §3 明确禁止**（`games and apps`）。所以做小程序之前先回去读 `docs/RIGHTS.md` §4。
 
 ### 4.5 命名与文案
 
