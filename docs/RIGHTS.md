@@ -80,7 +80,7 @@ Riot 政策 §3 把 **games and apps** 整体排除在授权之外（并点名 A
 
 **微信小程序是一种应用形态**，既不属于 §2 列举的 website/stream/video，又落在 §3「apps」的范围内。所以：
 
-- H5 站点（`lol.huohandu.cn`）是 **website**，在 §2 例外的字面范围内；
+- H5 站点（`rift.huohandu.cn`）是 **website**，在 §2 例外的字面范围内；
 - **微信小程序不在豁免的字面范围内**，而且 §3 是明确禁止条款。
 
 我的判断（**推断，不是政策原文**）：小程序形态**存在被 Riot 主张侵权的风险**，而且一旦在小程序里挂广告变现，风险会进一步上升——因为商业化正是政策收紧的核心。
@@ -114,15 +114,22 @@ Riot 政策 §3 把 **games and apps** 整体排除在授权之外（并点名 A
 
 ---
 
-## 7. 一个需要你自己判断的点：域名
+## 7. 域名（已处理）
 
 §5 写的是「You may not register **domain names** ... that uses Riot Games or any of our trademarks, trade names, character names, etc.」
 
-现用地址是 `lol.huohandu.cn`——`lol` 是《英雄联盟》的通行缩写，而政策禁止用其商标注册域名。
+原来的地址是 `lol.huohandu.cn`——`lol` 是《英雄联盟》的通行缩写。虽然它是**自有域名下的子域标签**、且 `lol` 本身也是通用英文缩写（laugh out loud），是否构成"register a domain name"存在解释空间，但**留着一个明显能联想到该商标的标签没有必要**。
 
-这条我**无法替你判断**：`lol` 本身是通用英文缩写（laugh out loud），且这里用的是**你自有域名下的子域标签**而不是注册的主域名，是否构成"register a domain name"存在解释空间。我把风险如实标出来，不做结论。
+**已于 2026-09-22 处理**：
 
-如果不想留这个模糊地带，换个子域标签的成本很低（例如 `rift.huohandu.cn`），改一条 nginx `server_name` + 一张证书即可。
+| 项 | 变更 |
+| --- | --- |
+| 主站点 | `rift.huohandu.cn`（新证书，2026-12-21 到期，已配自动续期） |
+| 旧域名 | `lol.huohandu.cn` 保留，**301 永久跳转**到新域名（含路径与查询串），老链接不失效 |
+| 服务器目录 | `/var/www/lol.huohandu.cn/` → `/var/www/rift.huohandu.cn/` |
+| 仓库 | `deploy.yml` 的 `WEB_ROOT`/`DOMAIN`、`deploy.ps1` 的默认域名、全部文档同步更新 |
+
+旧域名的证书继续由 certbot 管理，所以它的 nginx 配置里保留了 `ssl_certificate` 那几行——**不要删**，否则续期会失败。
 
 ---
 

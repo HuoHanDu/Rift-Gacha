@@ -14,12 +14,12 @@
 .EXAMPLE
     pwsh scripts/deploy.ps1
     pwsh scripts/deploy.ps1 -SkipBuild          # 复用已有产物，只做发布
-    pwsh scripts/deploy.ps1 -SshHost tencent -Domain lol.huohandu.cn
+    pwsh scripts/deploy.ps1 -SshHost tencent -Domain rift.huohandu.cn
 #>
 [CmdletBinding()]
 param(
     [string]$SshHost = 'tencent',
-    [string]$Domain = 'lol.huohandu.cn',
+    [string]$Domain = 'rift.huohandu.cn',
     [string]$WebRoot = '/var/www',
     [string]$Owner = 'ubuntu',
     [int]$KeepReleases = 5,

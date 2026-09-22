@@ -1,4 +1,4 @@
-# 构建 → 校验 → 发布到 lol.huohandu.cn
+# 构建 → 校验 → 发布到 rift.huohandu.cn
 #
 # 设计要点：
 # - **不需要 Node 在服务器上**：构建在 GitHub Runner 上完成，服务器只收一个几十 KB 的 tar。
@@ -29,8 +29,8 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  WEB_ROOT: /var/www/lol.huohandu.cn
-  DOMAIN: lol.huohandu.cn
+  WEB_ROOT: /var/www/rift.huohandu.cn
+  DOMAIN: rift.huohandu.cn
   KEEP_RELEASES: 5
 
 jobs:

@@ -2,7 +2,7 @@
 
 [![build-and-deploy](https://github.com/HuoHanDu/Rift-Gacha/actions/workflows/deploy.yml/badge.svg)](https://github.com/HuoHanDu/Rift-Gacha/actions/workflows/deploy.yml)
 
-> **在线地址：<https://lol.huohandu.cn/>** —— push 到 `main` 会自动跑测试、构建并发布。
+> **在线地址：<https://rift.huohandu.cn/>** —— push 到 `main` 会自动跑测试、构建并发布。
 
 一个用于《英雄联盟》召唤师峡谷的**娱乐向全随机构筑生成器**。输入人数和位置，一键随机出：
 

@@ -3,7 +3,7 @@
 > 目标：把这个项目部署成一个**纯静态站点**。
 > 没有后端进程、没有数据库、没有密钥、没有运行时数据请求——构建产物扔到任何能发静态文件的地方就能用。
 >
-> **当前线上地址：<https://lol.huohandu.cn/>**（部署记录见第 1 节）
+> **当前线上地址：<https://rift.huohandu.cn/>**（部署记录见第 1 节）
 
 ---
 
@@ -11,12 +11,12 @@
 
 | 项 | 值 |
 | --- | --- |
-| 域名 | `lol.huohandu.cn`（A 记录 → `<你的服务器IP>`） |
+| 域名 | `rift.huohandu.cn`（A 记录 → `<你的服务器IP>`） |
 | 服务器 | `ssh tencent` → `<你的服务器IP>`，Ubuntu 22.04 LTS，nginx 1.18.0 |
-| 站点根 | `/var/www/lol.huohandu.cn/current`（软链） |
-| 版本目录 | `/var/www/lol.huohandu.cn/releases/<yyyyMMdd-HHmmss>/`，保留最近 5 个 |
-| nginx 配置 | `/etc/nginx/sites-available/lol.huohandu.cn` → 软链到 `sites-enabled/` |
-| TLS | Let's Encrypt，`/etc/letsencrypt/live/lol.huohandu.cn/`，到期 2026-12-20，已配置自动续期 |
+| 站点根 | `/var/www/rift.huohandu.cn/current`（软链） |
+| 版本目录 | `/var/www/rift.huohandu.cn/releases/<yyyyMMdd-HHmmss>/`，保留最近 5 个 |
+| nginx 配置 | `/etc/nginx/sites-available/rift.huohandu.cn` → 软链到 `sites-enabled/` |
+| TLS | Let's Encrypt，`/etc/letsencrypt/live/rift.huohandu.cn/`，到期 2026-12-20，已配置自动续期 |
 | HTTP | 301 跳转到 HTTPS |
 | 一键发布 | `pwsh scripts/deploy.ps1` |
 
@@ -40,8 +40,8 @@ pwsh scripts/deploy.ps1 -SkipBuild      # 复用已有产物，只做发布
 
 ```bash
 ssh tencent
-ls -1dt /var/www/lol.huohandu.cn/releases/*/     # 找上一个版本
-sudo ln -sfn /var/www/lol.huohandu.cn/releases/<时间戳> /var/www/lol.huohandu.cn/current
+ls -1dt /var/www/rift.huohandu.cn/releases/*/     # 找上一个版本
+sudo ln -sfn /var/www/rift.huohandu.cn/releases/<时间戳> /var/www/rift.huohandu.cn/current
 ```
 
 静态站点无状态，切软链即刻生效，不需要 reload nginx。
@@ -49,8 +49,8 @@ sudo ln -sfn /var/www/lol.huohandu.cn/releases/<时间戳> /var/www/lol.huohandu
 ### 已验证的行为（线上实测）
 
 ```
-https://lol.huohandu.cn/                → 200，TLS 校验通过，0.52s
-http://lol.huohandu.cn/                 → 301 → https://lol.huohandu.cn/
+https://rift.huohandu.cn/                → 200，TLS 校验通过，0.52s
+http://rift.huohandu.cn/                 → 301 → https://rift.huohandu.cn/
 /assets/index-*.js                      → 200，Content-Encoding: gzip，Cache-Control: immutable
 /assets/不存在.js                        → 404（不会误回退成首页）
 /whatever                               → 200（回退入口，配合 hash 路由）
@@ -68,7 +68,7 @@ http://lol.huohandu.cn/                 → 301 → https://lol.huohandu.cn/
 | `npm run serve:dist`（零依赖静态服务器，端口 4180） | ✅ 实测 200、缓存头正确、未知路径回退入口页 |
 | `npm run preview:h5`（vite preview，端口 4173） | ✅ 实测 200 |
 | 子路径部署（`h5.router.base`） | ✅ 实测产物资源路径随之变成 `/lol-random/assets/...` |
-| nginx（第 5 节的配置） | ✅ 已实装到 `lol.huohandu.cn`，`nginx -t` 通过并正在承载线上流量 |
+| nginx（第 5 节的配置） | ✅ 已实装到 `rift.huohandu.cn`，`nginx -t` 通过并正在承载线上流量 |
 | `scripts/deploy.ps1` 全流程 | ✅ 实跑 2 次，含 sha256 校验、文件清单对齐、资源可达性检查 |
 | GitHub Actions 全流程（CI 构建 → SSH 发布 → 健康检查） | ✅ 已实跑并成功发布（run #6，release `20260922-040703`）；CI 构建出的文件名哈希与本地构建**完全一致**，说明构建可复现 |
 | Docker 镜像构建与运行 | ⚠️ **未验证**——本机装了 Docker CLI（v29.4.0）但 daemon 没运行，`docker build` 报 `failed to connect to the docker API`。容器化只是为了换环境部署方便，线上走的是静态文件 + nginx |

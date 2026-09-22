@@ -155,5 +155,5 @@ npm run sample -- 10   # 在终端打印一次 10 人随机结果，用来核对
 `todo.md` 的 P0–P7 已完成（环境 / 数据 / 引擎 / 展示 / 验证 / 文档 / 动画与排序）。改动前先看 `todo.md` 的「进度总览」，
 新增规则请同步补 `tests/` 用例与 `docs/RULES.md` 对应小节。
 
-**线上地址**：<https://lol.huohandu.cn/>（发布流程与回滚见 `docs/DEPLOY.md` 第 1 节）。
+**线上地址**：<https://rift.huohandu.cn/>（发布流程与回滚见 `docs/DEPLOY.md` 第 1 节）。
 **CI/CD**：`.github/workflows/deploy.yml`（GitHub Actions 构建 + SSH 发布，服务器不需要 Node）。
