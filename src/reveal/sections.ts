@@ -54,7 +54,18 @@ export function tickDelay(tick: number, total: number): number {
   return Math.round(40 + progress * progress * 240)
 }
 
-/** 一幕从开始到定格的总时长（毫秒），用于给用户一个心理预期。 */
+/**
+ * 两幕之间的呼吸间隔。
+ *
+ * 没有它的话，上一幕刚停下、下一幕立刻开始转，看起来像一串连续抖动而不是「一格一格揭晓」。
+ * 停这一下之后，节奏才读得出来：定格 → 空一拍 → 下一段开转。
+ */
+export const SECTION_GAP_MS = 170
+
+/** 换到下一位玩家时停得更久一点，让「这个人的结果出完了」这件事有落点。 */
+export const PLAYER_GAP_MS = 340
+
+/** 一幕从开始到定格的总时长（毫秒）。 */
 export function sectionDuration(section: SectionKey): number {
   const total = ROLL_TICKS[section]
   let sum = 0
@@ -62,7 +73,9 @@ export function sectionDuration(section: SectionKey): number {
   return sum
 }
 
-/** 一名玩家全部揭幕完的时长。 */
+/** 一名玩家全部揭幕完的时长（含段间停顿，不含换人时那一拍）。 */
 export function playerDuration(): number {
-  return SECTION_ORDER.reduce((sum, section) => sum + sectionDuration(section), 0)
+  const rolling = SECTION_ORDER.reduce((sum, section) => sum + sectionDuration(section), 0)
+  const gaps = (SECTION_ORDER.length - 1) * SECTION_GAP_MS
+  return rolling + gaps
 }

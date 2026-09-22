@@ -13,11 +13,14 @@ import { DATA } from '../src/data'
 import { createRevealController } from '../src/reveal/controller'
 import { buildCardPlan, buildPlans, SLOT_KEYS } from '../src/reveal/plan'
 import {
+  PLAYER_GAP_MS,
   playerDuration,
   ROLL_TICKS,
+  SECTION_GAP_MS,
   SECTION_ORDER,
   sectionDuration,
   tickDelay,
+  type SectionKey,
 } from '../src/reveal/sections'
 
 function input(players: number, overrides: Partial<GenerateInput> = {}): GenerateInput {
@@ -34,6 +37,13 @@ function builds(count = 1, seed = 42) {
   const outcome = generateBuilds(input(count), DATA, { seed })
   if (!outcome.ok) throw new Error('生成失败')
   return outcome.results
+}
+
+/** 造一个已经装好剧本的播放器。 */
+function controllerFor(count = 1) {
+  const list = builds(count)
+  const plans = buildPlans(list, DATA, createRng(1))
+  return { controller: createRevealController(plans), list }
 }
 
 beforeEach(() => {
@@ -67,6 +77,15 @@ describe('时长预估', () => {
     }
     expect(playerDuration()).toBeGreaterThan(2000)
     expect(playerDuration()).toBeLessThan(6000)
+  })
+
+  it('段间停顿被算进了单人总时长', () => {
+    const rolling = SECTION_ORDER.reduce((sum, section) => sum + sectionDuration(section), 0)
+    expect(playerDuration()).toBe(rolling + (SECTION_ORDER.length - 1) * SECTION_GAP_MS)
+  })
+
+  it('换人那一拍比段间停顿更长', () => {
+    expect(PLAYER_GAP_MS).toBeGreaterThan(SECTION_GAP_MS)
   })
 })
 
@@ -166,13 +185,125 @@ describe('buildCardPlan', () => {
   })
 })
 
-describe('createRevealController', () => {
-  function controllerFor(count = 1) {
-    const list = builds(count)
-    const plans = buildPlans(list, DATA, createRng(1))
-    return { controller: createRevealController(plans), list }
+describe('段与段之间的停顿', () => {
+  /** 把当前这一幕刚好播到定格那一刻。 */
+  function advancePastSection(section: SectionKey) {
+    vi.advanceTimersByTime(sectionDuration(section) + 1)
   }
 
+  it('第一幕不等：点了开始就在转', () => {
+    const { controller } = controllerFor()
+    controller.start()
+    expect(controller.revealOf(0).state.position).toBe('rolling')
+    controller.dispose()
+  })
+
+  it('一幕定格后会先空一拍，此时没有任何一段在滚动', () => {
+    const { controller } = controllerFor()
+    controller.start()
+    advancePastSection('position')
+
+    const reveal = controller.revealOf(0)
+    expect(reveal.state.position).toBe('done')
+    expect(reveal.state.champion).toBe('hidden')
+    expect(controller.isPlaying.value).toBe(true)
+    controller.dispose()
+  })
+
+  it('那一拍没走完之前，下一段不会提前开转', () => {
+    const { controller } = controllerFor()
+    controller.start()
+    advancePastSection('position')
+
+    vi.advanceTimersByTime(SECTION_GAP_MS - 40)
+    expect(controller.revealOf(0).state.champion).toBe('hidden')
+    controller.dispose()
+  })
+
+  it('空完那一拍，下一段才开始滚动', () => {
+    const { controller } = controllerFor()
+    controller.start()
+    advancePastSection('position')
+
+    vi.advanceTimersByTime(SECTION_GAP_MS + 40)
+    expect(controller.revealOf(0).state.champion).toBe('rolling')
+    controller.dispose()
+  })
+
+  it('整段播放期间，每一幕之间都确实存在没有幕在滚动的空档', () => {
+    const { controller } = controllerFor()
+    controller.start()
+
+    let gapSamples = 0
+    const totalMs = playerDuration() + PLAYER_GAP_MS + 500
+    for (let elapsed = 0; elapsed < totalMs; elapsed += 20) {
+      vi.advanceTimersByTime(20)
+      const reveal = controller.revealOf(0)
+      const anyRolling = SECTION_ORDER.some((section) => reveal.state[section] === 'rolling')
+      const allDone = SECTION_ORDER.every((section) => reveal.state[section] === 'done')
+      // 还没播完、又没有幕在滚，那就是夹在两幕之间的空档
+      if (!anyRolling && !allDone) gapSamples++
+    }
+
+    // 6 幕之间有 5 个空档，每个 170ms，按 20ms 采样至少能采到若干次
+    expect(gapSamples).toBeGreaterThanOrEqual(5)
+    controller.dispose()
+  })
+
+  it('换人时停得更久，这一拍里下一位玩家还没开始', () => {
+    const { controller } = controllerFor(2)
+    controller.start()
+    vi.advanceTimersByTime(playerDuration() + 1)
+
+    for (const section of SECTION_ORDER) {
+      expect(controller.revealOf(0).state[section]).toBe('done')
+    }
+    expect(controller.revealOf(1).state.position).toBe('hidden')
+    expect(controller.isPlaying.value).toBe(true)
+
+    vi.advanceTimersByTime(PLAYER_GAP_MS + 40)
+    expect(controller.revealOf(1).state.position).toBe('rolling')
+    controller.dispose()
+  })
+
+  it('停顿期间点一下会立刻开始下一段，不再等', () => {
+    const { controller } = controllerFor()
+    controller.start()
+    advancePastSection('position')
+    expect(controller.revealOf(0).state.champion).toBe('hidden')
+
+    controller.finishCurrent()
+    expect(controller.revealOf(0).state.champion).toBe('rolling')
+    controller.dispose()
+  })
+
+  it('手动快进的段与段之间不留停顿', () => {
+    const { controller } = controllerFor()
+    controller.start()
+    vi.advanceTimersByTime(30)
+
+    controller.finishCurrent()
+    expect(controller.revealOf(0).state.position).toBe('done')
+    expect(controller.revealOf(0).state.champion).toBe('rolling')
+    controller.dispose()
+  })
+
+  it('跳过和销毁都会掐掉还没到期的停顿', () => {
+    for (const stop of ['skipAll', 'dispose'] as const) {
+      const { controller } = controllerFor()
+      controller.start()
+      advancePastSection('position')
+
+      controller[stop]()
+      const snapshot = JSON.stringify(controller.revealOf(0).state)
+      vi.advanceTimersByTime(3000)
+      expect(JSON.stringify(controller.revealOf(0).state)).toBe(snapshot)
+      controller.dispose()
+    }
+  })
+})
+
+describe('createRevealController', () => {
   it('起步时只有第一段在滚动，其余都是隐藏', () => {
     const { controller } = controllerFor()
     controller.start()

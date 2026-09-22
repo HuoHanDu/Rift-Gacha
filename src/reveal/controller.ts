@@ -12,7 +12,14 @@
 
 import { reactive, ref, type Ref } from 'vue'
 import type { CardPlan } from './plan'
-import { ROLL_TICKS, SECTION_ORDER, tickDelay, type SectionKey } from './sections'
+import {
+  PLAYER_GAP_MS,
+  ROLL_TICKS,
+  SECTION_GAP_MS,
+  SECTION_ORDER,
+  tickDelay,
+  type SectionKey,
+} from './sections'
 
 export type SectionState = 'hidden' | 'rolling' | 'done'
 
@@ -69,6 +76,8 @@ export function createRevealController(
 
   let cursor: { step: number; section: number } | null = null
   let timer: ReturnType<typeof setTimeout> | null = null
+  /** 正处在两幕之间的停顿里。这一拍明确没有幕在滚动，点击可以直接把它掐掉。 */
+  let pendingGap = false
 
   for (let player = 0; player < plans.length; player++) {
     for (const section of SECTION_ORDER) {
@@ -94,6 +103,7 @@ export function createRevealController(
 
   function begin() {
     if (!cursor) return
+    pendingGap = false
     const player = playOrder[cursor.step]
     const section = SECTION_ORDER[cursor.section]
     const key = stateKey(player, section)
@@ -114,7 +124,7 @@ export function createRevealController(
       if (next >= lastTick(section)) {
         settle(player, section)
         cursor = { step, section: sectionIndex + 1 }
-        advance()
+        advance(false)
         return
       }
       ticks[key] = next
@@ -122,13 +132,21 @@ export function createRevealController(
     }, tickDelay(ticks[key], ROLL_TICKS[section]))
   }
 
-  /** 走到游标指向的下一幕；越界就换下一位玩家，全播完就收工。 */
-  function advance() {
+  /**
+   * 走到游标指向的下一幕；越界就换下一位玩家，全播完就收工。
+   *
+   * `immediate` 为 false 时会先停 `SECTION_GAP_MS`（换人时停 `PLAYER_GAP_MS`）再开始下一幕——
+   * 这一拍是刻意的，否则上一幕刚停、下一幕立刻开转，节奏糊成一片。
+   * 用户点画面快进时传 true，跳过这一拍：点下去就该立刻有反应。
+   */
+  function advance(immediate: boolean) {
     clearTimer()
     if (!cursor) {
       isPlaying.value = false
       return
     }
+
+    let gap = SECTION_GAP_MS
     if (cursor.section >= SECTION_ORDER.length) {
       const nextStep = cursor.step + 1
       if (nextStep >= playOrder.length) {
@@ -137,8 +155,21 @@ export function createRevealController(
         return
       }
       cursor = { step: nextStep, section: 0 }
+      gap = PLAYER_GAP_MS
     }
-    begin()
+
+    if (immediate || gap <= 0) {
+      begin()
+      return
+    }
+
+    // 停在原地一拍：上一幕已定格，下一幕还是隐含状态，视觉上就是「顿一下」。
+    pendingGap = true
+    timer = setTimeout(() => {
+      timer = null
+      if (!pendingGap) return
+      begin()
+    }, gap)
   }
 
   function start() {
@@ -153,24 +184,37 @@ export function createRevealController(
       isPlaying.value = false
       return
     }
+    pendingGap = false
     isPlaying.value = true
     activePlayer.value = playOrder[0]
     cursor = { step: 0, section: 0 }
+    // 第一幕不等：点了「开始随机」就该马上看到东西在转。
     begin()
   }
 
   function finishCurrent() {
-    if (!cursor || cursor.section >= SECTION_ORDER.length) return
+    if (!cursor) return
+
+    // 正卡在段间停顿里：这一下点击的意思就是「别等了，马上开始下一段」。
+    if (pendingGap) {
+      clearTimer()
+      begin()
+      return
+    }
+
+    if (cursor.section >= SECTION_ORDER.length) return
     const player = playOrder[cursor.step]
     const { step, section: index } = cursor
     clearTimer()
     settle(player, SECTION_ORDER[index])
     cursor = { step, section: index + 1 }
-    advance()
+    // 手动快进不留停顿，点了就要立刻看到下一段开转。
+    advance(true)
   }
 
   function skipAll() {
     clearTimer()
+    pendingGap = false
     cursor = null
     for (let player = 0; player < plans.length; player++) {
       for (const section of SECTION_ORDER) settle(player, section)
@@ -180,6 +224,7 @@ export function createRevealController(
 
   function dispose() {
     clearTimer()
+    pendingGap = false
     cursor = null
     isPlaying.value = false
   }
