@@ -79,7 +79,7 @@ jobs:
           retention-days: 14
 
   deploy:
-    name: 发布到 ${{ github.event.repository.name }}
+    name: 发布到线上
     needs: verify
     # PR 只校验不发布
     if: github.event_name != 'pull_request'
@@ -150,6 +150,9 @@ jobs:
           REMOTE
 
       - name: 健康检查
+        # 必须跟着「有没有真的发布」走。否则 secrets 没配时这一步照样去查线上，
+        # 而线上跑的是上一版——它当然返回 200，于是 CI 绿灯「验证」了一次没发生的发布。
+        if: steps.check.outputs.configured == 'true'
         run: |
           set -euo pipefail
           code=$(curl -sS -o /dev/null -w '%{http_code}' "https://$DOMAIN/")
@@ -173,8 +176,20 @@ jobs:
                 echo "$path → 200"
               done
 
+      - name: 未发布时的说明
+        if: steps.check.outputs.configured != 'true'
+        run: |
+          {
+            echo "### 本次只构建、未发布"
+            echo ""
+            echo "没有配置 \`SSH_HOST\` / \`SSH_USER\` / \`SSH_KEY\` / \`SSH_KNOWN_HOSTS\`，"
+            echo "因此跳过了发布与健康检查。构建产物可在本页 Artifacts 里下载（名字 \`h5\`）。"
+            echo ""
+            echo "配好 secrets 后重新运行本 workflow 即可发布。"
+          } >> "$GITHUB_STEP_SUMMARY"
+
       - name: 输出回滚命令
-        if: always()
+        if: steps.check.outputs.configured == 'true'
         run: |
           echo "回滚（把 current 切回上一个版本，不需要重新上传）："
           echo "  ssh <server> 'ls -1dt $WEB_ROOT/releases/*/'"
