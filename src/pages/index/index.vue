@@ -95,7 +95,7 @@
               type="text"
               placeholder="玩家名（选填）"
               placeholder-class="row__name-ph"
-              @input="clearOutcome"
+              @input="markInputDirty"
             />
             <view class="seg seg--compact">
               <view
@@ -162,6 +162,10 @@
           </view>
         </view>
 
+        <text v-if="inputDirty" class="results__hint results__hint--warn">
+          输入改动过了。下面显示的还是上一次的结果——点「开始随机」才会用新输入重新生成。
+        </text>
+
         <text v-if="revealing" class="results__hint">
           点击画面可以立刻揭晓当前这一段，直接跳到下一段
         </text>
@@ -201,6 +205,15 @@
           英雄、装备、符文等美术资源版权归 Riot Games 与腾讯所有，图标实时取自官方 CDN。
         </text>
       </view>
+
+      <SnapshotList
+        :items="snapshots"
+        :current-id="activeSnapshotId"
+        :patch="patch"
+        @restore="restoreSnapshot"
+        @remove="removeSnapshot"
+        @clear="clearSnapshots"
+      />
     </view>
 
     <!-- 全局唯一的详情弹层：窄屏贴底、宽屏居中。点任意图标打开 -->
@@ -212,6 +225,7 @@
 import { computed, onUnmounted, reactive, ref, shallowRef, watch } from 'vue'
 import BuildCard from '../../components/BuildCard.vue'
 import DetailSheet from '../../components/DetailSheet.vue'
+import SnapshotList from '../../components/SnapshotList.vue'
 import { POSITION_LABELS, POSITIONS, RIOT_FAN_NOTICE } from '../../core/constants'
 import { generateBuilds } from '../../core/generate'
 import { createRng } from '../../core/random'
@@ -219,6 +233,12 @@ import type { BuildResult, GenerateInput, PlayerInput, Position, TeamId } from '
 import { DATA } from '../../data'
 import { createRevealController, type CardReveal, type RevealController } from '../../reveal/controller'
 import { buildPlans } from '../../reveal/plan'
+import {
+  createSnapshotId,
+  createSnapshotStore,
+  describeSnapshot,
+  type Snapshot,
+} from '../../snapshots/store'
 
 /** 表单里的玩家：位置与队伍可以是「未选择」。 */
 interface EditablePlayer {
@@ -230,6 +250,13 @@ interface EditablePlayer {
 const teamMode = ref(false)
 const splitTeamsRandomly = ref(true)
 const banSmite = ref(true)
+
+/** 本地快照（历史记录）。全部存在访问者浏览器里，没有后端。 */
+const store = createSnapshotStore()
+const snapshots = ref<Snapshot[]>(store.list())
+const activeSnapshotId = ref<string | null>(null)
+/** 结果还在、但输入已经被改动过——提示用户要不要重新随机。 */
+const inputDirty = ref(false)
 /** 揭幕动画：默认关闭，开了才逐段播放。 */
 const animate = ref(false)
 /** 双队模式下把结果按队伍分组显示。 */
@@ -238,7 +265,7 @@ const sortByTeam = ref(true)
 /**
  * 玩家名走 `v-model`（而不是 `:value` + 手写 `@input`）：`v-model` 编译成 Vue 的 vModelText，
  * 它会处理 IME 组合事件（compositionstart / compositionend），中文输入法下不会被回写打断候选。
- * 模板上额外挂的 `@input="clearOutcome"` 只负责在改名字时清掉上一次的结果。
+ * 模板上额外挂的 `@input="markInputDirty"` 只负责标记「输入已改动」，不清结果。
  */
 const players = reactive<EditablePlayer[]>([{ name: '' }])
 
@@ -330,13 +357,13 @@ function setTeamMode(value: boolean) {
     autoAssignTeams()
   }
   while (players.length > maxPlayers.value) players.pop()
-  clearOutcome()
+  markInputDirty()
 }
 
 function setSplitRandomly(value: boolean) {
   splitTeamsRandomly.value = value
   if (!value) autoAssignTeams()
-  clearOutcome()
+  markInputDirty()
 }
 
 function autoAssignTeams() {
@@ -348,26 +375,36 @@ function autoAssignTeams() {
 
 function setPosition(index: number, position: Position | undefined) {
   players[index].position = position
-  clearOutcome()
+  markInputDirty()
 }
 
 function setTeam(index: number, team: TeamId) {
   players[index].team = team
-  clearOutcome()
+  markInputDirty()
 }
 
 function addPlayer() {
   if (players.length >= maxPlayers.value) return
   players.push({ name: '', team: splitTeamsRandomly.value ? undefined : 1 })
   if (teamMode.value && !splitTeamsRandomly.value) autoAssignTeams()
-  clearOutcome()
+  markInputDirty()
 }
 
 function removePlayer() {
   if (players.length <= 1) return
   players.pop()
   if (teamMode.value && !splitTeamsRandomly.value) autoAssignTeams()
-  clearOutcome()
+  markInputDirty()
+}
+
+/**
+ * 改动输入时**不再清空已有结果**。
+ *
+ * 原来的行为是「动一下输入，结果就没了」——手滑点到「添加玩家」就白随机一次。
+ * 现在结果留着，只在旁边提示「输入已变，点开始随机重新生成」，由用户自己决定。
+ */
+function markInputDirty() {
+  if (results.value.length > 0) inputDirty.value = true
 }
 
 function clearOutcome() {
@@ -375,6 +412,8 @@ function clearOutcome() {
   results.value = []
   errors.value = []
   seed.value = null
+  inputDirty.value = false
+  activeSnapshotId.value = null
 }
 
 function roll() {
@@ -394,8 +433,7 @@ function roll() {
 
   const outcome = generateBuilds(input, DATA)
   if (!outcome.ok) {
-    results.value = []
-    seed.value = null
+    clearOutcome()
     errors.value = outcome.errors.map((error) => error.message)
     return
   }
@@ -403,6 +441,8 @@ function roll() {
   errors.value = []
   seed.value = outcome.seed
   results.value = outcome.results
+  inputDirty.value = false
+  saveSnapshot(input, outcome.seed, outcome.results)
 
   if (animate.value) {
     // 轮盘的陪跑项也由同一个 seed 派生：同一个 seed 连动画都能重放。
@@ -411,6 +451,68 @@ function roll() {
     controller.value = next
     next.start()
   }
+}
+
+// ---------------------------------------------------------------- 本地快照
+
+/**
+ * 每次成功随机都自动存一条快照。
+ *
+ * 只存 **种子 + 选项 + 数据补丁**，不存结果本身：引擎是确定性的，同 seed 重放
+ * 得到逐字节相同的结果，所以一条快照只有几百字节而不是几十 KB。
+ */
+function saveSnapshot(input: GenerateInput, runSeed: number, builds: BuildResult[]) {
+  const createdAt = Date.now()
+  const snapshot: Snapshot = {
+    id: createSnapshotId(createdAt),
+    createdAt,
+    seed: runSeed,
+    patch: DATA.meta.patch,
+    input,
+    label: describeSnapshot(builds.map((build) => build.champion.title), input.teamMode),
+    teamMode: input.teamMode,
+  }
+  snapshots.value = store.add(snapshot)
+  activeSnapshotId.value = snapshot.id
+}
+
+/** 点快照：把当时的选项填回表单，再用同一个 seed 重放。 */
+function restoreSnapshot(snapshot: Snapshot) {
+  disposeReveal()
+
+  teamMode.value = snapshot.input.teamMode
+  splitTeamsRandomly.value = snapshot.input.splitTeamsRandomly
+  banSmite.value = snapshot.input.banSmiteForNonJungle
+  players.splice(
+    0,
+    players.length,
+    ...snapshot.input.players.map((player) => ({
+      name: player.name ?? '',
+      position: player.position,
+      team: player.team,
+    })),
+  )
+
+  const outcome = generateBuilds(snapshot.input, DATA, { seed: snapshot.seed })
+  if (!outcome.ok) {
+    errors.value = outcome.errors.map((error) => error.message)
+    return
+  }
+  errors.value = []
+  seed.value = outcome.seed
+  results.value = outcome.results
+  inputDirty.value = false
+  activeSnapshotId.value = snapshot.id
+}
+
+function removeSnapshot(snapshot: Snapshot) {
+  snapshots.value = store.remove(snapshot.id)
+  if (activeSnapshotId.value === snapshot.id) activeSnapshotId.value = null
+}
+
+function clearSnapshots() {
+  snapshots.value = store.clear()
+  activeSnapshotId.value = null
 }
 </script>
 
@@ -652,6 +754,10 @@ function roll() {
 .results__hint {
   font-size: 11px;
   color: var(--ink-muted);
+}
+
+.results__hint--warn {
+  color: var(--brass);
 }
 
 .results__body {
