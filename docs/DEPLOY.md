@@ -296,15 +296,32 @@ npm run build:h5
 | `SSH_KEY` | **专用部署私钥**（下面生成），不要用你自己的登录私钥 |
 | `SSH_KNOWN_HOSTS` | `ssh-keyscan -p 22 <你的服务器IP>` 的输出 |
 
-生成专用部署密钥：
+生成专用部署密钥（**已在 2026-09-22 完成，下面是留档与轮换方法**）：
 
 ```bash
-ssh-keygen -t ed25519 -C "github-actions-deploy" -f ./deploy_key -N ""
-# 公钥追加到服务器（这一步需要你自己的登录权限）
-ssh tencent 'cat >> ~/.ssh/authorized_keys' < ./deploy_key.pub
-# 私钥内容整段粘进 SSH_KEY secret，然后删掉本地私钥
-rm ./deploy_key
+# 生成到仓库目录之外，避免误提交。私钥必须无口令，否则 CI 无法非交互使用。
+ssh-keygen -t ed25519 -C "github-actions-deploy-rift-gacha" -f ~/.ssh/rift_gacha_deploy -N ""
+
+# 公钥追加到服务器（幂等，先 grep 再追加）
+ssh tencent "grep -qF 'github-actions-deploy-rift-gacha' ~/.ssh/authorized_keys || \
+  cat >> ~/.ssh/authorized_keys" < ~/.ssh/rift_gacha_deploy.pub
+
+# known_hosts：直接复用本机已验证过的那几条最可信
+# （ssh-keyscan 在本机与服务器的 KEX 算法集对不上，会抓到空）
+grep '^<你的服务器IP> ' ~/.ssh/known_hosts > ~/.ssh/rift_gacha_known_hosts
 ```
+
+已装好的那把密钥：
+
+| 项 | 值 |
+| --- | --- |
+| 本地私钥 | `~/.ssh/rift_gacha_deploy`（**不要提交、不要贴进任何聊天或 issue**） |
+| 服务器上 `authorized_keys` 里的注释 | `github-actions-deploy-rift-gacha`（用它来定位/撤销） |
+| 私钥指纹 | `SHA256:s6WfSqo6J3vGy6o7kuuMaOie5vuDqBa2hvWPItCS3s8` |
+
+**撤销/轮换**：从服务器 `~/.ssh/authorized_keys` 删掉注释为 `github-actions-deploy-rift-gacha` 的那一行，然后重新生成并更新 `SSH_KEY` secret。
+
+**实测确认（2026-09-22）**：这把密钥可以非交互登录（`IdentitiesOnly + BatchMode` 下不提示口令 ⇒ 确认无口令）、`sudo -n` 免密可用、`scp` 上传成功、远端的「建目录 → 切软链 → 清理」脚本全部动作跑通。
 
 > ⚠️ 该服务器上 `ubuntu` 用户有**免密 sudo**，所以这把私钥等价于服务器写权限。只放进 repo secrets，不要复用、不要提交。
 
