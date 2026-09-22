@@ -25,6 +25,7 @@ npm run dev:h5      # → http://localhost:5173/
 | --- | --- |
 | `npm run dev:h5` | 启动 Web 开发服务器 |
 | `npm run build:h5` | 构建产物到 `dist/build/h5` |
+| `npm run build:mp-weixin` | 构建微信小程序产物到 `dist/build/mp-weixin` |
 | `npm run serve:dist` | 零依赖静态服务器，预览构建产物（`:4180`） |
 | `npm run test` | 跑随机引擎与渲染的单元测试 |
 | `npm run typecheck` | TypeScript 类型检查 |
@@ -41,7 +42,9 @@ npm run dev:h5      # → http://localhost:5173/
 │   ├── RULES.md         # 随机规则的实现权威规范
 │   ├── ARCHITECTURE.md  # 分层、模块接口、未来接后端的接缝
 │   ├── DATA.md          # 数据源、抓取口径、快照 schema
-│   └── DEPLOY.md        # 部署文档（含 CI/CD 方案对比）
+│   ├── DEPLOY.md        # 部署文档（含 CI/CD 方案对比）
+│   └── MINIPROGRAM.md   # 微信小程序：可行性、依赖版本坑、上架待办
+├── .github/workflows/   # GitHub Actions：构建 + 校验 + 发布
 ├── scripts/             # 构建期数据脚本 + 本地工具（不进运行时）
 ├── src/
 │   ├── core/            # 纯逻辑层：随机引擎。不依赖 Vue / uni-app / DOM

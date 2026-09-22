@@ -199,7 +199,8 @@ export function pickFromGroups<T>(groups: readonly (readonly T[])[], rng: Rng): 
 **风险与对策**
 
 1. **uni-app 版本是 alpha 线（`3.0.0-*`）**：`package.json` 里所有 `@dcloudio/*` 必须**锁死同一个版本号**，禁止用 `^` 或 `latest`，否则预设与插件版本错配会直接构建失败。
-2. **Vite 必须停在 5.2.8**：`@dcloudio/vite-plugin-uni` 依赖其预设的 Vite 与 Rollup 版本。
-3. **数据会随版本变化**：快照里记录 patch 版本；刷新脚本失败时保留旧快照并在 `meta.json` 标注，页面不会因此白屏。
-4. **图标热链 CDN**：`game.gtimg.cn` 不可达时图标会裂。用 `image` 的 `@error` 兜底为占位块，避免整卡崩坏。
-5. **ID 常量藏在快照里**：`core/` 只按语义分组取池（`data.items.legendary` 等），不硬编码行为——唯一例外是 `docs/RULES.md` 明文列出的固定映射（打野蛋、辅助任务件、鞋子升级表、海克斯闪现罗网 ID），这些在 `core/` 里以命名的常量表出现并附注释指回规范小节。
+2. **Vue 必须锁死 `3.5.43` 且三包同版本**：`vue` / `@vue/runtime-core` / `@vue/server-renderer` 都用精确版本，**不要写 `^`**。整个 `@dcloudio/*` 套件依赖 `@vue/shared@3.4.21`，而 uni-app 的编译产物需要 3.5 的导出；只有显式钉住 3.5.43，npm 才会把 3.5.43 的 `@vue/shared` 嵌套到各 Vue 包下、同时让 `@dcloudio/*` 用顶层的 3.4.21。踩错的症状很隐蔽：**H5 能构建，小程序构建失败**（Vite/esbuild 对缺失的具名导出宽松，Rollup 严格报错）。详见 `docs/MINIPROGRAM.md` §1。
+3. **Vite 必须停在 5.2.8**：`@dcloudio/vite-plugin-uni` 依赖其预设的 Vite 与 Rollup 版本。
+4. **数据会随版本变化**：快照里记录 patch 版本；刷新脚本失败时保留旧快照并在 `meta.json` 标注，页面不会因此白屏。
+5. **图标热链 CDN**：`game.gtimg.cn` 不可达时图标会裂。用 `image` 的 `@error` 兜底为占位块，避免整卡崩坏。
+6. **ID 常量藏在快照里**：`core/` 只按语义分组取池（`data.items.legendary` 等），不硬编码行为——唯一例外是 `docs/RULES.md` 明文列出的固定映射（打野蛋、辅助任务件、鞋子升级表、海克斯闪现罗网 ID），这些在 `core/` 里以命名的常量表出现并附注释指回规范小节。

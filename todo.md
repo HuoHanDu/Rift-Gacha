@@ -15,6 +15,7 @@
 | P5 | 部署文档与 README | ✅ 完成 |
 | P6 | （v2 备选）移动端适配 | ☐ |
 | P7 | 揭幕动画 + 双队分组显示 | ✅ 完成 |
+| P8 | CI/CD + 微信小程序可行性 | ✅ 完成（小程序只到「可构建」） |
 
 ---
 
@@ -164,6 +165,22 @@
 - [x] **P5.2 `README.md`**
   - 项目简介、玩家视角的规则速览、常用命令表、目录说明、技术栈、部署指引、声明。
   - **完成判据**：只有仓库的情况下照 README 即可跑起 dev server（命令与 `package.json` 脚本一一对应）。✅
+
+---
+
+## P8 CI/CD 与微信小程序可行性（2026-09-22）
+
+- [x] **P8.1 GitHub Actions 构建 + 发布**
+  - `.github/workflows/deploy.yml`：`verify` job（npm ci → typecheck → test → build:h5 → 产物完整性检查 → 上传 artifact）与 `deploy` job（下载 artifact → 比对 sha256 → 解到 releases/ → 切 current 软链 → 清理旧版本 → 健康检查）。
+  - **不需要在服务器上装 Node**：构建在 Runner 上完成，服务器只收一个 90KB 的 tar。CI 也是自足的——数据快照入库，构建不访问 `game.gtimg.cn`。
+  - **完成判据**：YAML 解析通过（jobs = verify/deploy，deploy.needs = verify）；`npm ci` 实跑通过（12s）；`npm ci` 后 typecheck / 112 用例 / build:h5 全部通过。✅
+  - ⚠️ 未验证：workflow 本身没在 GitHub 上跑过（仓库还没推到 GitHub）。本地能验证的每一步都已实跑。
+
+- [x] **P8.2 微信小程序端可构建**
+  - 新增 `dev:mp-weixin` / `build:mp-weixin`；`npm run build:mp-weixin` 实测通过，产物含 `app.json`、各页面/组件的 `wxml/wxss/js/json`，主包约 190KB。
+  - **修掉一个真实缺陷**：原先 `vue: ^3.4.21` + `@vue/server-renderer: 3.4.21` 的精确 pin 把 vue 拖到 3.4.21，而 `@dcloudio/*` 的产物需要 3.5 的导出 → **H5 能构建、小程序构建失败**。现在三包钉死 `3.5.43`。
+  - **完成判据**：`npm ci` 干净重装后 `build:h5` 与 `build:mp-weixin` 同时通过。✅
+  - ⚠️ 只到「可构建」。**上架前必须处理的事**（含一条高风险项）写进了 `docs/MINIPROGRAM.md`：IP/类目审核风险（我的判断，未核实）、流量主门槛（未核实）、`:hover` 资料卡要改点击（P6）、`manifest.json` 的 `mp-weixin.appid` 还是空的。
 
 ---
 

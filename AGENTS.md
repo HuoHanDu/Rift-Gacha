@@ -11,11 +11,18 @@
 
 | 项 | 决定 |
 | --- | --- |
-| 框架 | uni-app（Vue 3 + Vite），**H5/Web 端为第一代交付目标** |
+| 框架 | uni-app（Vue 3 + Vite），**H5/Web 端为第一代交付目标**；微信小程序端可构建但未做适配（见 `docs/MINIPROGRAM.md`） |
 | 语言 | TypeScript |
 | 样式 | 原生 CSS + `rpx`/`px` 混合，响应式，扁平化，简洁现代 |
 | 后端 | **v1 无运行时后端**：纯静态 SPA + 构建期 Node 数据脚本 |
 | 移动端 | 复用同一份 uni-app 代码，v1 不做专项适配，仅保证不崩 |
+
+### 依赖版本的坑（别踩第二次）
+
+`vue` / `@vue/runtime-core` / `@vue/server-renderer` 三个包**必须都是同一个精确版本 `3.5.43`，不能用 `^`**。
+整个 `@dcloudio/*` 套件依赖 `@vue/shared@3.4.21`，而 uni-app 的编译产物又需要 3.5 的导出；只有显式钉住 3.5.43，npm 才会把 3.5.43 的 `@vue/shared` 嵌套到各 Vue 包下，同时让 `@dcloudio/*` 用顶层的 3.4.21。
+
+踩错的症状是：**H5 能构建，小程序构建失败**（Vite/esbuild 对缺失的具名导出宽松，Rollup 严格报错）。详见 `docs/MINIPROGRAM.md` §1。
 
 架构、模块边界与未来接后端的接缝见 `docs/ARCHITECTURE.md`。
 数据源、快照格式与刷新流程见 `docs/DATA.md`。
@@ -124,6 +131,8 @@
 ```bash
 npm run dev:h5         # 启动 Web 开发服务器（http://localhost:5173）
 npm run build:h5       # 构建 Web 产物到 dist/build/h5
+npm run dev:mp-weixin  # 微信小程序开发构建
+npm run build:mp-weixin # 微信小程序产物到 dist/build/mp-weixin
 npm run serve:dist     # 零依赖静态服务器，预览构建产物（:4180）
 npm run preview:h5     # vite preview 预览构建产物（:4173）
 npm run test           # 跑随机引擎与渲染的单元测试
@@ -138,3 +147,4 @@ npm run sample -- 10   # 在终端打印一次 10 人随机结果，用来核对
 新增规则请同步补 `tests/` 用例与 `docs/RULES.md` 对应小节。
 
 **线上地址**：<https://lol.huohandu.cn/>（发布流程与回滚见 `docs/DEPLOY.md` 第 1 节）。
+**CI/CD**：`.github/workflows/deploy.yml`（GitHub Actions 构建 + SSH 发布，服务器不需要 Node）。

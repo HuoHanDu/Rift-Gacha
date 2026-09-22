@@ -277,42 +277,38 @@ npm run build:h5
 
 ### A. GitHub Actions 构建 + SSH 推送（推荐）
 
-仓库里加 `.github/workflows/deploy.yml`，逻辑与 `scripts/deploy.ps1` 完全一致，只是把「本机构建」换成 runner 构建：
+**仓库里已经放好了：`.github/workflows/deploy.yml`。** 逻辑与 `scripts/deploy.ps1` 完全一致，只是把「本机构建」换成 runner 构建。它的结构是：
 
-```yaml
-name: deploy
-on:
-  push:
-    branches: [main]
-  workflow_dispatch:
+- `verify` job（每次 push / PR）：`npm ci` → `npm run typecheck` → `npm run test` → `npm run build:h5` → 检查产物非空且数据快照确实打进了 JS → 上传 artifact。
+- `deploy` job（非 PR 时）：下载 artifact → 比对本地与远端 sha256 → 解到 `releases/<时间戳>/` → 切 `current` 软链 → 清理旧版本 → 健康检查（首页 200 + 入口 HTML 引用的每个资源 200）。
 
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with: { node-version: '22', cache: npm }
-      - run: npm ci
-      - run: npm run test          # 测试不过就不发
-      - run: npm run build:h5
-      - name: 上传并切软链
-        run: |
-          TS=$(date +%Y%m%d-%H%M%S)
-          tar -czf /tmp/h5.tgz -C dist/build/h5 .
-          echo "${{ secrets.SSH_KEY }}" > /tmp/k && chmod 600 /tmp/k
-          scp -i /tmp/k -o StrictHostKeyChecking=no /tmp/h5.tgz \
-            ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/tmp/h5.tgz
-          ssh -i /tmp/k -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "
-            set -e
-            sudo mkdir -p /var/www/lol.huohandu.cn/releases/$TS
-            sudo tar -xzf /tmp/h5.tgz -C /var/www/lol.huohandu.cn/releases/$TS
-            sudo chown -R ubuntu:ubuntu /var/www/lol.huohandu.cn
-            sudo ln -sfn /var/www/lol.huohandu.cn/releases/$TS /var/www/lol.huohandu.cn/current
-            rm -f /tmp/h5.tgz"
+**服务器上不需要装 Node**——构建在 GitHub Runner 上完成，服务器只收一个约 90KB 的 tar。CI 也是自足的：数据快照 `src/data/*.json` 是提交进仓库的，所以构建过程不访问 `game.gtimg.cn`。
+
+要做的只有两件事：
+
+1. 把仓库推到 GitHub。
+2. 在 `Settings → Secrets and variables → Actions` 配 4 个 secrets：
+
+| Secret | 值 |
+| --- | --- |
+| `SSH_HOST` | `58.87.93.111` |
+| `SSH_USER` | `ubuntu` |
+| `SSH_KEY` | **专用部署私钥**（下面生成），不要用你自己的登录私钥 |
+| `SSH_KNOWN_HOSTS` | `ssh-keyscan -p 22 58.87.93.111` 的输出 |
+
+生成专用部署密钥：
+
+```bash
+ssh-keygen -t ed25519 -C "github-actions-deploy" -f ./deploy_key -N ""
+# 公钥追加到服务器（这一步需要你自己的登录权限）
+ssh tencent 'cat >> ~/.ssh/authorized_keys' < ./deploy_key.pub
+# 私钥内容整段粘进 SSH_KEY secret，然后删掉本地私钥
+rm ./deploy_key
 ```
 
-需要准备的 secrets：`SSH_HOST`、`SSH_USER`、`SSH_KEY`（一把**只用于部署**的新密钥对，公钥追加到服务器 `~ubuntu/.ssh/authorized_keys`）。注意服务器该用户有免密 sudo，所以这把 key 的权限等价于服务器写权限，务必只放在 repo secrets 里。
+> ⚠️ 该服务器上 `ubuntu` 用户有**免密 sudo**，所以这把私钥等价于服务器写权限。只放进 repo secrets，不要复用、不要提交。
+
+> 手头没有 Node 或想在本机直接发，用 `pwsh scripts/deploy.ps1` 也是一样的效果。
 
 > 若仓库是私有的，GitHub 侧要确认没有把 `src/data/*.json` 加进 `.gitignore`——快照是**入库**的，构建不依赖网络抓取。
 

@@ -1,0 +1,164 @@
+# 构建 → 校验 → 发布到 lol.huohandu.cn
+#
+# 设计要点：
+# - **不需要 Node 在服务器上**：构建在 GitHub Runner 上完成，服务器只收一个几十 KB 的 tar。
+# - **CI 是自足的**：数据快照 `src/data/*.json` 是提交进仓库的，所以 CI 不访问 game.gtimg.cn，
+#   不依赖任何外部数据的可用性。
+# - 上传后比对 sha256，并逐个检查入口 HTML 引用到的资源，避免半截产物上线。
+# - 目录约定与 `scripts/deploy.ps1` 完全一致：releases/<时间戳> + current 软链，回滚只需切软链。
+#
+# 需要的仓库 secrets（Settings → Secrets and variables → Actions）：
+#   SSH_HOST         58.87.93.111
+#   SSH_USER         ubuntu
+#   SSH_KEY          专用部署私钥（不要用你自己的登录私钥）
+#   SSH_KNOWN_HOSTS  ssh-keyscan -p 22 58.87.93.111 的输出
+#
+# 没有配 secrets 时，deploy job 会失败，但 verify job 仍然能给你构建结果。
+
+name: build-and-deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+# 同一个分支只跑一个：新的 push 会取消上一次还在跑的
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  WEB_ROOT: /var/www/lol.huohandu.cn
+  DOMAIN: lol.huohandu.cn
+  KEEP_RELEASES: 5
+
+jobs:
+  verify:
+    name: 校验与构建
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: 安装依赖
+        run: npm ci --no-audit --no-fund
+
+      - name: 类型检查
+        run: npm run typecheck
+
+      - name: 单元测试
+        run: npm run test
+
+      - name: 构建 H5 产物
+        run: npm run build:h5
+
+      - name: 检查产物完整性
+        run: |
+          set -euo pipefail
+          test -s dist/build/h5/index.html
+          for f in dist/build/h5/assets/*.js dist/build/h5/assets/*.css; do
+            test -s "$f" || { echo "产物为空：$f"; exit 1; }
+          done
+          # 数据快照必须被打进 JS（运行时不请求数据接口）
+          grep -q "无尽之刃" dist/build/h5/assets/*.js
+          grep -q "海克斯科技闪现罗网" dist/build/h5/assets/*.js
+          ls -lR dist/build/h5
+
+      - name: 打包产物
+        run: tar -czf h5.tgz -C dist/build/h5 .
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: h5
+          path: h5.tgz
+          retention-days: 14
+
+  deploy:
+    name: 发布到 ${{ github.event.repository.name }}
+    needs: verify
+    # PR 只校验不发布
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: h5
+
+      - name: 准备 SSH
+        run: |
+          set -euo pipefail
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          echo "${{ secrets.SSH_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
+
+      - name: 上传并切换版本
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+        run: |
+          set -euo pipefail
+          TS=$(date -u +%Y%m%d-%H%M%S)
+          REMOTE_TMP="/tmp/lol-h5-$TS.tgz"
+
+          scp -i ~/.ssh/deploy_key h5.tgz "$SSH_USER@$SSH_HOST:$REMOTE_TMP"
+
+          LOCAL_HASH=$(sha256sum h5.tgz | cut -d' ' -f1)
+          REMOTE_HASH=$(ssh -i ~/.ssh/deploy_key "$SSH_USER@$SSH_HOST" "sha256sum '$REMOTE_TMP'" | cut -d' ' -f1)
+          if [ "$LOCAL_HASH" != "$REMOTE_HASH" ]; then
+            echo "::error::上传校验失败：本地 $LOCAL_HASH / 远端 $REMOTE_HASH"
+            exit 1
+          fi
+          echo "校验和一致：$LOCAL_HASH"
+
+          ssh -i ~/.ssh/deploy_key "$SSH_USER@$SSH_HOST" \
+            "TS='$TS' REMOTE_TMP='$REMOTE_TMP' WEB_ROOT='$WEB_ROOT' KEEP='$KEEP_RELEASES' bash -s" <<'REMOTE'
+          set -euo pipefail
+          REL="$WEB_ROOT/releases/$TS"
+          sudo mkdir -p "$REL"
+          sudo tar -xzf "$REMOTE_TMP" -C "$REL"
+          sudo chown -R "$(id -un):$(id -gn)" "$WEB_ROOT"
+          sudo ln -sfn "$REL" "$WEB_ROOT/current"
+          rm -f "$REMOTE_TMP"
+          cd "$WEB_ROOT/releases"
+          ls -1dt */ | tail -n +$((KEEP + 1)) | xargs -r sudo rm -rf
+          echo "已发布 $REL"
+          REMOTE
+
+      - name: 健康检查
+        run: |
+          set -euo pipefail
+          code=$(curl -sS -o /dev/null -w '%{http_code}' "https://$DOMAIN/")
+          if [ "$code" != "200" ]; then
+            echo "::error::https://$DOMAIN/ 返回 $code"
+            exit 1
+          fi
+          echo "https://$DOMAIN/ → 200"
+
+          # 入口 HTML 里 src / href 引用到的资源都必须能取到
+          curl -sS "https://$DOMAIN/" \
+            | grep -oE '(src|href)="/assets/[^"]+"' \
+            | sed -E 's/.*"(\/assets\/[^"]+)"/\1/' \
+            | sort -u \
+            | while read -r path; do
+                c=$(curl -sS -o /dev/null -w '%{http_code}' "https://$DOMAIN$path")
+                if [ "$c" != "200" ]; then
+                  echo "::error::$path 返回 $c"
+                  exit 1
+                fi
+                echo "$path → 200"
+              done
+
+      - name: 输出回滚命令
+        if: always()
+        run: |
+          echo "回滚（把 current 切回上一个版本，不需要重新上传）："
+          echo "  ssh <server> 'ls -1dt $WEB_ROOT/releases/*/'"
+          echo "  ssh <server> 'sudo ln -sfn $WEB_ROOT/releases/<时间戳> $WEB_ROOT/current'"
