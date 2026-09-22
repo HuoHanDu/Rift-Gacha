@@ -1,5 +1,9 @@
 # 峡谷全随机构筑器
 
+[![build-and-deploy](https://github.com/HuoHanDu/Rift-Gacha/actions/workflows/deploy.yml/badge.svg)](https://github.com/HuoHanDu/Rift-Gacha/actions/workflows/deploy.yml)
+
+> **在线地址：<https://lol.huohandu.cn/>** —— push 到 `main` 会自动跑测试、构建并发布。
+
 一个用于《英雄联盟》召唤师峡谷的**娱乐向全随机构筑生成器**。输入人数和位置，一键随机出：
 
 > 位置 · 英雄 · 两个召唤师技能 · 出门装 · 六件成装 + 一双鞋 · 主副系符文与详细点法 · 三个小符文
