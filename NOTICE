@@ -1,0 +1,34 @@
+峡谷全随机构筑器 (Rift-Gacha)
+Copyright 2026 HuoHanDu
+
+本仓库以 Apache License, Version 2.0 授权，全文见 LICENSE 文件。
+
+===============================================================================
+许可范围说明（重要）
+===============================================================================
+
+Apache-2.0 只覆盖本项目作者自行编写的内容：源代码、随机规则、界面实现与文档。
+
+以下内容**不属于本项目作者，不在本许可的授权范围内**：
+
+1. 英雄头像、装备图标、符文图标、召唤师技能图标
+   —— 《英雄联盟》官方美术资源，版权归 Riot Games 所有（中国大陆地区由腾讯代理）。
+   本项目仅通过 <image> 标签热链官方 CDN（game.gtimg.cn）引用，不复制、不打包、
+   不随本仓库再分发。
+
+2. src/data/*.json 数据快照
+   —— 由 game.gtimg.cn 与 CommunityDragon 的公开接口在构建期生成。
+   其中的英雄/装备/符文名称与数值说明版权归 Riot Games 所有。
+
+3. "英雄联盟"、"League of Legends"、"Riot Games" 及相关名称与标识
+   —— 均为其各自权利人的商标。
+
+上述第三方内容的使用遵循 Riot Games 的 "Legal Jibber Jabber" 同人政策。
+完整说明与合规约束见 docs/RIGHTS.md。
+
+===============================================================================
+Riot Games 同人政策要求的声明
+===============================================================================
+
+峡谷全随机构筑器 was created under Riot Games' "Legal Jibber Jabber" policy using
+assets owned by Riot Games. Riot Games does not endorse or sponsor this project.

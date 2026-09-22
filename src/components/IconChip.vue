@@ -1,5 +1,5 @@
 <template>
-  <view class="chip" tabindex="0">
+  <view class="chip" tabindex="0" @click="onTap">
     <image
       v-if="!failed"
       class="chip__img"
@@ -23,6 +23,7 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue'
+import { openDetail } from './detailSheet'
 
 const props = withDefaults(
   defineProps<{
@@ -75,6 +76,29 @@ const tipStyle = computed(() => {
 const detail = computed(() => props.detail || props.desc)
 
 const initial = computed(() => props.name.slice(0, 1))
+
+/**
+ * 点击（触屏上就是"点按"）打开全局详情弹层。
+ *
+ * 为什么不做「悬停设备走 tooltip、触屏设备走弹层」的区分：
+ * 判断指针类型本身要分平台（H5 用 `matchMedia('(hover: none)')`，
+ * 小程序没有这个 API），而且桌面用户点一下看详情也不违和。
+ * 所以干脆统一——**桌面保留悬停 tooltip，两端都能点击开弹层**，零平台分支。
+ *
+ * 滚动中（轮盘还在转）没有真实内容，点了不响应。
+ */
+function onTap() {
+  if (props.rolling) return
+  if (!props.name) return
+  openDetail({
+    icon: props.icon,
+    name: props.name,
+    meta: props.meta,
+    detail: props.detail || props.desc,
+    accent: props.accent,
+    round: props.round,
+  })
+}
 </script>
 
 <style scoped>

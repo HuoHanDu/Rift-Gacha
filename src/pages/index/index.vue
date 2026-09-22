@@ -202,12 +202,16 @@
         </text>
       </view>
     </view>
+
+    <!-- 全局唯一的详情弹层：窄屏贴底、宽屏居中。点任意图标打开 -->
+    <DetailSheet />
   </view>
 </template>
 
 <script setup lang="ts">
 import { computed, onUnmounted, reactive, ref, shallowRef, watch } from 'vue'
 import BuildCard from '../../components/BuildCard.vue'
+import DetailSheet from '../../components/DetailSheet.vue'
 import { POSITION_LABELS, POSITIONS, RIOT_FAN_NOTICE } from '../../core/constants'
 import { generateBuilds } from '../../core/generate'
 import { createRng } from '../../core/random'
@@ -757,6 +761,24 @@ function roll() {
 
   .grid {
     grid-template-columns: 1fr;
+  }
+}
+
+/*
+ * 触控设备：把可点区域放大到接近 44px（手指点得准的常规下限）。
+ * 用 `hover: none` 而不是宽度断点——平板也会有宽屏，但它们同样是触屏。
+ */
+@media (hover: none) {
+  .seg__item {
+    padding: 10px 12px;
+  }
+
+  .btn {
+    padding: 11px 16px;
+  }
+
+  .row__name {
+    height: 38px;
   }
 }
 </style>

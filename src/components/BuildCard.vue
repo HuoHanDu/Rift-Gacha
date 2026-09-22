@@ -449,6 +449,25 @@ function shardRowLabel(index: number): string {
   flex-wrap: nowrap;
 }
 
+/*
+ * 极窄屏（iPhone SE 这类 320px）7 个图标一排放不下：
+ * 34×7 + 6×6 + 分隔 9 ≈ 283px，而 320px 屏扣掉内外边距只剩约 260px。
+ * 这时允许换行——宁可断成两行，也不要横向溢出。
+ */
+@media (max-width: 380px) {
+  .row--items {
+    flex-wrap: wrap;
+  }
+
+  .row__gap {
+    display: none;
+  }
+
+  .row {
+    gap: 5px;
+  }
+}
+
 .row__gap {
   flex: none;
   width: 4px;

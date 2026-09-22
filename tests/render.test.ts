@@ -188,6 +188,52 @@ describe('首页渲染', () => {
     expect(RIOT_FAN_NOTICE).toContain('Legal Jibber Jabber')
     expect(html).not.toContain('undefined')
   })
+
+  it('点击图标后详情弹层能拿到内容（移动端的主交互路径）', async () => {
+    const { openDetail, closeDetail } = await import('../src/components/detailSheet')
+    const [build] = sample(31)
+
+    // 弹层是「模块级单例状态 + 页面里唯一一个组件」，所以这里测的是这条链路：
+    // IconChip 写入 payload → 页面里的 DetailSheet 把它渲染出来。
+    openDetail({
+      icon: build.champion.icon,
+      name: build.champion.title,
+      meta: '测试用',
+      detail: '这是一段说明文字。',
+    })
+    const app = createSSRApp({ render: () => h(IndexPage) })
+    const html = await renderToString(app)
+
+    expect(html).toContain('sheet__panel')
+    expect(html).toContain(build.champion.title)
+    expect(html).toContain('这是一段说明文字。')
+    expect(html).toContain('关闭')
+
+    closeDetail()
+    const app2 = createSSRApp({ render: () => h(IndexPage) })
+    const html2 = await renderToString(app2)
+    expect(html2).not.toContain('sheet__panel')
+  })
+
+  it('详情弹层的共享状态契约：同一时刻只有一个弹层', async () => {
+    const { detailState, openDetail, closeDetail } = await import('../src/components/detailSheet')
+
+    closeDetail()
+    expect(detailState.open).toBe(false)
+
+    openDetail({ icon: 'a.png', name: '第一个' })
+    expect(detailState.open).toBe(true)
+    expect(detailState.payload?.name).toBe('第一个')
+
+    // 再开一个：payload 被替换，open 仍然是 true —— 不会出现两个弹层
+    openDetail({ icon: 'b.png', name: '第二个', detail: '说明' })
+    expect(detailState.open).toBe(true)
+    expect(detailState.payload?.name).toBe('第二个')
+    expect(detailState.payload?.detail).toBe('说明')
+
+    closeDetail()
+    expect(detailState.open).toBe(false)
+  })
 })
 
 describe('揭幕动画的渲染', () => {

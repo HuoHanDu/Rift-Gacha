@@ -169,7 +169,12 @@ export function pickFromGroups<T>(groups: readonly (readonly T[])[], rng: Rng): 
 - **揭幕动画**：`reveal/controller.ts` 是唯一有定时器的地方，页面只把它转成 `CardReveal` 传给卡片；卡片按 `hidden / rolling / done` 三态渲染。动画开关关闭时直接传 `null`，卡片走「全部定格」这条路径，与播放到结尾完全等价（有测试保证渲染结果逐字节相同）。
 - **展示**：`BuildCard.vue` 负责单份结果的排布，布局对齐 `hexfuser.com` 的卡片：表头（序号/名字/位置/队伍）→ 英雄 → 召唤师技能 → 出门装 → 成装一行 + 鞋子 → 符文分隔 → 主/副系与详细点法 → 三个小符文。
 - **分组显示**：双队模式下按队伍分组渲染，并带一条队伍分隔头；这也决定了动画的播放顺序（按显示顺序播，避免卡片乱跳）。
-- **资料卡**：`IconChip.vue` 自带的浮层，**纯 CSS `:hover`** 实现，不需要任何 JS 事件绑定。内容取自快照里的 `desc` / `short` / `long`，不请求任何第三方接口。代价是 v1 只对鼠标悬停生效，移动端要改成点击展开（P6）。
+- **资料卡**：两条路径。`IconChip.vue` 自带纯 CSS `:hover` 浮层（桌面）；点击则写入模块级单例状态
+  `src/components/detailSheet.ts`，由页面里唯一的 `DetailSheet.vue` 渲染成弹层（窄屏贴底、宽屏居中）。
+  内容取自快照里的 `desc` / `short` / `long`，不请求任何第三方接口。
+- **为什么弹层不用定位计算**：纯 CSS 感知不到视口，浮层固定 `bottom: 100%` 向上开，靠近顶部必然被裁；
+  算 `getBoundingClientRect()` 能修，但**小程序没有这个 API**（要用 `uni.createSelectorQuery()`）。
+  弹层是两端都能跑、且不需要任何定位数学的方案。
 - **图标兜底**：`<image>` 的 `@error` 置一个 flag，渲染成带首字的占位块，避免 CDN 不可达时整卡崩坏。
 - **设计令牌**：颜色只在 `App.vue` 的 `page` 选择器里定义一次（黑钢底 + 单点黄铜色），组件用 `var(--…)` 取用。
 
