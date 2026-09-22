@@ -70,6 +70,7 @@ http://lol.huohandu.cn/                 → 301 → https://lol.huohandu.cn/
 | 子路径部署（`h5.router.base`） | ✅ 实测产物资源路径随之变成 `/lol-random/assets/...` |
 | nginx（第 5 节的配置） | ✅ 已实装到 `lol.huohandu.cn`，`nginx -t` 通过并正在承载线上流量 |
 | `scripts/deploy.ps1` 全流程 | ✅ 实跑 2 次，含 sha256 校验、文件清单对齐、资源可达性检查 |
+| GitHub Actions 全流程（CI 构建 → SSH 发布 → 健康检查） | ✅ 已实跑并成功发布（run #6，release `20260922-040703`）；CI 构建出的文件名哈希与本地构建**完全一致**，说明构建可复现 |
 | Docker 镜像构建与运行 | ⚠️ **未验证**——本机装了 Docker CLI（v29.4.0）但 daemon 没运行，`docker build` 报 `failed to connect to the docker API`。容器化只是为了换环境部署方便，线上走的是静态文件 + nginx |
 
 ---

@@ -174,7 +174,7 @@
   - `.github/workflows/deploy.yml`：`verify` job（npm ci → typecheck → test → build:h5 → 产物完整性检查 → 上传 artifact）与 `deploy` job（下载 artifact → 比对 sha256 → 解到 releases/ → 切 current 软链 → 清理旧版本 → 健康检查）。
   - **不需要在服务器上装 Node**：构建在 Runner 上完成，服务器只收一个 90KB 的 tar。CI 也是自足的——数据快照入库，构建不访问 `game.gtimg.cn`。
   - **完成判据**：YAML 解析通过（jobs = verify/deploy，deploy.needs = verify）；`npm ci` 实跑通过（12s）；`npm ci` 后 typecheck / 112 用例 / build:h5 全部通过。✅
-  - ⚠️ 未验证：workflow 本身没在 GitHub 上跑过（仓库还没推到 GitHub）。本地能验证的每一步都已实跑。
+  - **已在 GitHub 上实跑并发布**（run #6）：四个 secrets 配好后，`准备 SSH` / `上传并切换版本` / `健康检查` 全部 success，`未发布时的说明` 正确变成 skipped，服务器新增 release `20260922-040703` 且 `current` 已切换。CI 构建的产物文件名哈希与本地构建一致 ⇒ 构建可复现。✅
 
 - [x] **P8.2 微信小程序端可构建**
   - 新增 `dev:mp-weixin` / `build:mp-weixin`；`npm run build:mp-weixin` 实测通过，产物含 `app.json`、各页面/组件的 `wxml/wxss/js/json`，主包约 190KB。
