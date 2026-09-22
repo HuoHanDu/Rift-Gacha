@@ -322,6 +322,24 @@ grep '^<你的服务器IP> ' ~/.ssh/known_hosts > ~/.ssh/rift_gacha_known_hosts
 
 **撤销/轮换**：从服务器 `~/.ssh/authorized_keys` 删掉注释为 `github-actions-deploy-rift-gacha` 的那一行，然后重新生成并更新 `SSH_KEY` secret。
 
+**权限收紧**：该密钥在 `authorized_keys` 里带 `restrict` 前缀（等价于 `no-port-forwarding,no-agent-forwarding,no-pty,no-X11-forwarding`）。
+
+- 实测：用它做远程端口转发 → `Error: remote port forwarding failed`，退出码 255（对照：用普通登录密钥同样操作能成功挂住）。
+- 意义：**即使这把密钥泄漏，也无法拿它把服务器当隧道用**，只能执行命令与 scp——这正是 CI 需要的全部。
+- `restrict` 不影响 CI：scp 与 `ssh ... bash -s` 都在无 pty 的情况下正常工作（已实测）。
+
+**这个密钥会触发腾讯云的「异常登录」高危告警**——不要被吓到，但要知道原因：
+
+GitHub Actions 的托管 Runner 跑在 **Azure** 上，出口 IP 是美国等地的微软网段且**每次都变**。所以每次发布都会出现一条「来源地：美国、登录用户名：ubuntu」的高危告警。
+
+本次实例（2026-09-22 12:07:49 GMT+8）经查证**就是 CI 自己**，证据链：
+
+- 登录用的是部署密钥指纹 `SHA256:s6WfSqo6J3vGy6o7kuuMaOie5vuDqBa2hvWPItCS3s8`；
+- 3 次连接（`scp` 上传 → `ssh sha256sum` 校验 → `ssh bash -s` 执行发布脚本）与 workflow 的三个步骤一一对应，每次 1~4 秒即断开；
+- 同一时间窗内服务器上**没有其它来源的异常登录**；`auth.log` 里成功登录的其它 IP 全是你自己的国内运营商地址。
+
+处理建议：在腾讯云「主机安全 → 登录审计/告警设置」里把这把部署密钥或 Azure 网段加入白名单，或者直接忽略此类告警。**不建议**为此关掉主机安全。
+
 **实测确认（2026-09-22）**：这把密钥可以非交互登录（`IdentitiesOnly + BatchMode` 下不提示口令 ⇒ 确认无口令）、`sudo -n` 免密可用、`scp` 上传成功、远端的「建目录 → 切软链 → 清理」脚本全部动作跑通。
 
 > ⚠️ 该服务器上 `ubuntu` 用户有**免密 sudo**，所以这把私钥等价于服务器写权限。只放进 repo secrets，不要复用、不要提交。
