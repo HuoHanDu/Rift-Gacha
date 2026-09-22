@@ -68,6 +68,23 @@
           </view>
         </view>
 
+        <view class="control">
+          <text class="control__label">显示</text>
+          <view class="seg">
+            <view class="seg__item" :class="{ 'seg__item--on': animate }" @click="animate = !animate">
+              <text class="seg__text">{{ animate ? '揭幕动画：开' : '揭幕动画：关' }}</text>
+            </view>
+            <view
+              v-if="teamMode"
+              class="seg__item"
+              :class="{ 'seg__item--on': sortByTeam }"
+              @click="sortByTeam = !sortByTeam"
+            >
+              <text class="seg__text">{{ sortByTeam ? '按队伍排序' : '按输入顺序' }}</text>
+            </view>
+          </view>
+        </view>
+
         <!-- 玩家列表 -->
         <view class="roster">
           <view v-for="(player, index) in players" :key="index" class="row">
@@ -140,14 +157,35 @@
         <view class="results__head">
           <text class="results__title">随机结果</text>
           <text class="results__seed">种子 {{ seed }} · 同一种子可复现</text>
+          <view v-if="revealing" class="btn btn--skip" @click.stop="skipAll">
+            <text class="btn__text btn__text--primary">跳过动画</text>
+          </view>
         </view>
-        <view class="grid">
-          <BuildCard
-            v-for="build in results"
-            :key="build.playerIndex"
-            :build="build"
-            :show-team="teamMode"
-          />
+
+        <text v-if="revealing" class="results__hint">
+          点击画面可以立刻揭晓当前这一段，直接跳到下一段
+        </text>
+
+        <view class="results__body" @click="finishCurrentSection">
+          <template v-for="group in groups" :key="group.key">
+            <view v-if="group.team" class="team-head">
+              <text class="team-head__text" :class="`team-head__text--${group.team}`">{{
+                group.team === 1 ? '蓝队' : '红队'
+              }}</text>
+              <view class="team-head__rule" />
+              <text class="team-head__count">{{ group.builds.length }} 人</text>
+            </view>
+            <view class="grid">
+              <BuildCard
+                v-for="build in group.builds"
+                :key="build.playerIndex"
+                :build="build"
+                :show-team="teamMode"
+                :reveal="revealFor(build.playerIndex)"
+                :active="activePlayerIndex === build.playerIndex"
+              />
+            </view>
+          </template>
         </view>
       </view>
 
@@ -166,12 +204,15 @@
 </template>
 
 <script setup lang="ts">
-import { computed, reactive, ref } from 'vue'
+import { computed, onUnmounted, reactive, ref, shallowRef, watch } from 'vue'
 import BuildCard from '../../components/BuildCard.vue'
 import { POSITION_LABELS, POSITIONS } from '../../core/constants'
 import { generateBuilds } from '../../core/generate'
+import { createRng } from '../../core/random'
 import type { BuildResult, GenerateInput, PlayerInput, Position, TeamId } from '../../core/types'
 import { DATA } from '../../data'
+import { createRevealController, type CardReveal, type RevealController } from '../../reveal/controller'
+import { buildPlans } from '../../reveal/plan'
 
 /** 表单里的玩家：位置与队伍可以是「未选择」。 */
 interface EditablePlayer {
@@ -183,6 +224,10 @@ interface EditablePlayer {
 const teamMode = ref(false)
 const splitTeamsRandomly = ref(true)
 const banSmite = ref(true)
+/** 揭幕动画：默认关闭，开了才逐段播放。 */
+const animate = ref(false)
+/** 双队模式下把结果按队伍分组显示。 */
+const sortByTeam = ref(true)
 
 /**
  * 玩家名走 `v-model`（而不是 `:value` + 手写 `@input`）：`v-model` 编译成 Vue 的 vModelText，
@@ -194,6 +239,76 @@ const players = reactive<EditablePlayer[]>([{ name: '' }])
 const results = ref<BuildResult[]>([])
 const errors = ref<string[]>([])
 const seed = ref<number | null>(null)
+
+/**
+ * 揭幕动画的播放器。`null` ⇒ 不做动画（等价于全部已揭晓）。
+ * 用 shallowRef 是因为控制器内部自己管响应式，我们只需要它的引用。
+ */
+const controller = shallowRef<RevealController | null>(null)
+
+const revealing = computed(() => controller.value?.isPlaying.value ?? false)
+const activePlayerIndex = computed(() => (revealing.value ? controller.value?.activePlayer.value ?? -1 : -1))
+
+/** 结果分组：双队 + 按队伍排序时拆成蓝/红两组，否则就是一组。 */
+interface ResultGroup {
+  key: string
+  team: TeamId | null
+  builds: BuildResult[]
+}
+
+const groups = computed<ResultGroup[]>(() => {
+  if (!teamMode.value || !sortByTeam.value) {
+    return [{ key: 'all', team: null, builds: results.value }]
+  }
+  return ([1, 2] as TeamId[]).map((team) => ({
+    key: `team-${team}`,
+    team,
+    builds: results.value.filter((build) => build.team === team),
+  }))
+})
+
+function revealFor(playerIndex: number): CardReveal | null {
+  return controller.value ? controller.value.revealOf(playerIndex) : null
+}
+
+/** 卡片的显示顺序（按队伍排序后就是蓝队在前）。动画也按这个顺序播，否则卡片会乱跳。 */
+const displayOrder = computed(() =>
+  groups.value.flatMap((group) => group.builds.map((build) => build.playerIndex)),
+)
+
+/**
+ * 播放到哪张卡就把它滚进视野。`block: 'nearest'` 只在需要时才滚，不会每段都晃一下。
+ * 这段依赖 DOM，所以只在 H5 生效——其他平台没有 `document`，直接跳过。
+ */
+watch(
+  activePlayerIndex,
+  (index) => {
+    if (index < 0 || typeof document === 'undefined') return
+    document.querySelector('.card--active')?.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
+  },
+  { flush: 'post' },
+)
+
+function disposeReveal() {
+  controller.value?.dispose()
+  controller.value = null
+}
+
+/** 点击画面：让当前这一段立刻定格，接着播下一段。 */
+function finishCurrentSection() {
+  controller.value?.finishCurrent()
+}
+
+/** 跳过：全部直接出结果，等同没开动画。 */
+function skipAll() {
+  const current = controller.value
+  if (!current) return
+  current.skipAll()
+  current.dispose()
+  controller.value = null
+}
+
+onUnmounted(disposeReveal)
 
 const patch = DATA.meta.patch
 const maxPlayers = computed(() => (teamMode.value ? 10 : 5))
@@ -250,12 +365,16 @@ function removePlayer() {
 }
 
 function clearOutcome() {
+  disposeReveal()
   results.value = []
   errors.value = []
   seed.value = null
 }
 
 function roll() {
+  // 连点「开始随机」时必须先把上一轮的定时器停掉，否则会叠出并发的播放。
+  disposeReveal()
+
   const input: GenerateInput = {
     players: players.map<PlayerInput>((player) => ({
       name: player.name,
@@ -278,6 +397,14 @@ function roll() {
   errors.value = []
   seed.value = outcome.seed
   results.value = outcome.results
+
+  if (animate.value) {
+    // 轮盘的陪跑项也由同一个 seed 派生：同一个 seed 连动画都能重放。
+    const plans = buildPlans(outcome.results, DATA, createRng(outcome.seed))
+    const next = createRevealController(plans, displayOrder.value)
+    controller.value = next
+    next.start()
+  }
 }
 </script>
 
@@ -497,8 +624,7 @@ function roll() {
 
 .results__head {
   display: flex;
-  align-items: baseline;
-  justify-content: space-between;
+  align-items: center;
   gap: 12px;
 }
 
@@ -509,9 +635,65 @@ function roll() {
 }
 
 .results__seed {
+  flex: 1;
+  min-width: 0;
+  font-size: 11px;
+  color: var(--ink-muted);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.results__hint {
+  font-size: 11px;
+  color: var(--ink-muted);
+}
+
+.results__body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  /* 动画期间整块是「可点击快进」的热区 */
+  cursor: default;
+}
+
+.team-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 4px 0 8px;
+}
+
+.team-head__text {
+  flex: none;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+}
+
+.team-head__text--1 {
+  color: #7fb0e4;
+}
+
+.team-head__text--2 {
+  color: #e4937f;
+}
+
+.team-head__rule {
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+
+.team-head__count {
+  flex: none;
   font-size: 11px;
   color: var(--ink-muted);
   font-variant-numeric: tabular-nums;
+}
+
+.btn--skip {
+  flex: none;
+  border-color: var(--brass);
+  background: rgba(200, 151, 63, 0.12);
 }
 
 .grid {

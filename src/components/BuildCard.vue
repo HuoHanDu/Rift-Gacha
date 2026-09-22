@@ -1,29 +1,41 @@
 <template>
-  <view class="card">
+  <view class="card" :class="{ 'card--active': active }">
     <!-- 表头：序号 / 名字 / 位置 / 队伍 -->
     <view class="card__head">
       <text class="card__index">{{ String(build.playerIndex + 1).padStart(2, '0') }}</text>
       <text class="card__name">{{ build.name }}</text>
-      <text class="card__tag card__tag--position">{{ positionLabel }}</text>
-      <text v-if="showTeam" class="card__tag card__tag--team" :class="`card__tag--team${build.team}`">
-        {{ build.team === 1 ? '蓝队' : '红队' }}
-      </text>
+      <view v-if="isHidden('position')" class="ph" :style="phStyle(46, false)" />
+      <text v-else class="card__tag card__tag--position">{{
+        textOf('position', SLOT_KEYS.position, positionLabel)
+      }}</text>
+      <text v-if="showTeam" class="card__tag" :class="`card__tag--team${build.team}`">{{
+        build.team === 1 ? '蓝队' : '红队'
+      }}</text>
     </view>
 
     <!-- 英雄 -->
     <view class="champion">
+      <view v-if="isHidden('champion')" class="ph" :style="phStyle(56, true)" />
       <IconChip
-        :icon="build.champion.icon"
+        v-else
+        :icon="iconOf('champion', SLOT_KEYS.champion, build.champion.icon)"
         :name="`${build.champion.title} · ${build.champion.name}`"
         :meta="championMeta"
         :desc="`官方定位：${championMeta}`"
         :size="56"
         round
         align="start"
+        :rolling="isRolling('champion')"
       />
       <view class="champion__text">
-        <text class="champion__name">{{ build.champion.title }}</text>
-        <text class="champion__title">{{ build.champion.name }}</text>
+        <template v-if="isDone('champion')">
+          <text class="champion__name">{{ build.champion.title }}</text>
+          <text class="champion__title">{{ build.champion.name }}</text>
+        </template>
+        <template v-else>
+          <view class="ph ph--text-lg" />
+          <view class="ph ph--text-sm" />
+        </template>
       </view>
     </view>
 
@@ -31,16 +43,19 @@
     <view class="section">
       <text class="section__label">召唤师技能</text>
       <view class="row">
-        <IconChip
-          v-for="(spell, spellIndex) in build.spells"
-          :key="spell.id"
-          :icon="spell.icon"
-          :name="spell.name"
-          :meta="spell.cooldown ? `冷却 ${spell.cooldown} 秒` : ''"
-          :desc="spell.desc"
-          :size="34"
-          :align="spellIndex === 0 ? 'start' : 'end'"
-        />
+        <template v-for="(spell, index) in build.spells" :key="spell.id">
+          <view v-if="isHidden('spells')" class="ph" :style="phStyle(34)" />
+          <IconChip
+            v-else
+            :icon="iconOf('spells', SLOT_KEYS.spell(index), spell.icon)"
+            :name="spell.name"
+            :meta="spell.cooldown ? `冷却 ${spell.cooldown} 秒` : ''"
+            :desc="spell.desc"
+            :size="34"
+            :align="index === 0 ? 'start' : 'end'"
+            :rolling="isRolling('spells')"
+          />
+        </template>
       </view>
     </view>
 
@@ -48,23 +63,26 @@
     <view class="section">
       <text class="section__label">出门装</text>
       <view class="row">
+        <view v-if="isHidden('starter')" class="ph" :style="phStyle(34)" />
         <IconChip
-          v-if="build.displayStarterItem"
-          :icon="build.displayStarterItem.icon"
+          v-else-if="build.displayStarterItem"
+          :icon="iconOf('starter', SLOT_KEYS.starter, build.displayStarterItem.icon)"
           :name="build.displayStarterItem.name"
           meta="云游图鉴 · 升级形态"
           :desc="build.displayStarterItem.desc"
           :size="34"
           align="start"
+          :rolling="isRolling('starter')"
         />
         <IconChip
           v-else
-          :icon="build.starterItem.icon"
+          :icon="iconOf('starter', SLOT_KEYS.starter, build.starterItem.icon)"
           :name="build.starterItem.name"
           :meta="`${build.starterItem.gold} 金币`"
           :desc="build.starterItem.desc"
           :size="34"
           align="start"
+          :rolling="isRolling('starter')"
         />
       </view>
     </view>
@@ -73,33 +91,43 @@
     <view class="section">
       <text class="section__label">成装</text>
       <view class="row row--items">
-        <IconChip
-          v-for="(item, itemIndex) in build.legendaryItems"
-          :key="item.id"
-          :icon="item.icon"
-          :name="item.name"
-          :meta="`${item.gold} 金币`"
-          :desc="item.desc"
-          :size="34"
-          :align="itemIndex === 0 ? 'start' : 'center'"
-        />
+        <template v-for="(item, index) in build.legendaryItems" :key="item.id">
+          <view v-if="isHidden('items')" class="ph" :style="phStyle(34)" />
+          <IconChip
+            v-else
+            :icon="iconOf('items', SLOT_KEYS.item(index), item.icon)"
+            :name="item.name"
+            :meta="`${item.gold} 金币`"
+            :desc="item.desc"
+            :size="34"
+            :align="index === 0 ? 'start' : 'center'"
+            :rolling="isRolling('items')"
+          />
+        </template>
         <view class="row__gap" />
+        <view v-if="isHidden('items')" class="ph" :style="phStyle(34)" />
         <IconChip
-          :icon="build.boots.icon"
+          v-else
+          :icon="iconOf('items', SLOT_KEYS.boots, build.boots.icon)"
           :name="build.boots.name"
           :meta="build.position === 'mid' ? '鞋子 · 中路已升级' : '鞋子'"
           :desc="build.boots.desc"
           :size="34"
           accent
           align="end"
+          :rolling="isRolling('items')"
         />
       </view>
     </view>
 
     <!-- 签名元素：用主系符文图标打断的细分隔线，标出「装备 → 符文」的体系切换 -->
-    <view class="divider">
+    <view v-if="!isHidden('runes')" class="divider">
       <view class="divider__rule" />
-      <image class="divider__mark" :src="build.runes.primaryStyle.icon" mode="aspectFit" />
+      <image
+        class="divider__mark"
+        :src="iconOf('runes', SLOT_KEYS.primaryStyle, build.runes.primaryStyle.icon)"
+        mode="aspectFit"
+      />
       <view class="divider__rule" />
     </view>
 
@@ -109,74 +137,88 @@
 
       <view class="rune-line">
         <text class="rune-line__role">主系</text>
+        <view v-if="isHidden('runes')" class="ph" :style="phStyle(26)" />
         <IconChip
-          :icon="build.runes.primaryStyle.icon"
+          v-else
+          :icon="iconOf('runes', SLOT_KEYS.primaryStyle, build.runes.primaryStyle.icon)"
           :name="build.runes.primaryStyle.name"
           meta="主系"
           :size="26"
           accent
           align="start"
+          :rolling="isRolling('runes')"
         />
+        <view v-if="isHidden('runes')" class="ph" :style="phStyle(30)" />
         <IconChip
-          :icon="build.runes.keystone.icon"
+          v-else
+          :icon="iconOf('runes', SLOT_KEYS.keystone, build.runes.keystone.icon)"
           :name="build.runes.keystone.name"
           meta="基石"
           :detail="build.runes.keystone.long"
           :desc="build.runes.keystone.short"
           :size="30"
           accent
+          :rolling="isRolling('runes')"
         />
-        <IconChip
-          v-for="(rune, runeIndex) in build.runes.primaryMinors"
-          :key="rune.id"
-          :icon="rune.icon"
-          :name="rune.name"
-          meta="主系小符文"
-          :detail="rune.long"
-          :desc="rune.short"
-          :size="26"
-          :align="runeIndex === build.runes.primaryMinors.length - 1 ? 'end' : 'center'"
-        />
+        <template v-for="(rune, index) in build.runes.primaryMinors" :key="rune.id">
+          <view v-if="isHidden('runes')" class="ph" :style="phStyle(26)" />
+          <IconChip
+            v-else
+            :icon="iconOf('runes', SLOT_KEYS.primaryMinor(index), rune.icon)"
+            :name="rune.name"
+            meta="主系小符文"
+            :detail="rune.long"
+            :desc="rune.short"
+            :size="26"
+            :align="index === build.runes.primaryMinors.length - 1 ? 'end' : 'center'"
+            :rolling="isRolling('runes')"
+          />
+        </template>
       </view>
 
       <view class="rune-line">
         <text class="rune-line__role">副系</text>
+        <view v-if="isHidden('runes')" class="ph" :style="phStyle(26)" />
         <IconChip
-          :icon="build.runes.secondaryStyle.icon"
+          v-else
+          :icon="iconOf('runes', SLOT_KEYS.secondaryStyle, build.runes.secondaryStyle.icon)"
           :name="build.runes.secondaryStyle.name"
           meta="副系"
           :size="26"
           align="start"
+          :rolling="isRolling('runes')"
         />
-        <IconChip
-          v-for="(rune, runeIndex) in build.runes.secondaryMinors"
-          :key="rune.id"
-          :icon="rune.icon"
-          :name="rune.name"
-          meta="副系小符文"
-          :detail="rune.long"
-          :desc="rune.short"
-          :size="26"
-          :align="runeIndex === build.runes.secondaryMinors.length - 1 ? 'end' : 'center'"
-        />
+        <template v-for="(rune, index) in build.runes.secondaryMinors" :key="rune.id">
+          <view v-if="isHidden('runes')" class="ph" :style="phStyle(26)" />
+          <IconChip
+            v-else
+            :icon="iconOf('runes', SLOT_KEYS.secondaryMinor(index), rune.icon)"
+            :name="rune.name"
+            meta="副系小符文"
+            :detail="rune.long"
+            :desc="rune.short"
+            :size="26"
+            :align="index === build.runes.secondaryMinors.length - 1 ? 'end' : 'center'"
+            :rolling="isRolling('runes')"
+          />
+        </template>
       </view>
-    </view>
 
-    <!-- 小符文 -->
-    <view class="section section--last">
-      <text class="section__label">小符文</text>
-      <view class="row">
-        <IconChip
-          v-for="(shard, index) in build.shards"
-          :key="shard.id"
-          :icon="shard.icon"
-          :name="shard.name"
-          :meta="shardRowLabel(index)"
-          :detail="shard.long"
-          :desc="shard.short"
-          :size="28"
-          :align="index === 0 ? 'start' : index === build.shards.length - 1 ? 'end' : 'center'"
-        />
+      <view class="row row--shards">
+        <template v-for="(shard, index) in build.shards" :key="shard.id">
+          <view v-if="isHidden('runes')" class="ph" :style="phStyle(28)" />
+          <IconChip
+            v-else
+            :icon="iconOf('runes', SLOT_KEYS.shard(index), shard.icon)"
+            :name="shard.name"
+            :meta="shardRowLabel(index)"
+            :detail="shard.long"
+            :desc="shard.short"
+            :size="28"
+            :align="index === 0 ? 'start' : index === build.shards.length - 1 ? 'end' : 'center'"
+            :rolling="isRolling('runes')"
+          />
+        </template>
       </view>
     </view>
   </view>
@@ -188,14 +230,63 @@ import IconChip from './IconChip.vue'
 import { POSITION_LABELS, ROLE_LABELS } from '../core/constants'
 import { DATA } from '../data'
 import type { BuildResult } from '../core/types'
+import type { CardReveal, SectionState } from '../reveal/controller'
+import { SLOT_KEYS, type SlotFrame } from '../reveal/plan'
+import type { SectionKey } from '../reveal/sections'
 
-const props = defineProps<{ build: BuildResult; showTeam: boolean }>()
+const props = defineProps<{
+  build: BuildResult
+  showTeam: boolean
+  /** `null` 表示不做动画，直接显示最终结果。 */
+  reveal: CardReveal | null
+  /** 正在播放这一张卡（用于高亮）。 */
+  active: boolean
+}>()
 
 const positionLabel = computed(() => POSITION_LABELS[props.build.position])
 
 const championMeta = computed(() =>
   props.build.champion.roles.map((role) => ROLE_LABELS[role] ?? role).join(' · '),
 )
+
+function stateOf(section: SectionKey): SectionState {
+  return props.reveal ? props.reveal.state[section] : 'done'
+}
+
+function isHidden(section: SectionKey): boolean {
+  return stateOf(section) === 'hidden'
+}
+
+function isRolling(section: SectionKey): boolean {
+  return stateOf(section) === 'rolling'
+}
+
+function isDone(section: SectionKey): boolean {
+  return stateOf(section) === 'done'
+}
+
+/** 取该格子此刻该显示的帧；不在滚动就返回 null，调用方回退到真实值。 */
+function frameAt(section: SectionKey, key: string): SlotFrame | null {
+  if (!props.reveal || stateOf(section) !== 'rolling') return null
+  const slot = props.reveal.plan[section].find((candidate) => candidate.key === key)
+  if (!slot || slot.frames.length === 0) return null
+  const tick = Math.min(Math.max(props.reveal.tick[section] ?? 0, 0), slot.frames.length - 1)
+  return slot.frames[tick] ?? null
+}
+
+function iconOf(section: SectionKey, key: string, fallback: string): string {
+  const frame = frameAt(section, key)
+  return frame && frame.icon ? frame.icon : fallback
+}
+
+function textOf(section: SectionKey, key: string, fallback: string): string {
+  const frame = frameAt(section, key)
+  return frame && frame.text ? frame.text : fallback
+}
+
+function phStyle(size: number, round = false): string {
+  return `width:${size}px;height:${size}px;border-radius:${round ? '50%' : '5px'};`
+}
 
 function shardRowLabel(index: number): string {
   return DATA.runes.shardRows[index]?.slot ?? ''
@@ -211,6 +302,49 @@ function shardRowLabel(index: number): string {
   display: flex;
   flex-direction: column;
   gap: 12px;
+}
+
+/* 正在播放动画的那张卡亮一下铜色边框，多人随机时能一眼找到。 */
+.card--active {
+  border-color: var(--brass);
+  box-shadow: 0 0 0 1px rgba(200, 151, 63, 0.25);
+}
+
+/* 尚未揭晓的格子：留空但可感知，避免看起来像坏了。 */
+.ph {
+  flex: none;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  box-sizing: border-box;
+  animation: ph-breathe 1.4s ease-in-out infinite;
+}
+
+.ph--text-lg {
+  width: 96px;
+  height: 20px;
+  border-radius: 4px;
+}
+
+.ph--text-sm {
+  width: 64px;
+  height: 12px;
+  border-radius: 3px;
+}
+
+@keyframes ph-breathe {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ph {
+    animation: none;
+  }
 }
 
 .card__head {
@@ -306,6 +440,10 @@ function shardRowLabel(index: number): string {
   flex-wrap: wrap;
 }
 
+.row--shards {
+  margin-top: 2px;
+}
+
 /* 成装一行放 6 件，和鞋子之间用一小段留白隔开——对应游戏里多出来的鞋子格。 */
 .row--items {
   flex-wrap: nowrap;
@@ -351,9 +489,5 @@ function shardRowLabel(index: number): string {
   width: 26px;
   font-size: 11px;
   color: var(--ink-muted);
-}
-
-.section--last {
-  padding-bottom: 2px;
 }
 </style>

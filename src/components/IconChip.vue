@@ -3,7 +3,7 @@
     <image
       v-if="!failed"
       class="chip__img"
-      :class="{ 'chip__img--accent': accent }"
+      :class="{ 'chip__img--accent': accent, 'chip__img--rolling': rolling }"
       :style="boxStyle"
       :src="icon"
       mode="aspectFill"
@@ -13,7 +13,7 @@
       <text class="chip__fallback-text">{{ initial }}</text>
     </view>
 
-    <view class="chip__tip" :style="tipStyle">
+    <view v-if="!rolling" class="chip__tip" :style="tipStyle">
       <text class="chip__tip-name">{{ name }}</text>
       <text v-if="meta" class="chip__tip-meta">{{ meta }}</text>
       <text v-if="detail" class="chip__tip-desc">{{ detail }}</text>
@@ -44,8 +44,19 @@ const props = withDefaults(
      * 行首的图标必须用 `start`、行尾必须用 `end`，否则 232px 宽的浮层会溢出视口被裁掉。
      */
     align?: 'start' | 'center' | 'end'
+    /** 轮盘滚动中：只显示当前帧，不出资料卡、也不做加载失败兜底。 */
+    rolling?: boolean
   }>(),
-  { meta: '', detail: '', desc: '', size: 34, round: false, accent: false, align: 'center' },
+  {
+    meta: '',
+    detail: '',
+    desc: '',
+    size: 34,
+    round: false,
+    accent: false,
+    align: 'center',
+    rolling: false,
+  },
 )
 
 const failed = ref(false)
@@ -89,6 +100,11 @@ const initial = computed(() => props.name.slice(0, 1))
 
 .chip__img--accent {
   border-color: var(--brass);
+}
+
+/* 滚动中的帧：压暗一点，和定格后的清晰状态区分开。 */
+.chip__img--rolling {
+  filter: brightness(0.72) saturate(0.85);
 }
 
 .chip__fallback {

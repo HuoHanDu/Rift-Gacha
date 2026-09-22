@@ -12,8 +12,12 @@ import { describe, expect, it } from 'vitest'
 import BuildCard from '../src/components/BuildCard.vue'
 import IndexPage from '../src/pages/index/index.vue'
 import { generateBuilds } from '../src/core/generate'
+import { createRng } from '../src/core/random'
 import type { BuildResult, GenerateInput } from '../src/core/types'
 import { DATA } from '../src/data'
+import type { CardReveal, SectionState } from '../src/reveal/controller'
+import { buildCardPlan, SLOT_KEYS, type CardPlan } from '../src/reveal/plan'
+import { SECTION_ORDER, type SectionKey } from '../src/reveal/sections'
 
 function makeInput(overrides: Partial<GenerateInput> = {}): GenerateInput {
   return {
@@ -25,8 +29,49 @@ function makeInput(overrides: Partial<GenerateInput> = {}): GenerateInput {
   }
 }
 
+function sample(seed: number, overrides: Partial<GenerateInput> = {}): BuildResult[] {
+  const outcome = generateBuilds(makeInput(overrides), DATA, { seed })
+  if (!outcome.ok) throw new Error('生成失败')
+  return outcome.results
+}
+
 async function renderCard(build: BuildResult, showTeam: boolean): Promise<string> {
-  const app = createSSRApp({ render: () => h(BuildCard, { build, showTeam }) })
+  const app = createSSRApp({
+    render: () => h(BuildCard, { build, showTeam, reveal: null, active: false }),
+  })
+  return renderToString(app)
+}
+
+/** 手搓一份揭幕状态，绕开定时器，测试只关心渲染结果。 */
+function manualReveal(
+  plan: CardPlan,
+  states: Partial<Record<SectionKey, SectionState>>,
+  tick = 0,
+): CardReveal {
+  const state = {
+    position: 'hidden',
+    champion: 'hidden',
+    spells: 'hidden',
+    starter: 'hidden',
+    items: 'hidden',
+    runes: 'hidden',
+    ...states,
+  } as Record<SectionKey, SectionState>
+  const ticks = Object.fromEntries(SECTION_ORDER.map((key) => [key, tick])) as Record<
+    SectionKey,
+    number
+  >
+  return { state, tick: ticks, plan }
+}
+
+async function renderCardWithReveal(
+  build: BuildResult,
+  reveal: CardReveal | null,
+  active = false,
+): Promise<string> {
+  const app = createSSRApp({
+    render: () => h(BuildCard, { build, showTeam: false, reveal, active }),
+  })
   return renderToString(app)
 }
 
@@ -124,6 +169,7 @@ describe('首页渲染', () => {
     expect(html).toContain('单队 1–5 人')
     expect(html).toContain('双队最多 10 人')
     expect(html).toContain('非打野位置不出现惩戒')
+    expect(html).toContain('揭幕动画：关')
     expect(html).toContain('还没有结果')
     // 未选到 5 个位置选项（随机 + 5 个位置）
     for (const label of ['随机', '上单', '打野', '中单', '下路', '辅助']) {
@@ -131,5 +177,66 @@ describe('首页渲染', () => {
     }
     expect(html).toContain('非官方娱乐工具')
     expect(html).not.toContain('undefined')
+  })
+})
+
+describe('揭幕动画的渲染', () => {
+  it('全部隐藏时只剩序号和玩家名，格子都是占位块', async () => {
+    const [build] = sample(42)
+    const plan = buildCardPlan(build, DATA, createRng(1))
+    const html = await renderCardWithReveal(build, manualReveal(plan, {}))
+
+    expect(html).toContain(build.name)
+    expect(html).toContain('01')
+    // 位置、英雄、装备、符文都不应泄露
+    expect(html).not.toContain(build.champion.title)
+    expect(html).not.toContain(build.runes.keystone.name)
+    for (const item of build.legendaryItems) expect(html).not.toContain(item.name)
+    // 占位块出现了
+    expect(html).toContain('class="ph"')
+    expect(html).toContain('section__label')
+  })
+
+  it('英雄滚动中显示的是轮盘帧，不是最终英雄', async () => {
+    const [build] = sample(42)
+    const plan = buildCardPlan(build, DATA, createRng(1))
+    const html = await renderCardWithReveal(
+      build,
+      manualReveal(plan, { champion: 'rolling' }, 0),
+    )
+
+    const frame = plan.champion.find((slot) => slot.key === SLOT_KEYS.champion)!.frames[0]
+    expect(html).toContain(frame.icon)
+    expect(frame.icon).not.toBe(build.champion.icon)
+    // 英雄名字要等定格才出现
+    expect(html).not.toContain(build.champion.title)
+  })
+
+  it('位置滚动中显示的是候选位置文案', async () => {
+    const [build] = sample(7)
+    const plan = buildCardPlan(build, DATA, createRng(2))
+    const html = await renderCardWithReveal(build, manualReveal(plan, { position: 'rolling' }, 0))
+    const frame = plan.position.find((slot) => slot.key === SLOT_KEYS.position)!.frames[0]
+    expect(html).toContain(frame.text)
+  })
+
+  it('全部定格后与「不用动画」渲染完全一致', async () => {
+    const [build] = sample(99)
+    const plan = buildCardPlan(build, DATA, createRng(3))
+    const allDone = Object.fromEntries(
+      SECTION_ORDER.map((key) => [key, 'done' as SectionState]),
+    ) as Record<SectionKey, SectionState>
+
+    const withReveal = await renderCardWithReveal(build, manualReveal(plan, allDone))
+    const without = await renderCardWithReveal(build, null)
+    expect(withReveal).toBe(without)
+    expect(withReveal).not.toContain('class="ph"')
+  })
+
+  it('滚动中不出资料卡，避免悬停看到未揭晓的内容', async () => {
+    const [build] = sample(5)
+    const plan = buildCardPlan(build, DATA, createRng(4))
+    const html = await renderCardWithReveal(build, manualReveal(plan, { champion: 'rolling' }, 0))
+    expect(html).not.toContain('chip__tip')
   })
 })

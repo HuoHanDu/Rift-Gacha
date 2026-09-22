@@ -42,8 +42,12 @@
   │        └─ core/random.ts        可注入种子 RNG                                             │
   │        │  BuildResult[]                                                                   │
   │        ▼                                                                                 │
-  │  components/BuildCard.vue       单份结果卡片（参考 hexfuser 排布）                          │
-  │  components/IconWithTooltip.vue 图标 + 悬停资料卡（数据全部来自快照）                        │
+  │  reveal/plan.ts                 结果 → 轮盘剧本（每格一串候选，末项必是真实值）              │
+  │  reveal/controller.ts           播放器状态机：逐玩家逐段推进 / 点击快进 / 跳过全部            │
+  │        │  CardReveal | null（null = 不做动画）                                             │
+  │        ▼                                                                                 │
+  │  components/BuildCard.vue       单份结果卡片（隐藏 / 滚动 / 定格三态）                       │
+  │  components/IconChip.vue        图标 + 悬停资料卡（数据全部来自快照）                        │
   └──────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -51,6 +55,8 @@
 - 它可以被 `vitest` 直接在 Node 里跑；
 - 同一份逻辑将来可以原样搬进后端；
 - 换数据源（换快照或改成后端返回）不需要动算法。
+
+`reveal/` 受同样的约束（不碰 DOM、不参与随机结果），只是它用 Vue 的 `ref`/`reactive` 表达播放状态——核心资产是那个状态机，不是渲染。
 
 ---
 
@@ -81,6 +87,7 @@ lol/
 │   │   └── index.ts            # 组装成 DataBundle
 │   ├── core/                   # 纯逻辑层（无框架依赖）
 │   │   ├── types.ts
+│   │   ├── constants.ts
 │   │   ├── random.ts
 │   │   ├── validate.ts
 │   │   ├── positions.ts
@@ -89,9 +96,13 @@ lol/
 │   │   ├── items.ts
 │   │   ├── runes.ts
 │   │   └── generate.ts
+│   ├── reveal/                 # 揭幕动画层（不碰 DOM，不影响随机结果）
+│   │   ├── sections.ts         # 分幕顺序、每幕帧数、先快后慢的帧间隔
+│   │   ├── plan.ts             # 结果 → 轮盘剧本（陪跑项由同一个 seed 派生，动画也可复现）
+│   │   └── controller.ts       # 播放器状态机：逐玩家逐段推进 / 点击快进 / 跳过全部
 │   ├── components/
-│   │   ├── IconChip.vue        # 图标 + 悬停资料卡 + 图标加载失败的兜底
-│   │   └── BuildCard.vue       # 单份结果卡片（参考 hexfuser 排布）
+│   │   ├── IconChip.vue        # 图标 + 悬停资料卡 + 图标加载失败的兜底 + 滚动态
+│   │   └── BuildCard.vue       # 单份结果卡片（隐藏 / 滚动 / 定格）
 │   ├── pages/index/index.vue   # 输入面板 + 结果网格（表单状态就地管理）
 │   ├── static/
 │   ├── App.vue                 # 全局样式与设计令牌（CSS 自定义属性）
@@ -154,8 +165,10 @@ export function pickFromGroups<T>(groups: readonly (readonly T[])[], rng: Rng): 
 
 ## 5. 状态与展示
 
-- **状态**：全部就地放在 `pages/index/index.vue` 里（`ref`/`reactive`），不引 Pinia。状态只有四块：玩家表单、显示开关、结果、当前 seed。
+- **状态**：全部就地放在 `pages/index/index.vue` 里（`ref`/`reactive`），不引 Pinia。状态只有五块：玩家表单、显示开关、揭幕播放器、结果、当前 seed。
+- **揭幕动画**：`reveal/controller.ts` 是唯一有定时器的地方，页面只把它转成 `CardReveal` 传给卡片；卡片按 `hidden / rolling / done` 三态渲染。动画开关关闭时直接传 `null`，卡片走「全部定格」这条路径，与播放到结尾完全等价（有测试保证渲染结果逐字节相同）。
 - **展示**：`BuildCard.vue` 负责单份结果的排布，布局对齐 `hexfuser.com` 的卡片：表头（序号/名字/位置/队伍）→ 英雄 → 召唤师技能 → 出门装 → 成装一行 + 鞋子 → 符文分隔 → 主/副系与详细点法 → 三个小符文。
+- **分组显示**：双队模式下按队伍分组渲染，并带一条队伍分隔头；这也决定了动画的播放顺序（按显示顺序播，避免卡片乱跳）。
 - **资料卡**：`IconChip.vue` 自带的浮层，**纯 CSS `:hover`** 实现，不需要任何 JS 事件绑定。内容取自快照里的 `desc` / `short` / `long`，不请求任何第三方接口。代价是 v1 只对鼠标悬停生效，移动端要改成点击展开（P6）。
 - **图标兜底**：`<image>` 的 `@error` 置一个 flag，渲染成带首字的占位块，避免 CDN 不可达时整卡崩坏。
 - **设计令牌**：颜色只在 `App.vue` 的 `page` 选择器里定义一次（黑钢底 + 单点黄铜色），组件用 `var(--…)` 取用。
