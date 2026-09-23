@@ -87,49 +87,52 @@ describe('compatScore —— 装备适配度', () => {
 })
 
 describe('挡位', () => {
+  // 这些用例**从常量推导期望值**，不硬编码阈值——
+  // 否则每次按真实分布调参（已经调过两轮）都要跟着改测试。
   it('最高档需要复合条件：总分够但没命中推荐装 → 不算最高档', () => {
     const top = tier('top')
-    const base = {
-      hero: 0,
-      items: 0,
-      runes: 0,
-      detail: {} as never,
-    }
-    // 总分远超 60，但一件推荐都没命中
-    expect(meetsTier({ ...base, total: 90, recommendedHits: 0 }, top)).toBe(false)
-    // 命中 1 件仍不够
-    expect(meetsTier({ ...base, total: 90, recommendedHits: 1 }, top)).toBe(false)
-    // 命中 2 件才算
-    expect(meetsTier({ ...base, total: 90, recommendedHits: 2 }, top)).toBe(true)
+    const enough = (top.min ?? 0) + 20
+    const base = { hero: 0, items: 0, runes: 0, total: enough, detail: {} as never }
+
+    expect(top.requireRecommended).toBeGreaterThan(0)
+    expect(meetsTier({ ...base, recommendedHits: 0 }, top)).toBe(false)
+    expect(meetsTier({ ...base, recommendedHits: top.requireRecommended - 1 }, top)).toBe(false)
+    expect(meetsTier({ ...base, recommendedHits: top.requireRecommended }, top)).toBe(true)
     // 命中够但总分不够，也不行
-    expect(meetsTier({ ...base, total: 40, recommendedHits: 6 }, top)).toBe(false)
+    expect(
+      meetsTier({ ...base, total: (top.min ?? 0) - 1, recommendedHits: 6 }, top),
+    ).toBe(false)
   })
 
   it('完全随机挡位对任何分数都成立', () => {
     const any = tier('any')
-    for (const total of [-100, 0, 50, 200]) {
+    for (const total of [-1000, -100, 0, 50, 200]) {
       expect(meetsTier({ total, recommendedHits: 0 } as never, any)).toBe(true)
     }
   })
 
-  it('三个低档按分数区间判定，且互不重叠', () => {
+  it('低档按分数区间判定，边界是「下界含、上界不含」，且互不重叠', () => {
     const low = tier('low')
     const mid = tier('mid')
-    expect(meetsTier({ total: 10, recommendedHits: 0 } as never, low)).toBe(true)
-    expect(meetsTier({ total: 10, recommendedHits: 0 } as never, mid)).toBe(false)
-    expect(meetsTier({ total: 30, recommendedHits: 0 } as never, low)).toBe(false)
-    expect(meetsTier({ total: 30, recommendedHits: 0 } as never, mid)).toBe(true)
-    // 边界：26 属于 mid（下界含、上界不含）
-    expect(meetsTier({ total: 26, recommendedHits: 0 } as never, low)).toBe(false)
-    expect(meetsTier({ total: 26, recommendedHits: 0 } as never, mid)).toBe(true)
+    const boundary = low.max!
+
+    // 边界左边属于 low、不属于 mid
+    expect(meetsTier({ total: boundary - 1, recommendedHits: 0 } as never, low)).toBe(true)
+    expect(meetsTier({ total: boundary - 1, recommendedHits: 0 } as never, mid)).toBe(false)
+    // 边界本身属于 mid（含下界、不含上界）
+    expect(meetsTier({ total: boundary, recommendedHits: 0 } as never, low)).toBe(false)
+    expect(meetsTier({ total: boundary, recommendedHits: 0 } as never, mid)).toBe(true)
+    // low 是 min=null / max=有值，不能被当成「无约束」
+    expect(meetsTier({ total: 9999, recommendedHits: 0 } as never, low)).toBe(false)
   })
 
-  it('T 挡位加分表与文档一致，且 T4 为 0', () => {
-    expect(TIER_BONUS.T0).toBe(27)
-    expect(TIER_BONUS.T1).toBe(19)
-    expect(TIER_BONUS.T2).toBe(11)
-    expect(TIER_BONUS.T3).toBe(4)
+  it('T 挡位加分单调递减、T4 为 0、T0 最高（防手滑改错表）', () => {
+    const order = ['T0', 'T1', 'T2', 'T3', 'T4']
+    for (let i = 1; i < order.length; i++) {
+      expect(TIER_BONUS[order[i]]).toBeLessThan(TIER_BONUS[order[i - 1]])
+    }
     expect(TIER_BONUS.T4).toBe(0)
+    expect(TIER_BONUS.T0).toBeGreaterThan(0)
   })
 })
 

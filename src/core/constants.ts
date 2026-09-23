@@ -109,11 +109,29 @@ export const RUNE_POINTS = {
 } as const
 
 /** T 挡位加分。没有该分路数据时为 0（决策 6：不加分也不扣分）。 */
+/**
+ * 位置英雄分：(胜率 - 50) x LANE_K1 + 登场率 x LANE_K2（决策 4/5，比例 7:3）。
+ *
+ * **必须减掉 50 基线**，否则所有英雄白拿 50 分底分、区分度被压掉。
+ *
+ * 量级由 x3.5 定下（决策 11 的目标比例 英雄:装备:符文 = 6:5:3）。
+ * 注意 rift-stats.json 里也存了一份构建期算好的 laneScore，但**评分不读它**，
+ * 那一份只是快照里的参考值。所以改这里不需要重跑 fetch:101。
+ */
+export const LANE_K1 = 24.5
+export const LANE_K2 = 10.5
+
+/**
+ * T 挡位加分。没有该分路数据时为 0（决策 6：不加分也不扣分）。
+ *
+ * **T 挡位贡献必须约等于胜率/登场率的 80%，不能压过它**——小代/主播会把胜率
+ * 打高（如打野豹女），实测数据比官方分档更可信（决策 6）。
+ */
 export const TIER_BONUS: Record<string, number> = {
-  T0: 27,
-  T1: 19,
-  T2: 11,
-  T3: 4,
+  T0: 95,
+  T1: 67,
+  T2: 39,
+  T3: 14,
   T4: 0,
 }
 
@@ -136,8 +154,8 @@ export const STRENGTH_TIERS: ReadonlyArray<{
   requireRecommended: number
 }> = [
   { id: 'any', label: '完全随机', min: null, max: null, requireRecommended: 0 },
-  { id: 'low', label: '区', min: null, max: 26, requireRecommended: 0 },
-  { id: 'mid', label: '爬行动物', min: 26, max: 41, requireRecommended: 0 },
-  { id: 'high', label: '类人', min: 41, max: null, requireRecommended: 0 },
-  { id: 'top', label: '人上人', min: 60, max: null, requireRecommended: 2 },
+  { id: 'low', label: '区', min: null, max: 12, requireRecommended: 0 },
+  { id: 'mid', label: '爬行动物', min: 12, max: 28, requireRecommended: 0 },
+  { id: 'high', label: '类人', min: 28, max: null, requireRecommended: 0 },
+  { id: 'top', label: '人上人', min: 116, max: null, requireRecommended: 2 },
 ]

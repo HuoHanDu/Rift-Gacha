@@ -29,6 +29,11 @@ const builds = await read('src/data/rift-builds.json')
 const TRIALS = Number(process.argv[2] ?? 20000)
 const RUNE_N = 5
 
+// 与 src/core/constants.ts 保持一致（改一处必须改另一处；正式实现只读 constants）
+const LANE_K1 = 24.5
+const LANE_K2 = 10.5
+const TIER_BONUS = { T0: 95, T1: 67, T2: 39, T3: 14, T4: 0 }
+
 // 分值（docs/STRENGTH.md §2 决策 5/6/8）
 const POINTS = {
   core: 10,
@@ -75,7 +80,10 @@ for (const record of stats.ranks) {
     shoes,
     starters,
     runePages: entry.runePages,
-    heroScore: record.laneScore + record.tierBonus,
+    heroScore:
+      (record.winRate - 50) * LANE_K1 +
+      (record.pickRate ?? 0) * LANE_K2 +
+      (record.tier ? (TIER_BONUS[record.tier] ?? 0) : 0),
   }
   combos.push(comboEntry)
   combosByKey.set(key, comboEntry)

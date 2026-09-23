@@ -20,6 +20,8 @@
  */
 
 import {
+  LANE_K1,
+  LANE_K2,
   RIFT_RUNE_TOP_N,
   RUNE_POINTS,
   SCORE_POINTS,
@@ -165,7 +167,9 @@ export function scoreBuild(result: BuildResult, data: StrengthData): StrengthBre
   const buildFallback = usedKey !== laneKey
 
   // ---- 英雄项 ----
-  const laneScore = lane?.laneScore ?? 0
+  // 从原始胜率/登场率**现算**，不读快照里那份构建期算好的 laneScore——
+  // 否则改分值要同时改 constants.ts 与 fetch-101.mjs 两处，漏一处就静默算错（踩过）。
+  const laneScore = lane ? (lane.winRate - 50) * LANE_K1 + (lane.pickRate ?? 0) * LANE_K2 : 0
   const tierBonus = lane ? (lane.tier ? (TIER_BONUS[lane.tier] ?? 0) : 0) : 0
   const hero = laneScore + tierBonus
 
