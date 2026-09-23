@@ -12,6 +12,7 @@
     "serve:dist": "node scripts/serve-dist.mjs",
     "fetch:data": "node scripts/fetch-data.mjs",
     "fetch:101": "node scripts/fetch-101.mjs",
+    "fetch:101:build": "node scripts/fetch-101-build.mjs",
     "sample": "vite-node --config vitest.config.ts scripts/dump-sample.ts",
     "test": "vitest run",
     "test:watch": "vitest",
