@@ -186,6 +186,7 @@ const totals = []
 const parts = { hero: 0, item: 0, rune: 0 }
 const compatHit = { strong: 0, weak: 0, none: 0, recommended: 0 }
 let itemDraws = 0
+let fallback = 0
 
 for (let trial = 0; trial < TRIALS; trial++) {
   // **按游戏的真实抽样方式**：先随机英雄、再随机分路，然后去查有没有数据。
@@ -193,7 +194,12 @@ for (let trial = 0; trial < TRIALS; trial++) {
   // 把英雄项高估了约 3.6 倍（239/865 = 27.6%）。
   const champion = champions[Math.floor(rng() * champions.length)]
   const position = POSITIONS[Math.floor(rng() * POSITIONS.length)]
-  const combo = combosByKey.get(`${champion.heroId}:${position}`) ?? null
+  // 英雄分只在真实分路里查（查不到就是 0，决策 4）；
+  // 构筑与符文在当前分路没数据时回退到该英雄的常用分路（用户定的口径）。
+  const laneCombo = combosByKey.get(`${champion.heroId}:${position}`) ?? null
+  const primary = stats.primaryPositions?.[champion.heroId]
+  const combo = laneCombo ?? (primary ? combosByKey.get(`${champion.heroId}:${primary}`) ?? null : null)
+  if (!laneCombo && combo) fallback++
 
   // 6 件成装：从 107 件池里抽（不重复，忽略唯一词条/远程专属以简化——它们不改变量级）
   const pool = [...LEGENDARY_IDS]
@@ -219,7 +225,7 @@ for (let trial = 0; trial < TRIALS; trial++) {
 
   const runeScore = combo ? rollRunes(allowedSets(combo.runePages), rng) : 0
 
-  const heroScore = combo ? combo.heroScore : 0
+  const heroScore = laneCombo ? laneCombo.heroScore : 0
   parts.hero += heroScore
   parts.item += itemScore
   parts.rune += runeScore
@@ -234,6 +240,7 @@ const T = mean(totals)
 const ratioUnits = (v) => (v / T) * 14
 
 console.log(`模拟 ${TRIALS} 次（${combos.length} 个英雄×分路组合，真实 101 数据）\n`)
+console.log(`  其中构筑/符文回退到常用分路的比例：${((fallback / TRIALS) * 100).toFixed(1)}%\n`)
 console.log('=== 三块的平均贡献 ===')
 console.log(`  英雄  ${(parts.hero / TRIALS).toFixed(2)}`)
 console.log(`  装备  ${(parts.item / TRIALS).toFixed(2)}`)

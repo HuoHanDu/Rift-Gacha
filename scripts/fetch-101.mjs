@@ -230,6 +230,21 @@ async function main() {
     }
   }
 
+  /**
+   * 每个英雄的「常用分路」= 登场率最高的那条分路。
+   *
+   * 用途：构筑与符文在**当前分路**查不到时回退到常用分路（用户定的口径）。
+   * 否则 72% 的随机组合（101 每分路只收录约 50 个英雄）会让符文项直接归零。
+   */
+  const primaryPositions = {}
+  for (const record of records) {
+    const pickRate = record.pickRate ?? 0
+    const current = primaryPositions[record.heroId]
+    if (!current || pickRate > current.pickRate) {
+      primaryPositions[record.heroId] = { position: record.position, pickRate }
+    }
+  }
+
   const scores = records.map((r) => r.laneScore + r.tierBonus)
   scores.sort((a, b) => a - b)
   const quantile = (q) => scores[Math.min(scores.length - 1, Math.floor(scores.length * q))]
@@ -258,7 +273,11 @@ async function main() {
   }
 
   await mkdir(OUT_DIR, { recursive: true })
-  await writeJsonAtomic('rift-stats.json', { meta, ranks: records })
+  const primaryMap = Object.fromEntries(
+    Object.entries(primaryPositions).map(([heroId, value]) => [heroId, value.position]),
+  )
+
+  await writeJsonAtomic('rift-stats.json', { meta, ranks: records, primaryPositions: primaryMap })
   await writeJsonAtomic('rift-101-meta.json', meta)
 
   process.stdout.write(`\n✓ 已写入 src/data/rift-stats.json（${version}，数据日 ${meta.dataDate}）\n`)

@@ -61,6 +61,8 @@ export interface StrengthBreakdown {
     tierBonus: number
     tier: string | null
     hasLaneData: boolean
+    /** 构筑/符文是否回退到了常用分路（用于界面如实标注） */
+    buildFallback: boolean
     itemPoints: number[]
     runeHits: { keystone: boolean; primary: boolean[]; secondary: boolean[]; shards: boolean[] }
   }
@@ -149,9 +151,18 @@ function hitMinor(rune: RuneRef, allowed: Set<string>): boolean {
 }
 
 export function scoreBuild(result: BuildResult, data: StrengthData): StrengthBreakdown {
-  const laneKey = `${result.champion.heroId}:${result.position}`
+  const heroId = result.champion.heroId
+  const laneKey = `${heroId}:${result.position}`
+  // 英雄分只在**真实分路**里查；查不到就是 0（决策 4：不在这个位置就是弱）。
   const lane = indexLaneRecords(data.rift.ranks).get(laneKey)
-  const entry = data.rift.builds[laneKey]
+
+  // 构筑与符文：当前分路没数据时**回退到该英雄的常用分路**（用户定的口径）。
+  // 101 每分路只收录约 50 个英雄，不回退的话 72% 的随机结果符文项会直接归零。
+  const primary = data.rift.primaryPositions?.[heroId]
+  const fallbackKey = primary ? `${heroId}:${primary}` : null
+  const usedKey = data.rift.builds[laneKey] ? laneKey : fallbackKey && data.rift.builds[fallbackKey] ? fallbackKey : laneKey
+  const entry = data.rift.builds[usedKey]
+  const buildFallback = usedKey !== laneKey
 
   // ---- 英雄项 ----
   const laneScore = lane?.laneScore ?? 0
@@ -240,6 +251,8 @@ export function scoreBuild(result: BuildResult, data: StrengthData): StrengthBre
       tierBonus,
       tier: lane?.tier ?? null,
       hasLaneData: Boolean(lane),
+      /** 构筑/符文是否回退到了常用分路 */
+      buildFallback,
       itemPoints,
       runeHits,
     },

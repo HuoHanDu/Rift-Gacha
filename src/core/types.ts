@@ -233,6 +233,13 @@ export interface RiftSnapshot {
   ranks: RiftLaneRecord[]
   /** 键为 `heroId:position` */
   builds: Record<string, RiftBuildEntry>
+  /**
+   * 英雄 id → 常用分路（101 里登场率最高的那条）。
+   *
+   * 构筑与符文在当前分路查不到时回退到它。**英雄分不回退**——
+   * 「英雄不在这个位置就是弱」是用户明确定的规则（决策 4）。
+   */
+  primaryPositions: Record<string, Position>
 }
 
 // ---------------------------------------------------------------- 输入

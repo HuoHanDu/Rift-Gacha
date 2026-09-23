@@ -34,6 +34,7 @@ export const DATA: DataBundle = {
     meta: rift101Meta,
     ranks: riftStats.ranks,
     builds: riftBuilds.index,
+    primaryPositions: riftStats.primaryPositions,
   } as DataBundle['rift'],
 }
 
