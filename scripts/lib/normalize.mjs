@@ -236,18 +236,18 @@ function expect(condition, message) {
  * @param attackTypes Map<heroId, 'melee'|'ranged'>，来自官方客户端数据（CD）。
  *   缺失时抛错——宁可失败也不要猜，猜错会让近战英雄随机出卢安娜的飓风。
  */
-export function normalizeChampions(raw, attackTypes) {
+export function normalizeChampions(raw, profiles) {
   const list = raw?.hero
   expect(Array.isArray(list), 'hero_list.js 结构异常：缺少 hero 数组')
-  expect(attackTypes instanceof Map, '缺少 attackType 数据，无法判定近战/远程')
+  expect(profiles instanceof Map, '缺少英雄画像数据，无法判定近战/远程')
 
   const champions = list
     .map((hero) => {
       const heroId = String(hero.heroId)
-      const attackType = attackTypes.get(heroId)
+      const profile = profiles.get(heroId)
       expect(
-        attackType === 'melee' || attackType === 'ranged',
-        `英雄 ${heroId} ${hero.alias} 缺少 attackType（实际：${attackType}）`,
+        profile?.attackType === 'melee' || profile?.attackType === 'ranged',
+        `英雄 ${heroId} ${hero.alias} 缺少 attackType（实际：${profile?.attackType}）`,
       )
       return {
         heroId,
@@ -256,7 +256,15 @@ export function normalizeChampions(raw, attackTypes) {
         title: hero.title ?? '',
         roles: toArray(hero.roles).map(String),
         icon: `${ICON_BASE}/champion/${hero.alias}.png`,
-        ranged: attackType === 'ranged',
+        ranged: profile.attackType === 'ranged',
+        /** docs/STRENGTH.md §5.1 —— 英雄侧画像，用于判装备相容度 */
+        profile: {
+          damageType: profile.damageType,
+          damage: profile.damage,
+          durability: profile.durability,
+          utility: profile.utility,
+          tags: profile.tags ?? [],
+        },
       }
     })
     .sort((a, b) => Number(a.heroId) - Number(b.heroId))

@@ -73,7 +73,21 @@ async function fetchAttackTypes(heroes, concurrency = 8) {
           `英雄 ${heroId} ${hero.alias} 的 tacticalInfo.attackType 异常：${JSON.stringify(attackType)}`,
         )
       }
-      result.set(heroId, attackType)
+      // 顺带把「英雄侧画像」也取回来（docs/STRENGTH.md §5.1）：
+      // damageType 判物理/法强，playstyleInfo 判定位，championTagInfo 做交叉验证。
+      // 同一次请求多拿几个字段，不增加请求数。
+      const playstyle = raw?.playstyleInfo ?? {}
+      const tag = raw?.championTagInfo ?? {}
+      result.set(heroId, {
+        attackType,
+        damageType: raw?.tacticalInfo?.damageType ?? null,
+        damage: Number.isFinite(playstyle.damage) ? playstyle.damage : null,
+        durability: Number.isFinite(playstyle.durability) ? playstyle.durability : null,
+        utility: Number.isFinite(playstyle.utility) ? playstyle.utility : null,
+        tags: [tag.championTagPrimary, tag.championTagSecondary].filter(
+          (value) => typeof value === 'string' && value !== '',
+        ),
+      })
     }
   }
 
@@ -208,11 +222,11 @@ async function main() {
   ])
 
   process.stdout.write('抓取英雄近战/远程分类（每人一次请求，约 173 次）…\n')
-  const attackTypes = await fetchAttackTypes(heroRaw.hero)
+  const profiles = await fetchAttackTypes(heroRaw.hero)
 
   process.stdout.write('规格化…\n')
   const snapshot = {
-    champions: normalizeChampions(heroRaw, attackTypes),
+    champions: normalizeChampions(heroRaw, profiles),
     items: normalizeItems(itemsRaw, itemsExtRaw),
     runes: normalizeRunes(runesRaw, cdStyles, cdPerks),
     spells: normalizeSpells(spellsRaw),

@@ -51,7 +51,7 @@ const LANE_TO_POSITION = {
 }
 
 /** docs/STRENGTH.md §2 决策 6 —— T 挡位加分。没有该分路数据时为 0（决策 4/6）。 */
-const TIER_BONUS = { T0: 20, T1: 14, T2: 8, T3: 3, T4: 0 }
+const TIER_BONUS = { T0: 27, T1: 19, T2: 11, T3: 4, T4: 0 }
 
 const HEADERS = {
   'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) rift-gacha/0.1',
@@ -173,9 +173,9 @@ export function parseRanks(raw) {
       banRate: Number.isFinite(banRate) ? banRate : null,
       /**
        * docs/STRENGTH.md §5.1 —— 位置英雄分。
-       * k1/k2 已放大 4 倍（保持 7:3）：(胜率 − 50) × 2.8 + 登场率 × 1.2
+       * k1 = 7.0、k2 = 3.0（保持 7:3），见 docs/STRENGTH.md §2 决策 5
        */
-      laneScore: Math.round(((winRate - 50) * 2.8 + safePickRate * 1.2) * 100) / 100,
+      laneScore: Math.round(((winRate - 50) * 7.0 + safePickRate * 3.0) * 100) / 100,
       tierBonus: tier ? TIER_BONUS[tier] : 0,
     })
   }

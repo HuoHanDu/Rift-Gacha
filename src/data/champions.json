@@ -9,7 +9,17 @@
       "support"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Annie.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 3,
+      "durability": 1,
+      "utility": 2,
+      "tags": [
+        "召唤",
+        "爆发"
+      ]
+    }
   },
   {
     "heroId": "2",
@@ -21,7 +31,17 @@
       "tank"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Olaf.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 2,
+      "durability": 2,
+      "utility": 1,
+      "tags": [
+        "单挑",
+        "自我治疗"
+      ]
+    }
   },
   {
     "heroId": "3",
@@ -33,7 +53,17 @@
       "mage"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Galio.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 2,
+      "durability": 3,
+      "utility": 1,
+      "tags": [
+        "战斗法师",
+        "控制"
+      ]
+    }
   },
   {
     "heroId": "4",
@@ -45,7 +75,17 @@
       "marksman"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/TwistedFate.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 3,
+      "durability": 1,
+      "utility": 2,
+      "tags": [
+        "爆发",
+        "普攻"
+      ]
+    }
   },
   {
     "heroId": "5",
@@ -57,7 +97,14 @@
       "tank"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/XinZhao.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 2,
+      "durability": 2,
+      "utility": 1,
+      "tags": []
+    }
   },
   {
     "heroId": "6",
@@ -69,7 +116,17 @@
       "tank"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Urgot.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 2,
+      "durability": 2,
+      "utility": 1,
+      "tags": [
+        "单挑",
+        "持续伤害"
+      ]
+    }
   },
   {
     "heroId": "7",
@@ -81,7 +138,17 @@
       "mage"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Leblanc.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 3,
+      "durability": 1,
+      "utility": 1,
+      "tags": [
+        "爆发",
+        "机动"
+      ]
+    }
   },
   {
     "heroId": "8",
@@ -93,7 +160,17 @@
       "fighter"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Vladimir.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 3,
+      "durability": 2,
+      "utility": 1,
+      "tags": [
+        "自我治疗",
+        "战斗法师"
+      ]
+    }
   },
   {
     "heroId": "9",
@@ -105,7 +182,17 @@
       "support"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/FiddleSticks.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 3,
+      "durability": 1,
+      "utility": 1,
+      "tags": [
+        "自我治疗",
+        "群体效果"
+      ]
+    }
   },
   {
     "heroId": "10",
@@ -117,7 +204,17 @@
       "mage"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Kayle.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 3,
+      "durability": 1,
+      "utility": 3,
+      "tags": [
+        "大后期",
+        "普攻"
+      ]
+    }
   },
   {
     "heroId": "11",
@@ -129,7 +226,17 @@
       "assassin"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/MasterYi.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 3,
+      "durability": 1,
+      "utility": 1,
+      "tags": [
+        "普攻",
+        "大后期"
+      ]
+    }
   },
   {
     "heroId": "12",
@@ -141,7 +248,17 @@
       "support"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Alistar.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 1,
+      "durability": 3,
+      "utility": 2,
+      "tags": [
+        "控制",
+        "先手发起者"
+      ]
+    }
   },
   {
     "heroId": "13",
@@ -152,7 +269,17 @@
       "mage"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Ryze.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 3,
+      "durability": 1,
+      "utility": 2,
+      "tags": [
+        "战斗法师",
+        "持续伤害"
+      ]
+    }
   },
   {
     "heroId": "14",
@@ -164,7 +291,17 @@
       "fighter"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Sion.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 2,
+      "durability": 3,
+      "utility": 1,
+      "tags": [
+        "耐久",
+        "控制"
+      ]
+    }
   },
   {
     "heroId": "15",
@@ -175,7 +312,17 @@
       "marksman"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Sivir.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 3,
+      "durability": 1,
+      "utility": 2,
+      "tags": [
+        "群体效果",
+        "普攻"
+      ]
+    }
   },
   {
     "heroId": "16",
@@ -187,7 +334,17 @@
       "mage"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Soraka.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 1,
+      "durability": 1,
+      "utility": 3,
+      "tags": [
+        "友军保护",
+        "控制"
+      ]
+    }
   },
   {
     "heroId": "17",
@@ -199,7 +356,17 @@
       "mage"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Teemo.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 3,
+      "durability": 1,
+      "utility": 2,
+      "tags": [
+        "周期伤害",
+        "潜行"
+      ]
+    }
   },
   {
     "heroId": "18",
@@ -211,7 +378,17 @@
       "assassin"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Tristana.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 3,
+      "durability": 1,
+      "utility": 1,
+      "tags": [
+        "机动",
+        "普攻"
+      ]
+    }
   },
   {
     "heroId": "19",
@@ -223,7 +400,17 @@
       "tank"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Warwick.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kMixed",
+      "damage": 2,
+      "durability": 2,
+      "utility": 1,
+      "tags": [
+        "自我治疗",
+        "单挑"
+      ]
+    }
   },
   {
     "heroId": "20",
@@ -235,7 +422,17 @@
       "mage"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Nunu.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 1,
+      "durability": 3,
+      "utility": 2,
+      "tags": [
+        "先手发起者",
+        "战斗法师"
+      ]
+    }
   },
   {
     "heroId": "21",
@@ -247,7 +444,17 @@
       "mage"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/MissFortune.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 3,
+      "durability": 1,
+      "utility": 1,
+      "tags": [
+        "群体效果",
+        "爆发"
+      ]
+    }
   },
   {
     "heroId": "22",
@@ -259,7 +466,17 @@
       "support"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Ashe.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 2,
+      "durability": 1,
+      "utility": 2,
+      "tags": [
+        "普攻",
+        "控制"
+      ]
+    }
   },
   {
     "heroId": "23",
@@ -271,7 +488,17 @@
       "assassin"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Tryndamere.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 3,
+      "durability": 2,
+      "utility": 1,
+      "tags": [
+        "单挑",
+        "普攻"
+      ]
+    }
   },
   {
     "heroId": "24",
@@ -282,7 +509,17 @@
       "fighter"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Jax.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 3,
+      "durability": 2,
+      "utility": 1,
+      "tags": [
+        "单挑",
+        "普攻"
+      ]
+    }
   },
   {
     "heroId": "25",
@@ -294,7 +531,17 @@
       "mage"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Morgana.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 2,
+      "durability": 1,
+      "utility": 2,
+      "tags": [
+        "控制",
+        "友军保护"
+      ]
+    }
   },
   {
     "heroId": "26",
@@ -306,7 +553,17 @@
       "mage"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Zilean.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 2,
+      "durability": 1,
+      "utility": 3,
+      "tags": [
+        "控制",
+        "友军保护"
+      ]
+    }
   },
   {
     "heroId": "27",
@@ -318,7 +575,17 @@
       "mage"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Singed.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 2,
+      "durability": 3,
+      "utility": 1,
+      "tags": [
+        "战斗法师",
+        "周期伤害"
+      ]
+    }
   },
   {
     "heroId": "28",
@@ -330,7 +597,17 @@
       "mage"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Evelynn.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 2,
+      "durability": 2,
+      "utility": 2,
+      "tags": [
+        "潜行",
+        "爆发"
+      ]
+    }
   },
   {
     "heroId": "29",
@@ -342,7 +619,17 @@
       "assassin"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Twitch.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 3,
+      "durability": 1,
+      "utility": 1,
+      "tags": [
+        "大后期",
+        "潜行"
+      ]
+    }
   },
   {
     "heroId": "30",
@@ -353,7 +640,17 @@
       "mage"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Karthus.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 3,
+      "durability": 1,
+      "utility": 2,
+      "tags": [
+        "群体效果",
+        "持续伤害"
+      ]
+    }
   },
   {
     "heroId": "31",
@@ -365,7 +662,17 @@
       "mage"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Chogath.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 2,
+      "durability": 3,
+      "utility": 1,
+      "tags": [
+        "耐久",
+        "控制"
+      ]
+    }
   },
   {
     "heroId": "32",
@@ -377,7 +684,17 @@
       "support"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Amumu.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 2,
+      "durability": 3,
+      "utility": 1,
+      "tags": [
+        "控制",
+        "先手发起者"
+      ]
+    }
   },
   {
     "heroId": "33",
@@ -388,7 +705,17 @@
       "tank"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Rammus.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 2,
+      "durability": 3,
+      "utility": 1,
+      "tags": [
+        "机动",
+        "控制"
+      ]
+    }
   },
   {
     "heroId": "34",
@@ -399,7 +726,17 @@
       "mage"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Anivia.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 3,
+      "durability": 1,
+      "utility": 2,
+      "tags": [
+        "群体效果",
+        "控制"
+      ]
+    }
   },
   {
     "heroId": "35",
@@ -410,7 +747,17 @@
       "assassin"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Shaco.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kMixed",
+      "damage": 3,
+      "durability": 1,
+      "utility": 2,
+      "tags": [
+        "潜行",
+        "召唤"
+      ]
+    }
   },
   {
     "heroId": "36",
@@ -422,7 +769,17 @@
       "fighter"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/DrMundo.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kMixed",
+      "damage": 2,
+      "durability": 3,
+      "utility": 1,
+      "tags": [
+        "耐久",
+        "自我治疗"
+      ]
+    }
   },
   {
     "heroId": "37",
@@ -434,7 +791,17 @@
       "mage"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Sona.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 2,
+      "durability": 1,
+      "utility": 2,
+      "tags": [
+        "友军保护",
+        "控制"
+      ]
+    }
   },
   {
     "heroId": "38",
@@ -446,7 +813,17 @@
       "mage"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Kassadin.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 3,
+      "durability": 2,
+      "utility": 1,
+      "tags": [
+        "大后期",
+        "机动"
+      ]
+    }
   },
   {
     "heroId": "39",
@@ -458,7 +835,17 @@
       "assassin"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Irelia.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 2,
+      "durability": 2,
+      "utility": 2,
+      "tags": [
+        "机动",
+        "单挑"
+      ]
+    }
   },
   {
     "heroId": "40",
@@ -470,7 +857,17 @@
       "mage"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Janna.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 1,
+      "durability": 1,
+      "utility": 3,
+      "tags": [
+        "控制",
+        "友军保护"
+      ]
+    }
   },
   {
     "heroId": "41",
@@ -481,7 +878,17 @@
       "fighter"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Gangplank.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 3,
+      "durability": 1,
+      "utility": 2,
+      "tags": [
+        "群体效果",
+        "爆发"
+      ]
+    }
   },
   {
     "heroId": "42",
@@ -493,7 +900,17 @@
       "mage"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Corki.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 3,
+      "durability": 1,
+      "utility": 1,
+      "tags": [
+        "普攻",
+        "群体效果"
+      ]
+    }
   },
   {
     "heroId": "43",
@@ -505,7 +922,17 @@
       "support"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Karma.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 2,
+      "durability": 1,
+      "utility": 2,
+      "tags": [
+        "友军保护",
+        "群体效果"
+      ]
+    }
   },
   {
     "heroId": "44",
@@ -517,7 +944,17 @@
       "tank"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Taric.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 1,
+      "durability": 2,
+      "utility": 3,
+      "tags": [
+        "耐久",
+        "友军保护"
+      ]
+    }
   },
   {
     "heroId": "45",
@@ -528,7 +965,17 @@
       "mage"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Veigar.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 3,
+      "durability": 1,
+      "utility": 1,
+      "tags": [
+        "大后期",
+        "爆发"
+      ]
+    }
   },
   {
     "heroId": "48",
@@ -540,7 +987,17 @@
       "tank"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Trundle.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 2,
+      "durability": 3,
+      "utility": 2,
+      "tags": [
+        "单挑",
+        "自我治疗"
+      ]
+    }
   },
   {
     "heroId": "50",
@@ -552,7 +1009,17 @@
       "support"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Swain.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 2,
+      "durability": 2,
+      "utility": 1,
+      "tags": [
+        "战斗法师",
+        "自我治疗"
+      ]
+    }
   },
   {
     "heroId": "51",
@@ -563,7 +1030,17 @@
       "marksman"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Caitlyn.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 3,
+      "durability": 1,
+      "utility": 1,
+      "tags": [
+        "普攻",
+        "爆发"
+      ]
+    }
   },
   {
     "heroId": "53",
@@ -576,7 +1053,17 @@
       "support"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Blitzcrank.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 1,
+      "durability": 2,
+      "utility": 1,
+      "tags": [
+        "先手发起者",
+        "控制"
+      ]
+    }
   },
   {
     "heroId": "54",
@@ -588,7 +1075,17 @@
       "mage"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Malphite.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 1,
+      "durability": 3,
+      "utility": 1,
+      "tags": [
+        "先手发起者",
+        "控制"
+      ]
+    }
   },
   {
     "heroId": "55",
@@ -600,7 +1097,17 @@
       "mage"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Katarina.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 3,
+      "durability": 1,
+      "utility": 1,
+      "tags": [
+        "机动",
+        "爆发"
+      ]
+    }
   },
   {
     "heroId": "56",
@@ -612,7 +1119,17 @@
       "assassin"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Nocturne.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 3,
+      "durability": 1,
+      "utility": 2,
+      "tags": [
+        "陷阵",
+        "单挑"
+      ]
+    }
   },
   {
     "heroId": "57",
@@ -624,7 +1141,17 @@
       "support"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Maokai.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 1,
+      "durability": 3,
+      "utility": 2,
+      "tags": [
+        "先手发起者",
+        "控制"
+      ]
+    }
   },
   {
     "heroId": "58",
@@ -636,7 +1163,17 @@
       "tank"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Renekton.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 2,
+      "durability": 2,
+      "utility": 1,
+      "tags": [
+        "单挑",
+        "耐久"
+      ]
+    }
   },
   {
     "heroId": "59",
@@ -648,7 +1185,17 @@
       "tank"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/JarvanIV.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 2,
+      "durability": 2,
+      "utility": 2,
+      "tags": [
+        "陷阵",
+        "控制"
+      ]
+    }
   },
   {
     "heroId": "60",
@@ -660,7 +1207,17 @@
       "mage"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Elise.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 2,
+      "durability": 2,
+      "utility": 1,
+      "tags": [
+        "变换形态",
+        "爆发"
+      ]
+    }
   },
   {
     "heroId": "61",
@@ -672,7 +1229,17 @@
       "support"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Orianna.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 2,
+      "durability": 1,
+      "utility": 2,
+      "tags": [
+        "群体效果",
+        "远距离"
+      ]
+    }
   },
   {
     "heroId": "62",
@@ -684,7 +1251,17 @@
       "tank"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/MonkeyKing.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 2,
+      "durability": 2,
+      "utility": 1,
+      "tags": [
+        "陷阵",
+        "群体效果"
+      ]
+    }
   },
   {
     "heroId": "63",
@@ -696,7 +1273,17 @@
       "support"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Brand.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 3,
+      "durability": 1,
+      "utility": 1,
+      "tags": [
+        "周期伤害",
+        "群体效果"
+      ]
+    }
   },
   {
     "heroId": "64",
@@ -708,7 +1295,17 @@
       "assassin"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/LeeSin.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 3,
+      "durability": 2,
+      "utility": 1,
+      "tags": [
+        "机动",
+        "单挑"
+      ]
+    }
   },
   {
     "heroId": "67",
@@ -720,7 +1317,17 @@
       "assassin"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Vayne.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 3,
+      "durability": 1,
+      "utility": 1,
+      "tags": [
+        "大后期",
+        "潜行"
+      ]
+    }
   },
   {
     "heroId": "68",
@@ -732,7 +1339,17 @@
       "mage"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Rumble.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 3,
+      "durability": 2,
+      "utility": 1,
+      "tags": [
+        "周期伤害",
+        "战斗法师"
+      ]
+    }
   },
   {
     "heroId": "69",
@@ -743,7 +1360,17 @@
       "mage"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Cassiopeia.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 3,
+      "durability": 1,
+      "utility": 1,
+      "tags": [
+        "控制",
+        "持续伤害"
+      ]
+    }
   },
   {
     "heroId": "72",
@@ -755,7 +1382,17 @@
       "fighter"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Skarner.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 2,
+      "durability": 3,
+      "utility": 1,
+      "tags": [
+        "控制",
+        "先手发起者"
+      ]
+    }
   },
   {
     "heroId": "74",
@@ -767,7 +1404,17 @@
       "support"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Heimerdinger.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 3,
+      "durability": 1,
+      "utility": 2,
+      "tags": [
+        "召唤",
+        "持续伤害"
+      ]
+    }
   },
   {
     "heroId": "75",
@@ -779,7 +1426,17 @@
       "tank"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Nasus.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 2,
+      "durability": 3,
+      "utility": 1,
+      "tags": [
+        "耐久",
+        "大后期"
+      ]
+    }
   },
   {
     "heroId": "76",
@@ -791,7 +1448,17 @@
       "mage"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Nidalee.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 3,
+      "durability": 1,
+      "utility": 2,
+      "tags": [
+        "变换形态",
+        "机动"
+      ]
+    }
   },
   {
     "heroId": "77",
@@ -803,7 +1470,17 @@
       "tank"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Udyr.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kMixed",
+      "damage": 2,
+      "durability": 3,
+      "utility": 1,
+      "tags": [
+        "普攻",
+        "耐久"
+      ]
+    }
   },
   {
     "heroId": "78",
@@ -815,7 +1492,17 @@
       "fighter"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Poppy.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 2,
+      "durability": 3,
+      "utility": 1,
+      "tags": [
+        "耐久",
+        "陷阵"
+      ]
+    }
   },
   {
     "heroId": "79",
@@ -827,7 +1514,17 @@
       "mage"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Gragas.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 2,
+      "durability": 3,
+      "utility": 1,
+      "tags": [
+        "爆发",
+        "控制"
+      ]
+    }
   },
   {
     "heroId": "80",
@@ -839,7 +1536,17 @@
       "assassin"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Pantheon.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 3,
+      "durability": 2,
+      "utility": 1,
+      "tags": [
+        "陷阵",
+        "单挑"
+      ]
+    }
   },
   {
     "heroId": "81",
@@ -851,7 +1558,17 @@
       "mage"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Ezreal.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 1,
+      "durability": 1,
+      "utility": 1,
+      "tags": [
+        "远距离",
+        "机动"
+      ]
+    }
   },
   {
     "heroId": "82",
@@ -863,7 +1580,17 @@
       "mage"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Mordekaiser.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 3,
+      "durability": 2,
+      "utility": 2,
+      "tags": [
+        "单挑",
+        "持续伤害"
+      ]
+    }
   },
   {
     "heroId": "83",
@@ -875,7 +1602,17 @@
       "tank"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Yorick.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 2,
+      "durability": 2,
+      "utility": 2,
+      "tags": [
+        "召唤",
+        "单挑"
+      ]
+    }
   },
   {
     "heroId": "84",
@@ -886,7 +1623,17 @@
       "assassin"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Akali.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 3,
+      "durability": 1,
+      "utility": 1,
+      "tags": [
+        "机动",
+        "爆发"
+      ]
+    }
   },
   {
     "heroId": "85",
@@ -897,7 +1644,17 @@
       "mage"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Kennen.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 3,
+      "durability": 1,
+      "utility": 1,
+      "tags": [
+        "爆发",
+        "群体效果"
+      ]
+    }
   },
   {
     "heroId": "86",
@@ -909,7 +1666,17 @@
       "tank"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Garen.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 2,
+      "durability": 3,
+      "utility": 1,
+      "tags": [
+        "耐久",
+        "持续伤害"
+      ]
+    }
   },
   {
     "heroId": "89",
@@ -921,7 +1688,17 @@
       "support"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Leona.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 1,
+      "durability": 3,
+      "utility": 1,
+      "tags": [
+        "先手发起者",
+        "控制"
+      ]
+    }
   },
   {
     "heroId": "90",
@@ -932,7 +1709,17 @@
       "mage"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Malzahar.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 3,
+      "durability": 1,
+      "utility": 2,
+      "tags": [
+        "周期伤害",
+        "召唤"
+      ]
+    }
   },
   {
     "heroId": "91",
@@ -943,7 +1730,17 @@
       "assassin"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Talon.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 3,
+      "durability": 1,
+      "utility": 1,
+      "tags": [
+        "机动",
+        "爆发"
+      ]
+    }
   },
   {
     "heroId": "92",
@@ -955,7 +1752,17 @@
       "assassin"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Riven.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 3,
+      "durability": 2,
+      "utility": 1,
+      "tags": [
+        "机动",
+        "单挑"
+      ]
+    }
   },
   {
     "heroId": "96",
@@ -967,7 +1774,17 @@
       "mage"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/KogMaw.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kMixed",
+      "damage": 3,
+      "durability": 1,
+      "utility": 1,
+      "tags": [
+        "大后期",
+        "普攻"
+      ]
+    }
   },
   {
     "heroId": "98",
@@ -978,7 +1795,17 @@
       "tank"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Shen.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kMixed",
+      "damage": 2,
+      "durability": 3,
+      "utility": 3,
+      "tags": [
+        "友军保护",
+        "单挑"
+      ]
+    }
   },
   {
     "heroId": "99",
@@ -990,7 +1817,17 @@
       "support"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Lux.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 3,
+      "durability": 1,
+      "utility": 2,
+      "tags": [
+        "爆发",
+        "远距离"
+      ]
+    }
   },
   {
     "heroId": "101",
@@ -1002,7 +1839,17 @@
       "support"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Xerath.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 3,
+      "durability": 1,
+      "utility": 1,
+      "tags": [
+        "远距离",
+        "群体效果"
+      ]
+    }
   },
   {
     "heroId": "102",
@@ -1014,7 +1861,14 @@
       "tank"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Shyvana.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kMixed",
+      "damage": 2,
+      "durability": 2,
+      "utility": 1,
+      "tags": []
+    }
   },
   {
     "heroId": "103",
@@ -1026,7 +1880,17 @@
       "assassin"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Ahri.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 3,
+      "durability": 1,
+      "utility": 1,
+      "tags": [
+        "机动",
+        "爆发"
+      ]
+    }
   },
   {
     "heroId": "104",
@@ -1037,7 +1901,17 @@
       "marksman"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Graves.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 3,
+      "durability": 2,
+      "utility": 2,
+      "tags": [
+        "爆发",
+        "普攻"
+      ]
+    }
   },
   {
     "heroId": "105",
@@ -1049,7 +1923,17 @@
       "fighter"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Fizz.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 3,
+      "durability": 1,
+      "utility": 1,
+      "tags": [
+        "爆发",
+        "机动"
+      ]
+    }
   },
   {
     "heroId": "106",
@@ -1061,7 +1945,17 @@
       "tank"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Volibear.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kMixed",
+      "damage": 2,
+      "durability": 3,
+      "utility": 1,
+      "tags": [
+        "单挑",
+        "耐久"
+      ]
+    }
   },
   {
     "heroId": "107",
@@ -1073,7 +1967,17 @@
       "fighter"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Rengar.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 3,
+      "durability": 1,
+      "utility": 1,
+      "tags": [
+        "潜行",
+        "爆发"
+      ]
+    }
   },
   {
     "heroId": "110",
@@ -1085,7 +1989,17 @@
       "mage"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Varus.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 3,
+      "durability": 1,
+      "utility": 1,
+      "tags": [
+        "远距离",
+        "普攻"
+      ]
+    }
   },
   {
     "heroId": "111",
@@ -1097,7 +2011,17 @@
       "support"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Nautilus.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 1,
+      "durability": 3,
+      "utility": 1,
+      "tags": [
+        "先手发起者",
+        "控制"
+      ]
+    }
   },
   {
     "heroId": "112",
@@ -1108,7 +2032,17 @@
       "mage"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Viktor.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 3,
+      "durability": 1,
+      "utility": 1,
+      "tags": [
+        "持续伤害",
+        "群体效果"
+      ]
+    }
   },
   {
     "heroId": "113",
@@ -1119,7 +2053,17 @@
       "tank"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Sejuani.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 2,
+      "durability": 2,
+      "utility": 1,
+      "tags": [
+        "控制",
+        "先手发起者"
+      ]
+    }
   },
   {
     "heroId": "114",
@@ -1131,7 +2075,17 @@
       "assassin"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Fiora.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 3,
+      "durability": 2,
+      "utility": 2,
+      "tags": [
+        "单挑",
+        "机动"
+      ]
+    }
   },
   {
     "heroId": "115",
@@ -1142,7 +2096,17 @@
       "mage"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Ziggs.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 3,
+      "durability": 1,
+      "utility": 1,
+      "tags": [
+        "远距离",
+        "群体效果"
+      ]
+    }
   },
   {
     "heroId": "117",
@@ -1154,7 +2118,17 @@
       "mage"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Lulu.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 2,
+      "durability": 1,
+      "utility": 3,
+      "tags": [
+        "友军保护",
+        "控制"
+      ]
+    }
   },
   {
     "heroId": "119",
@@ -1165,7 +2139,17 @@
       "marksman"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Draven.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 3,
+      "durability": 1,
+      "utility": 1,
+      "tags": [
+        "普攻",
+        "爆发"
+      ]
+    }
   },
   {
     "heroId": "120",
@@ -1177,7 +2161,17 @@
       "tank"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Hecarim.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 2,
+      "durability": 2,
+      "utility": 1,
+      "tags": [
+        "机动",
+        "陷阵"
+      ]
+    }
   },
   {
     "heroId": "121",
@@ -1188,7 +2182,17 @@
       "assassin"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Khazix.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 3,
+      "durability": 1,
+      "utility": 1,
+      "tags": [
+        "爆发",
+        "潜行"
+      ]
+    }
   },
   {
     "heroId": "122",
@@ -1200,7 +2204,17 @@
       "tank"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Darius.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 3,
+      "durability": 2,
+      "utility": 1,
+      "tags": [
+        "单挑",
+        "自我治疗"
+      ]
+    }
   },
   {
     "heroId": "126",
@@ -1212,7 +2226,17 @@
       "marksman"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Jayce.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 3,
+      "durability": 1,
+      "utility": 2,
+      "tags": [
+        "变换形态",
+        "远距离"
+      ]
+    }
   },
   {
     "heroId": "127",
@@ -1223,7 +2247,17 @@
       "mage"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Lissandra.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 3,
+      "durability": 1,
+      "utility": 1,
+      "tags": [
+        "控制",
+        "爆发"
+      ]
+    }
   },
   {
     "heroId": "131",
@@ -1235,7 +2269,17 @@
       "assassin"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Diana.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 3,
+      "durability": 2,
+      "utility": 1,
+      "tags": [
+        "爆发",
+        "陷阵"
+      ]
+    }
   },
   {
     "heroId": "133",
@@ -1247,7 +2291,17 @@
       "assassin"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Quinn.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 3,
+      "durability": 1,
+      "utility": 1,
+      "tags": [
+        "机动",
+        "单挑"
+      ]
+    }
   },
   {
     "heroId": "134",
@@ -1258,7 +2312,17 @@
       "mage"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Syndra.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 3,
+      "durability": 1,
+      "utility": 1,
+      "tags": [
+        "爆发",
+        "远距离"
+      ]
+    }
   },
   {
     "heroId": "136",
@@ -1269,7 +2333,17 @@
       "mage"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/AurelionSol.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 3,
+      "durability": 1,
+      "utility": 1,
+      "tags": [
+        "大后期",
+        "群体效果"
+      ]
+    }
   },
   {
     "heroId": "141",
@@ -1281,7 +2355,17 @@
       "assassin"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Kayn.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 3,
+      "durability": 1,
+      "utility": 1,
+      "tags": [
+        "机动",
+        "陷阵"
+      ]
+    }
   },
   {
     "heroId": "142",
@@ -1292,7 +2376,17 @@
       "mage"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Zoe.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 3,
+      "durability": 1,
+      "utility": 1,
+      "tags": [
+        "爆发",
+        "远距离"
+      ]
+    }
   },
   {
     "heroId": "143",
@@ -1304,7 +2398,17 @@
       "support"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Zyra.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 3,
+      "durability": 1,
+      "utility": 1,
+      "tags": [
+        "召唤",
+        "控制"
+      ]
+    }
   },
   {
     "heroId": "145",
@@ -1316,7 +2420,17 @@
       "mage"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Kaisa.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 3,
+      "durability": 1,
+      "utility": 1,
+      "tags": [
+        "陷阵",
+        "普攻"
+      ]
+    }
   },
   {
     "heroId": "147",
@@ -1328,7 +2442,17 @@
       "mage"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Seraphine.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 3,
+      "durability": 1,
+      "utility": 2,
+      "tags": [
+        "群体效果",
+        "友军保护"
+      ]
+    }
   },
   {
     "heroId": "150",
@@ -1340,7 +2464,17 @@
       "tank"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Gnar.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 2,
+      "durability": 3,
+      "utility": 1,
+      "tags": [
+        "变换形态",
+        "控制"
+      ]
+    }
   },
   {
     "heroId": "154",
@@ -1352,7 +2486,17 @@
       "fighter"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Zac.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 2,
+      "durability": 3,
+      "utility": 1,
+      "tags": [
+        "先手发起者",
+        "自我治疗"
+      ]
+    }
   },
   {
     "heroId": "157",
@@ -1364,7 +2508,17 @@
       "assassin"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Yasuo.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 3,
+      "durability": 1,
+      "utility": 2,
+      "tags": [
+        "单挑",
+        "机动"
+      ]
+    }
   },
   {
     "heroId": "161",
@@ -1376,7 +2530,17 @@
       "support"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Velkoz.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 3,
+      "durability": 1,
+      "utility": 1,
+      "tags": [
+        "远距离",
+        "群体效果"
+      ]
+    }
   },
   {
     "heroId": "163",
@@ -1388,7 +2552,17 @@
       "support"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Taliyah.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 3,
+      "durability": 1,
+      "utility": 3,
+      "tags": [
+        "控制",
+        "群体效果"
+      ]
+    }
   },
   {
     "heroId": "164",
@@ -1400,7 +2574,17 @@
       "assassin"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Camille.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 3,
+      "durability": 2,
+      "utility": 1,
+      "tags": [
+        "陷阵",
+        "单挑"
+      ]
+    }
   },
   {
     "heroId": "166",
@@ -1412,7 +2596,17 @@
       "assassin"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Akshan.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 3,
+      "durability": 1,
+      "utility": 2,
+      "tags": [
+        "机动",
+        "潜行"
+      ]
+    }
   },
   {
     "heroId": "200",
@@ -1423,7 +2617,17 @@
       "fighter"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Belveth.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 3,
+      "durability": 1,
+      "utility": 1,
+      "tags": [
+        "普攻",
+        "机动"
+      ]
+    }
   },
   {
     "heroId": "201",
@@ -1435,7 +2639,17 @@
       "support"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Braum.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 1,
+      "durability": 2,
+      "utility": 2,
+      "tags": [
+        "耐久",
+        "控制"
+      ]
+    }
   },
   {
     "heroId": "202",
@@ -1447,7 +2661,17 @@
       "mage"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Jhin.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 3,
+      "durability": 1,
+      "utility": 1,
+      "tags": [
+        "远距离",
+        "爆发"
+      ]
+    }
   },
   {
     "heroId": "203",
@@ -1458,7 +2682,17 @@
       "marksman"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Kindred.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 3,
+      "durability": 1,
+      "utility": 2,
+      "tags": [
+        "普攻",
+        "机动"
+      ]
+    }
   },
   {
     "heroId": "221",
@@ -1469,7 +2703,17 @@
       "marksman"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Zeri.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 2,
+      "durability": 1,
+      "utility": 0,
+      "tags": [
+        "机动",
+        "爆发"
+      ]
+    }
   },
   {
     "heroId": "222",
@@ -1480,7 +2724,17 @@
       "marksman"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Jinx.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 3,
+      "durability": 1,
+      "utility": 1,
+      "tags": [
+        "普攻",
+        "大后期"
+      ]
+    }
   },
   {
     "heroId": "223",
@@ -1492,7 +2746,17 @@
       "support"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/TahmKench.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 2,
+      "durability": 3,
+      "utility": 3,
+      "tags": [
+        "控制",
+        "友军保护"
+      ]
+    }
   },
   {
     "heroId": "233",
@@ -1504,7 +2768,17 @@
       "assassin"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Briar.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 2,
+      "durability": 2,
+      "utility": 1,
+      "tags": [
+        "自我治疗",
+        "陷阵"
+      ]
+    }
   },
   {
     "heroId": "234",
@@ -1516,7 +2790,17 @@
       "assassin"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Viego.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 3,
+      "durability": 1,
+      "utility": 1,
+      "tags": [
+        "变换形态",
+        "单挑"
+      ]
+    }
   },
   {
     "heroId": "235",
@@ -1528,7 +2812,17 @@
       "marksman"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Senna.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 2,
+      "durability": 1,
+      "utility": 3,
+      "tags": [
+        "普攻",
+        "友军保护"
+      ]
+    }
   },
   {
     "heroId": "236",
@@ -1540,7 +2834,17 @@
       "assassin"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Lucian.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 3,
+      "durability": 1,
+      "utility": 1,
+      "tags": [
+        "机动",
+        "爆发"
+      ]
+    }
   },
   {
     "heroId": "238",
@@ -1551,7 +2855,17 @@
       "assassin"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Zed.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 3,
+      "durability": 1,
+      "utility": 1,
+      "tags": [
+        "爆发",
+        "机动"
+      ]
+    }
   },
   {
     "heroId": "240",
@@ -1562,7 +2876,17 @@
       "fighter"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Kled.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 3,
+      "durability": 2,
+      "utility": 1,
+      "tags": [
+        "陷阵",
+        "单挑"
+      ]
+    }
   },
   {
     "heroId": "245",
@@ -1574,7 +2898,17 @@
       "mage"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Ekko.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 3,
+      "durability": 2,
+      "utility": 1,
+      "tags": [
+        "爆发",
+        "机动"
+      ]
+    }
   },
   {
     "heroId": "246",
@@ -1585,7 +2919,17 @@
       "assassin"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Qiyana.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 3,
+      "durability": 1,
+      "utility": 1,
+      "tags": [
+        "爆发",
+        "机动"
+      ]
+    }
   },
   {
     "heroId": "254",
@@ -1597,7 +2941,17 @@
       "assassin"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Vi.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 2,
+      "durability": 2,
+      "utility": 1,
+      "tags": [
+        "陷阵",
+        "普攻"
+      ]
+    }
   },
   {
     "heroId": "266",
@@ -1608,7 +2962,17 @@
       "fighter"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Aatrox.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 3,
+      "durability": 3,
+      "utility": 2,
+      "tags": [
+        "持续伤害",
+        "自我治疗"
+      ]
+    }
   },
   {
     "heroId": "267",
@@ -1620,7 +2984,17 @@
       "mage"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Nami.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 1,
+      "durability": 1,
+      "utility": 2,
+      "tags": [
+        "友军保护",
+        "控制"
+      ]
+    }
   },
   {
     "heroId": "268",
@@ -1632,7 +3006,17 @@
       "marksman"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Azir.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 3,
+      "durability": 1,
+      "utility": 1,
+      "tags": [
+        "大后期",
+        "普攻"
+      ]
+    }
   },
   {
     "heroId": "350",
@@ -1644,7 +3028,17 @@
       "mage"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Yuumi.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 1,
+      "durability": 1,
+      "utility": 3,
+      "tags": [
+        "友军保护",
+        "群体效果"
+      ]
+    }
   },
   {
     "heroId": "360",
@@ -1656,7 +3050,17 @@
       "assassin"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Samira.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 3,
+      "durability": 2,
+      "utility": 1,
+      "tags": [
+        "群体效果",
+        "陷阵"
+      ]
+    }
   },
   {
     "heroId": "412",
@@ -1668,7 +3072,17 @@
       "tank"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Thresh.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 1,
+      "durability": 2,
+      "utility": 3,
+      "tags": [
+        "先手发起者",
+        "友军保护"
+      ]
+    }
   },
   {
     "heroId": "420",
@@ -1680,7 +3094,17 @@
       "tank"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Illaoi.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 3,
+      "durability": 2,
+      "utility": 1,
+      "tags": [
+        "自我治疗",
+        "单挑"
+      ]
+    }
   },
   {
     "heroId": "421",
@@ -1692,7 +3116,17 @@
       "tank"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/RekSai.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 2,
+      "durability": 2,
+      "utility": 2,
+      "tags": [
+        "机动",
+        "陷阵"
+      ]
+    }
   },
   {
     "heroId": "427",
@@ -1704,7 +3138,17 @@
       "mage"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Ivern.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 1,
+      "durability": 1,
+      "utility": 3,
+      "tags": [
+        "召唤",
+        "友军保护"
+      ]
+    }
   },
   {
     "heroId": "429",
@@ -1715,7 +3159,17 @@
       "marksman"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Kalista.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 3,
+      "durability": 1,
+      "utility": 2,
+      "tags": [
+        "机动",
+        "普攻"
+      ]
+    }
   },
   {
     "heroId": "432",
@@ -1727,7 +3181,17 @@
       "mage"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Bard.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 1,
+      "durability": 1,
+      "utility": 3,
+      "tags": [
+        "控制",
+        "机动"
+      ]
+    }
   },
   {
     "heroId": "497",
@@ -1738,7 +3202,17 @@
       "support"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Rakan.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 1,
+      "durability": 2,
+      "utility": 3,
+      "tags": [
+        "机动",
+        "控制"
+      ]
+    }
   },
   {
     "heroId": "498",
@@ -1749,7 +3223,17 @@
       "marksman"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Xayah.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 3,
+      "durability": 2,
+      "utility": 1,
+      "tags": [
+        "群体效果",
+        "普攻"
+      ]
+    }
   },
   {
     "heroId": "516",
@@ -1760,7 +3244,17 @@
       "tank"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Ornn.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 1,
+      "durability": 3,
+      "utility": 2,
+      "tags": [
+        "先手发起者",
+        "控制"
+      ]
+    }
   },
   {
     "heroId": "517",
@@ -1772,7 +3266,17 @@
       "assassin"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Sylas.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 2,
+      "durability": 2,
+      "utility": 1,
+      "tags": [
+        "单挑",
+        "战斗法师"
+      ]
+    }
   },
   {
     "heroId": "518",
@@ -1784,7 +3288,17 @@
       "support"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Neeko.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 3,
+      "durability": 1,
+      "utility": 1,
+      "tags": [
+        "群体效果",
+        "爆发"
+      ]
+    }
   },
   {
     "heroId": "523",
@@ -1795,7 +3309,17 @@
       "marksman"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Aphelios.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 3,
+      "durability": 1,
+      "utility": 1,
+      "tags": [
+        "大后期",
+        "普攻"
+      ]
+    }
   },
   {
     "heroId": "526",
@@ -1807,7 +3331,17 @@
       "support"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Rell.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 1,
+      "durability": 3,
+      "utility": 2,
+      "tags": [
+        "控制",
+        "先手发起者"
+      ]
+    }
   },
   {
     "heroId": "555",
@@ -1819,7 +3353,17 @@
       "assassin"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Pyke.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 2,
+      "durability": 1,
+      "utility": 1,
+      "tags": [
+        "机动",
+        "潜行"
+      ]
+    }
   },
   {
     "heroId": "711",
@@ -1830,7 +3374,17 @@
       "mage"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Vex.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 3,
+      "durability": 2,
+      "utility": 1,
+      "tags": [
+        "爆发",
+        "控制"
+      ]
+    }
   },
   {
     "heroId": "777",
@@ -1842,7 +3396,17 @@
       "assassin"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Yone.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 3,
+      "durability": 1,
+      "utility": 1,
+      "tags": [
+        "机动",
+        "单挑"
+      ]
+    }
   },
   {
     "heroId": "799",
@@ -1854,7 +3418,17 @@
       "assassin"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Ambessa.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 3,
+      "durability": 2,
+      "utility": 1,
+      "tags": [
+        "机动",
+        "陷阵"
+      ]
+    }
   },
   {
     "heroId": "800",
@@ -1866,7 +3440,17 @@
       "support"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Mel.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 3,
+      "durability": 1,
+      "utility": 1,
+      "tags": [
+        "远距离",
+        "群体效果"
+      ]
+    }
   },
   {
     "heroId": "804",
@@ -1877,7 +3461,17 @@
       "marksman"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Yunara.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 3,
+      "durability": 1,
+      "utility": 0,
+      "tags": [
+        "普攻",
+        "持续伤害"
+      ]
+    }
   },
   {
     "heroId": "805",
@@ -1889,7 +3483,17 @@
       "mage"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Locke.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 3,
+      "durability": 2,
+      "utility": 1,
+      "tags": [
+        "爆发",
+        "机动"
+      ]
+    }
   },
   {
     "heroId": "875",
@@ -1901,7 +3505,17 @@
       "tank"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Sett.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 2,
+      "durability": 2,
+      "utility": 1,
+      "tags": [
+        "单挑",
+        "耐久"
+      ]
+    }
   },
   {
     "heroId": "876",
@@ -1913,7 +3527,17 @@
       "mage"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Lillia.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 3,
+      "durability": 1,
+      "utility": 2,
+      "tags": [
+        "机动",
+        "周期伤害"
+      ]
+    }
   },
   {
     "heroId": "887",
@@ -1924,7 +3548,17 @@
       "fighter"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Gwen.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 3,
+      "durability": 2,
+      "utility": 1,
+      "tags": [
+        "持续伤害",
+        "单挑"
+      ]
+    }
   },
   {
     "heroId": "888",
@@ -1936,7 +3570,17 @@
       "mage"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Renata.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 2,
+      "durability": 1,
+      "utility": 2,
+      "tags": [
+        "控制",
+        "友军保护"
+      ]
+    }
   },
   {
     "heroId": "893",
@@ -1948,7 +3592,17 @@
       "assassin"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Aurora.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 3,
+      "durability": 1,
+      "utility": 1,
+      "tags": [
+        "爆发",
+        "潜行"
+      ]
+    }
   },
   {
     "heroId": "895",
@@ -1960,7 +3614,17 @@
       "assassin"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Nilah.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 3,
+      "durability": 1,
+      "utility": 2,
+      "tags": [
+        "普攻",
+        "群体效果"
+      ]
+    }
   },
   {
     "heroId": "897",
@@ -1972,7 +3636,17 @@
       "fighter"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/KSante.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 2,
+      "durability": 3,
+      "utility": 2,
+      "tags": [
+        "耐久",
+        "单挑"
+      ]
+    }
   },
   {
     "heroId": "901",
@@ -1984,7 +3658,17 @@
       "mage"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Smolder.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 3,
+      "durability": 1,
+      "utility": 1,
+      "tags": [
+        "大后期",
+        "群体效果"
+      ]
+    }
   },
   {
     "heroId": "902",
@@ -1996,7 +3680,17 @@
       "mage"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Milio.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 1,
+      "durability": 1,
+      "utility": 3,
+      "tags": [
+        "友军保护",
+        "群体效果"
+      ]
+    }
   },
   {
     "heroId": "904",
@@ -2007,7 +3701,14 @@
       "fighter"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Zaahen.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 2,
+      "durability": 2,
+      "utility": 1,
+      "tags": []
+    }
   },
   {
     "heroId": "910",
@@ -2019,7 +3720,17 @@
       "support"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Hwei.png",
-    "ranged": true
+    "ranged": true,
+    "profile": {
+      "damageType": "kMagic",
+      "damage": 3,
+      "durability": 1,
+      "utility": 2,
+      "tags": [
+        "群体效果",
+        "远距离"
+      ]
+    }
   },
   {
     "heroId": "950",
@@ -2031,6 +3742,16 @@
       "fighter"
     ],
     "icon": "https://game.gtimg.cn/images/lol/act/img/champion/Naafiri.png",
-    "ranged": false
+    "ranged": false,
+    "profile": {
+      "damageType": "kPhysical",
+      "damage": 3,
+      "durability": 1,
+      "utility": 1,
+      "tags": [
+        "召唤",
+        "机动"
+      ]
+    }
   }
 ]
