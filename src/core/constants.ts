@@ -1,3 +1,6 @@
+
+/** 挡位 id。由弱到强；ny 表示「完全随机（不控强度）」。 */
+export type StrengthTierId = 'any' | 'low' | 'mid' | 'high' | 'top'
 /**
  * 运行时常量：规则里被写死、且不属于「数据口径」的东西。
  *
@@ -73,3 +76,68 @@ export const PROJECT_TITLE = '峡谷全随机构筑器'
  * 相关合规要点见 docs/RIGHTS.md。
  */
 export const RIOT_FAN_NOTICE = `${PROJECT_TITLE} was created under Riot Games' "Legal Jibber Jabber" policy using assets owned by Riot Games. Riot Games does not endorse or sponsor this project.`
+
+// ---------------------------------------------------------------- 强度系统
+
+/**
+ * 各分值（docs/STRENGTH.md §2）。
+ *
+ * **改这里必须重跑 `scripts/analyze-total-score.mjs` 复核三块比例**
+ * （目标 英雄 : 装备 : 符文 = 6 : 5 : 3，实测 5.96 : 5.21 : 2.83）。
+ */
+export const SCORE_POINTS = {
+  /** 命中「优先成装」 */
+  coreItem: 10,
+  /** 命中「第 4/5/6 件」或鞋 */
+  laterItem: 5,
+  shoe: 5,
+  starter: 5,
+  /**
+   * 适配度分。**只给 2 和 1**，因为 91.4% 的成装抽取都不在推荐列表里，
+   * 给 +4 会让装备项翻倍、压过英雄项（模拟实测过）。
+   */
+  strongCompat: 2,
+  weakCompat: 1,
+} as const
+
+/** 符文分。满分 = 7 + 4×3 + 2×2 + 2×3 = 29。 */
+export const RUNE_POINTS = {
+  keystone: 7,
+  primaryMinor: 4,
+  secondaryMinor: 2,
+  shard: 2,
+} as const
+
+/** T 挡位加分。没有该分路数据时为 0（决策 6：不加分也不扣分）。 */
+export const TIER_BONUS: Record<string, number> = {
+  T0: 27,
+  T1: 19,
+  T2: 11,
+  T3: 4,
+  T4: 0,
+}
+
+/** 符文「命中」取推荐页的前几页（§9：拐点在 5）。 */
+export const RIFT_RUNE_TOP_N = 5
+
+/**
+ * 挡位（§4）。由弱到强，`any` 是「完全随机（不控强度）」。
+ *
+ * 最高档是**复合条件**（用户决策 C）：总分达标之外，还要求六件成装里
+ * 至少命中 2 件推荐——否则高分可能只是靠一堆强相容的散件堆出来的。
+ *
+ * > ⚠️ 「人上人」这个名字是我按那个梗的惯用顺序先填的占位，**等用户确认/改名**。
+ */
+export const STRENGTH_TIERS: ReadonlyArray<{
+  id: StrengthTierId
+  label: string
+  min: number | null
+  max: number | null
+  requireRecommended: number
+}> = [
+  { id: 'any', label: '完全随机', min: null, max: null, requireRecommended: 0 },
+  { id: 'low', label: '区', min: null, max: 26, requireRecommended: 0 },
+  { id: 'mid', label: '爬行动物', min: 26, max: 41, requireRecommended: 0 },
+  { id: 'high', label: '类人', min: 41, max: null, requireRecommended: 0 },
+  { id: 'top', label: '人上人', min: 60, max: null, requireRecommended: 2 },
+]

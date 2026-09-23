@@ -25,6 +25,22 @@ export interface ChampionRef {
   roles: string[]
   icon: string
   /**
+   * 英雄侧画像（docs/STRENGTH.md §5.1），用于判装备适配度。
+   * 来源：CD 的 `tacticalInfo.damageType` 与 `playstyleInfo` / `championTagInfo`。
+   */
+  profile?: {
+    /** `kPhysical` / `kMagic` / `kMixed` */
+    damageType: string | null
+    /** 1~3 的输出倾向 */
+    damage: number | null
+    /** 1~3 的耐久倾向 */
+    durability: number | null
+    /** 1~3 的功能倾向 */
+    utility: number | null
+    /** 官方原型标签，如「耐久」「爆发」，用于交叉验证 */
+    tags: string[]
+  }
+  /**
    * 远程还是近战。来源是官方客户端数据的 `tacticalInfo.attackType`
    * （CD，zh_cn），**不能用攻击距离数值推断**——锤石射程 450 但属于远程，
    * 洛 300 却是近战，Wiki 明确写了「没有严格规则，可能是任意划分的」。
@@ -106,6 +122,12 @@ export interface ItemsSnapshot {
   uniqueGroups: string[][]
   /** 只有远程英雄能出的装备 ID（如卢安娜的飓风）。 */
   rangedOnly: string[]
+  /**
+   * 装备侧画像（docs/STRENGTH.md §9）：装备 ID → 六类标签
+   * （`ad` / `ap` / `crit` / `attackSpeed` / `tank` / `support`）。
+   * 一件装备可以属多类。构建期由 `types` 标签自动推导 + 少量人工覆盖。
+   */
+  categories: Record<string, string[]>
 }
 
 export interface RunesSnapshot {
@@ -128,6 +150,89 @@ export interface DataBundle {
   items: ItemsSnapshot
   runes: RunesSnapshot
   spells: SpellRef[]
+  /** 101 数据站的强度数据（docs/STRENGTH.md）。构建期抓取，见 scripts/fetch-101*.mjs */
+  rift: RiftSnapshot
+}
+
+// ---------------------------------------------------------------- 101 强度数据
+
+/**
+ * 101 榜单里的一条「英雄 × 分路」记录。
+ *
+ * 注意 `laneScore`/`tierBonus` 是**构建期按当时的分值算好存下来的**，
+ * 所以改了分值必须重跑 `npm run fetch:101`，否则快照里是旧值（这个坑踩过）。
+ */
+export interface RiftLaneRecord {
+  heroId: string
+  position: Position
+  rank: number | null
+  tier: string | null
+  winRate: number
+  pickRate: number | null
+  banRate: number | null
+  laneScore: number
+  tierBonus: number
+}
+
+/** 101 的一组装备推荐（出门装 / 鞋 / 核心 / 第 4、5、6 件）。 */
+export interface RiftEquipmentSlot {
+  rank: number
+  /**
+   * 装备 id。**这里存的是数字**——101 返回的就是数字，抓取脚本直接 parseInt 存下来，
+   * 而快照里的 `ItemRef.id` 是字符串。比较时统一 String()（见 core/strength.ts）。
+   */
+  itemIds: number[]
+  pickRate: number
+  winRate: number
+}
+
+export interface RiftRunePage {
+  rank: number
+  keystone: number
+  secondaryStyleCode: string
+  /** 主系 4 个：基石 + 3 排 */
+  primaryRunes: number[]
+  /** 副系 2 个 */
+  secondaryRunes: number[]
+  /** 属性碎片 3 个 */
+  shards: number[]
+  pickRate: number
+  winRate: number
+  games: number
+}
+
+export interface RiftBuild {
+  date: string | null
+  starting: RiftEquipmentSlot[]
+  shoes: RiftEquipmentSlot[]
+  core: RiftEquipmentSlot[]
+  forth: RiftEquipmentSlot[]
+  fifth: RiftEquipmentSlot[]
+  sixth: RiftEquipmentSlot[]
+}
+
+/** 以 `heroId:position` 为键，例如 `75:top`。 */
+export interface RiftBuildEntry {
+  build: RiftBuild | null
+  runePages: RiftRunePage[]
+}
+
+export interface RiftSnapshot {
+  meta: {
+    source: string
+    fetchedAt: string
+    /** 101 版本列表里最新的是哪个 */
+    latestPublished: string
+    /** 实际取到数据的版本，可能落后于 latestPublished */
+    version: string
+    behind: boolean
+    dataDate: string | null
+    counts: Record<string, number>
+    laneHeroScore: Record<string, number>
+  }
+  ranks: RiftLaneRecord[]
+  /** 键为 `heroId:position` */
+  builds: Record<string, RiftBuildEntry>
 }
 
 // ---------------------------------------------------------------- 输入

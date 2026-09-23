@@ -43,12 +43,14 @@ const POINTS = {
   runeShard: 2,
 }
 
+const POSITIONS = ['top', 'jungle', 'mid', 'adc', 'support']
 const championById = new Map(champions.map((c) => [c.heroId, c]))
 const legendaryById = new Map(items.legendary.map((i) => [i.id, i]))
 const LEGENDARY_IDS = items.legendary.map((i) => i.id)
 
 /** heroId:position → { core:Set, later:Set, shoes:Set, starters:Set, runePages } */
 const combos = []
+const combosByKey = new Map()
 for (const record of stats.ranks) {
   const key = `${record.heroId}:${record.position}`
   const entry = builds.index[key]
@@ -66,7 +68,7 @@ for (const record of stats.ranks) {
   const starters = new Set()
   for (const slot of entry.build?.starting ?? []) for (const id of slot.itemIds) starters.add(String(id))
 
-  combos.push({
+  const comboEntry = {
     champion,
     core,
     later,
@@ -74,7 +76,9 @@ for (const record of stats.ranks) {
     starters,
     runePages: entry.runePages,
     heroScore: record.laneScore + record.tierBonus,
-  })
+  }
+  combos.push(comboEntry)
+  combosByKey.set(key, comboEntry)
 }
 
 // ---------------------------------------------------------------- 装备相容度
@@ -184,8 +188,12 @@ const compatHit = { strong: 0, weak: 0, none: 0, recommended: 0 }
 let itemDraws = 0
 
 for (let trial = 0; trial < TRIALS; trial++) {
-  const combo = combos[Math.floor(rng() * combos.length)]
-  const champion = combo.champion
+  // **按游戏的真实抽样方式**：先随机英雄、再随机分路，然后去查有没有数据。
+  // 早期版本是从「已覆盖的 239 条」里均匀抽，等于把覆盖率当成 100%，
+  // 把英雄项高估了约 3.6 倍（239/865 = 27.6%）。
+  const champion = champions[Math.floor(rng() * champions.length)]
+  const position = POSITIONS[Math.floor(rng() * POSITIONS.length)]
+  const combo = combosByKey.get(`${champion.heroId}:${position}`) ?? null
 
   // 6 件成装：从 107 件池里抽（不重复，忽略唯一词条/远程专属以简化——它们不改变量级）
   const pool = [...LEGENDARY_IDS]
@@ -193,8 +201,8 @@ for (let trial = 0; trial < TRIALS; trial++) {
   for (let i = 0; i < 6; i++) {
     const id = String(pool.splice(Math.floor(rng() * pool.length), 1)[0])
     itemDraws++
-    if (combo.core.has(id)) itemScore += POINTS.core
-    else if (combo.later.has(id)) itemScore += POINTS.later
+    if (combo && combo.core.has(id)) itemScore += POINTS.core
+    else if (combo && combo.later.has(id)) itemScore += POINTS.later
     else {
       const s = compatScore(id, champion)
       if (s === POINTS.strong) compatHit.strong++
@@ -205,16 +213,17 @@ for (let trial = 0; trial < TRIALS; trial++) {
   }
   // 鞋与出门装
   const boot = pickFrom(items.boots, rng).id
-  if (combo.shoes.has(boot)) itemScore += POINTS.shoe
+  if (combo && combo.shoes.has(boot)) itemScore += POINTS.shoe
   const starter = pickFrom(items.starterGeneric, rng).id
-  if (combo.starters.has(starter)) itemScore += POINTS.starter
+  if (combo && combo.starters.has(starter)) itemScore += POINTS.starter
 
-  const runeScore = rollRunes(allowedSets(combo.runePages), rng)
+  const runeScore = combo ? rollRunes(allowedSets(combo.runePages), rng) : 0
 
-  parts.hero += combo.heroScore
+  const heroScore = combo ? combo.heroScore : 0
+  parts.hero += heroScore
   parts.item += itemScore
   parts.rune += runeScore
-  totals.push(combo.heroScore + itemScore + runeScore)
+  totals.push(heroScore + itemScore + runeScore)
 }
 
 totals.sort((a, b) => a - b)
