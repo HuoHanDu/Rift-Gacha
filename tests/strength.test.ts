@@ -31,11 +31,6 @@ function championOf(title: string): ChampionRef {
   return found
 }
 
-function itemOf(name: string): ItemRef {
-  const found = DATA.items.legendary.find((i) => i.name === name)
-  if (!found) throw new Error(`快照里没有装备 ${name}`)
-  return found
-}
 
 /** 从真实快照里挑一件「含某类别」的装备。 */
 function itemWithCategory(category: string): ItemRef {
