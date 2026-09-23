@@ -135,6 +135,14 @@ export const TIER_BONUS: Record<string, number> = {
   T4: 0,
 }
 
+// ---------------------------------------------------------------- 强度瞄准（§6）
+
+/** 目标分容差比例。区间窄时严格命中很难，按比例放宽既好命中又不会串挡。 */
+export const DEFAULT_TARGET_TOLERANCE = 0.1
+
+/** 每人最大尝试次数。超限就取最接近的那次并如实标注未达标，绝不无限重试。 */
+export const MAX_TARGET_ATTEMPTS = 200
+
 /** 符文「命中」取推荐页的前几页（§9：拐点在 5）。 */
 export const RIFT_RUNE_TOP_N = 5
 
