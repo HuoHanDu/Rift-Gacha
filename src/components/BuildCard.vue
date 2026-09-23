@@ -13,6 +13,22 @@
       }}</text>
     </view>
 
+    <!-- 强度（docs/STRENGTH.md）。仅在控强度时显示 -->
+    <view v-if="strength" class="strength">
+      <text class="strength__value">{{ Math.round(strength.total) }}</text>
+      <text v-if="strength.tierLabel" class="strength__tier">{{ strength.tierLabel }}</text>
+      <text class="strength__parts">
+        英雄 {{ Math.round(strength.hero) }} · 装备 {{ Math.round(strength.items) }} ·
+        符文 {{ strength.runes }}
+      </text>
+      <text v-if="!strength.met" class="strength__warn">
+        没达到目标挡位，试了 {{ strength.attempts }} 次，这是最接近的一次
+      </text>
+      <text v-if="strength.buildFallback" class="strength__note">
+        该分路没有 101 数据，装备与符文按常用分路评分
+      </text>
+    </view>
+
     <!-- 英雄 -->
     <view class="champion">
       <view v-if="isHidden('champion')" class="ph" :style="phStyle(56, true)" />
@@ -241,6 +257,23 @@ const props = defineProps<{
   reveal: CardReveal | null
   /** 正在播放这一张卡（用于高亮）。 */
   active: boolean
+  /**
+   * 强度信息（docs/STRENGTH.md）。`null` / 不传表示不控强度，此时不显示任何强度 UI。
+   * 形状由页面组装，见 index.vue 的 `strengthFor`。
+   */
+  strength?: {
+    total: number
+    hero: number
+    items: number
+    runes: number
+    /** 是否达到目标挡位；false 时显示的是「最接近」的那一次 */
+    met: boolean
+    attempts: number
+    /** 实际落档名；null 表示落不进任何档 */
+    tierLabel: string | null
+    /** 该分路无数据，构筑与符文回退到了常用分路 */
+    buildFallback: boolean
+  } | null
 }>()
 
 const positionLabel = computed(() => POSITION_LABELS[props.build.position])
@@ -508,5 +541,49 @@ function shardRowLabel(index: number): string {
   width: 26px;
   font-size: 11px;
   color: var(--ink-muted);
+}
+</style>
+
+<style scoped>
+.strength {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 0 0 10px;
+  padding: 7px 10px;
+  background: rgba(198, 155, 88, 0.07);
+  border: 1px solid var(--line);
+  border-radius: 7px;
+}
+
+.strength__value {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--brass);
+  font-variant-numeric: tabular-nums;
+}
+
+.strength__tier {
+  font-size: 12px;
+  color: var(--ink);
+}
+
+.strength__parts {
+  font-size: 11px;
+  color: var(--ink-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.strength__warn {
+  width: 100%;
+  font-size: 11px;
+  color: #d98b6a;
+}
+
+.strength__note {
+  width: 100%;
+  font-size: 11px;
+  color: #5d6675;
 }
 </style>

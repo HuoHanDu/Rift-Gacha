@@ -68,7 +68,22 @@
           </view>
         </view>
 
-        <view class="control">
+          <view class="control">
+            <text class="control__label">强度</text>
+            <view class="seg">
+              <view
+                v-for="option in strengthOptions"
+                :key="option.id"
+                class="seg__item"
+                :class="{ 'seg__item--on': tierId === option.id }"
+                @click="tierId = option.id"
+              >
+                <text class="seg__text">{{ option.label }}</text>
+              </view>
+            </view>
+          </view>
+
+          <view class="control">
           <text class="control__label">显示</text>
           <view class="seg">
             <view class="seg__item" :class="{ 'seg__item--on': animate }" @click="animate = !animate">
@@ -187,6 +202,7 @@
                 :show-team="teamMode"
                 :reveal="revealFor(build.playerIndex)"
                 :active="activePlayerIndex === build.playerIndex"
+                  :strength="strengthFor(build.playerIndex)"
               />
             </view>
           </template>
@@ -226,11 +242,14 @@ import { computed, onUnmounted, reactive, ref, shallowRef, watch } from 'vue'
 import BuildCard from '../../components/BuildCard.vue'
 import DetailSheet from '../../components/DetailSheet.vue'
 import SnapshotList from '../../components/SnapshotList.vue'
-import { POSITION_LABELS, POSITIONS, RIOT_FAN_NOTICE } from '../../core/constants'
+import { POSITION_LABELS, POSITIONS, RIOT_FAN_NOTICE, STRENGTH_TIERS } from '../../core/constants'
+import type { StrengthTierId } from '../../core/constants'
 import { generateBuilds } from '../../core/generate'
 import { createRng } from '../../core/random'
 import type { BuildResult, GenerateInput, PlayerInput, Position, TeamId } from '../../core/types'
 import { DATA } from '../../data'
+import { classifyTier } from '../../core/strength'
+import type { PlayerStrength } from '../../core/generate'
 import { createRevealController, type CardReveal, type RevealController } from '../../reveal/controller'
 import { buildPlans } from '../../reveal/plan'
 import {
@@ -257,6 +276,28 @@ const snapshots = ref<Snapshot[]>(store.list())
 const activeSnapshotId = ref<string | null>(null)
 /** 结果还在、但输入已经被改动过——提示用户要不要重新随机。 */
 const inputDirty = ref(false)
+
+/** 强度挡位（docs/STRENGTH.md §4）。`any` = 不控强度。 */
+const tierId = ref<StrengthTierId>('any')
+const strengthOptions = STRENGTH_TIERS
+/** 与 results 同序的强度信息；不控强度时为空。 */
+const strengths = ref<PlayerStrength[]>([])
+
+/** 给卡片用的强度展示数据（含实际落档与是否达标）。 */
+function strengthFor(playerIndex: number) {
+  const index = results.value.findIndex((build) => build.playerIndex === playerIndex)
+  const target = index >= 0 ? strengths.value[index] : undefined
+  if (!target) return null
+  return {
+    ...target.breakdown,
+    met: target.met,
+    attempts: target.attempts,
+    tierLabel: classifyTier(target.breakdown)?.label ?? null,
+    // 提到顶层给卡片用：回退到常用分路这件事必须让用户看得见
+    // （实测约 70% 的随机结果会走回退，不说明的话用户会以为算错了）
+    buildFallback: target.breakdown.detail.buildFallback,
+  }
+}
 /** 揭幕动画：默认关闭，开了才逐段播放。 */
 const animate = ref(false)
 /** 双队模式下把结果按队伍分组显示。 */
@@ -412,6 +453,7 @@ function clearOutcome() {
   results.value = []
   errors.value = []
   seed.value = null
+  strengths.value = []
   inputDirty.value = false
   activeSnapshotId.value = null
 }
@@ -431,7 +473,8 @@ function roll() {
     banSmiteForNonJungle: banSmite.value,
   }
 
-  const outcome = generateBuilds(input, DATA)
+  // 挡位作用于每个玩家；`any` 表示不控强度，走与历史一致的单次路径。
+  const outcome = generateBuilds(input, DATA, { tiers: players.map(() => tierId.value) })
   if (!outcome.ok) {
     clearOutcome()
     errors.value = outcome.errors.map((error) => error.message)
@@ -441,6 +484,7 @@ function roll() {
   errors.value = []
   seed.value = outcome.seed
   results.value = outcome.results
+  strengths.value = outcome.strengths
   inputDirty.value = false
   saveSnapshot(input, outcome.seed, outcome.results)
 
@@ -501,6 +545,7 @@ function restoreSnapshot(snapshot: Snapshot) {
   errors.value = []
   seed.value = outcome.seed
   results.value = outcome.results
+  strengths.value = outcome.strengths
   inputDirty.value = false
   activeSnapshotId.value = snapshot.id
 }
