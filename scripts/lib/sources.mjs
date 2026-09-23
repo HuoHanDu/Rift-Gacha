@@ -43,3 +43,25 @@ export const ICON_BASE = 'https://game.gtimg.cn/images/lol/act/img'
 export function championUrl(heroId) {
   return `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/zh_cn/v1/champions/${heroId}.json`
 }
+
+/**
+ * 101 数据站（`101.qq.com`）的峡谷数据接口。
+ *
+ * 参数与响应格式是**对照开源项目 LeagueAkari 的实现**解出来的，不是猜的：
+ * - `src/shared/http-api-axios-helper/qq101/index.ts`
+ * - `src/shared/data-adapter/champion-data/qq101-protocol.ts`
+ *
+ * **三个必须记住的坑**（详见 `scripts/fetch-101.mjs` 顶部注释）：
+ * 1. `lane` 必须大写，中单是 `MIDDLE` 不是 `MID`；小写会**静默返回空**
+ * 2. `version_id` 用版本号字符串（`16.18`），不是 id / vkey / key
+ * 3. 最新版本可能还没铺数据，要**从新到旧探测**
+ */
+export const QQ101 = {
+  base: 'https://mlol.qt.qq.com',
+  /** 各位置榜单 + 单英雄构筑 + 单英雄符文共用的前缀 */
+  rift: '/go/battle_info/odp_proxy/lol_101strategy',
+  versions: '/go/database/versionlist',
+  /** 榜单载荷在 `_fieldValues` 里的字段名 */
+  fields: { rank: 'R17960', build: 'R18087', runes: 'R18119' },
+}
+

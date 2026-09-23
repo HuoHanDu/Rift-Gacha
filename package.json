@@ -11,6 +11,7 @@
     "preview:h5": "vite preview --outDir dist/build/h5",
     "serve:dist": "node scripts/serve-dist.mjs",
     "fetch:data": "node scripts/fetch-data.mjs",
+    "fetch:101": "node scripts/fetch-101.mjs",
     "sample": "vite-node --config vitest.config.ts scripts/dump-sample.ts",
     "test": "vitest run",
     "test:watch": "vitest",
