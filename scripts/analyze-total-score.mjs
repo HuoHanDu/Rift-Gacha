@@ -30,9 +30,9 @@ const TRIALS = Number(process.argv[2] ?? 20000)
 const RUNE_N = 5
 
 // 与 src/core/constants.ts 保持一致（改一处必须改另一处；正式实现只读 constants）
-const LANE_K1 = 24.5
-const LANE_K2 = 10.5
-const TIER_BONUS = { T0: 95, T1: 67, T2: 39, T3: 14, T4: 0 }
+const LANE_K1 = 14.0
+const LANE_K2 = 6.0
+const TIER_BONUS = { T0: 54, T1: 38, T2: 22, T3: 8, T4: 0 }
 
 // 分值（docs/STRENGTH.md §2 决策 5/6/8）
 const POINTS = {
