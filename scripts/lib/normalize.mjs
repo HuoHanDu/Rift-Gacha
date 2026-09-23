@@ -95,6 +95,65 @@ export const SPEC = {
   rangedOnlyByName: ['卢安娜的飓风'],
 
   /**
+   * docs/STRENGTH.md §5.1 —— 装备侧画像。
+   *
+   * 用来判断「这件装备对这位英雄有没有用」。一件装备**可以属多类**
+   * （界弓 = 物理 + 攻速，智慧末刃 = 攻速 + 坦度），比强行归一准确。
+   *
+   * 规则基于 `items.js` 的 `types` 标签。注意 `Health` 单独出现**不算坦度**——
+   * 46 件装备带 Health，包括三相之力和兰德里的折磨这类输出装，
+   * 只有配上真正的防御标签（护甲/魔抗/韧性）才算。
+   */
+  itemCategoryRules: {
+    ad: ['Damage', 'ArmorPenetration', 'LifeSteal'],
+    // 不含 SpellVamp：无穷饥渴带这个标签但是纯物理吸血装
+    ap: ['SpellDamage', 'MagicPenetration'],
+    crit: ['CriticalStrike'],
+    attackSpeed: ['AttackSpeed', 'OnHit'],
+    // 不含 Tenacity：有韧性的多半是输出装（水银弯刀、无穷饥渴），不代表坦度
+    tank: ['Armor', 'SpellBlock', 'MagicResist'],
+    // **辅助不按标签判**——见 supportByName 的注释
+  },
+
+  /**
+   * 辅助装改用**显式名单**，因为标签启发式在这一类上实测不可靠：
+   * - `Aura` 会把日炎圣盾、冰霜之心这两件纯坦克装拉进来（它们只是带光环）
+   * - `ManaRegen` 会把夺萃之镰拉进来（"夺萃"是回蓝被动，它是物理暴击装）
+   * - `Active` 会把中娅沙漏这类主动装拉进来
+   * 辅助装本来就是个明确的小集合，用名单比用标签准得多。
+   */
+  supportByName: [
+    '舒瑞娅的战歌', '救赎', '米凯尔的祝福', '炽热香炉', '帝国指令',
+    '流水法杖', '月石再生器', '海力亚的回响', '黎明核心', '骑士之誓',
+    '钢铁烈阳之匣',
+  ],
+
+  /** 补充规则：需要标签**同时**出现才算 */
+  itemCategoryAllOf: {
+    // 狂徒铠甲这类纯血量+回复装：没有护甲/魔抗，但有坦度语义
+    tank: [['Health', 'HealthRegen']],
+  },
+
+  /**
+   * 人工覆盖。规则由 `types` 自动推导，但总有边界情况——
+   * 那些改这里而不是改规则，改动会体现在 diff 里、便于复核。
+   * **覆盖是替换而不是叠加**，写了就以它为准。
+   */
+  itemCategoryOverrides: {
+    // 深渊面具：types 里没有任何伤害标签，但它带「损毁」减魔抗光环，
+    // 对法系阵容算辅助装，对坦克算坦度装。
+    深渊面具: ['tank', 'support'],
+    // 斯塔缇克电刃：SpellDamage 指的是普攻附带的魔法伤害，它并不提供法强
+    斯塔缇克电刃: ['ad', 'crit', 'attackSpeed'],
+  },
+
+  /** 分类表的结构性断言：每件传说装备至少归入一类，否则构建失败 */
+  minCategoriesPerItem: 1,
+
+  /** 判定「有输出语义」的标签，用于「有血量且无输出 ⇒ 坦度」这条规则 */
+  offenseTags: ['Damage', 'SpellDamage', 'CriticalStrike', 'AttackSpeed', 'OnHit'],
+
+  /**
    * 英雄近战/远程的抽样断言。
    *
    * 数据源是官方客户端分类（CD 的 `tacticalInfo.attackType`），**不能用攻击距离数值推断**：
@@ -321,6 +380,45 @@ export function normalizeItems(rawItems, rawItemsExt) {
 
   const rangedOnly = SPEC.rangedOnlyByName.map((name) => resolveName(name, '远程专属'))
 
+  // 装备侧画像（docs/STRENGTH.md §5.1）：按 types 标签归六类，允许一件属多类。
+  // 分类结果进快照，core 层靠它判「装备对该英雄是否相容」。
+  const categories = {}
+  for (const item of legendary) {
+    const labels = new Set(item.types ?? [])
+    const matched = new Set()
+
+    for (const [category, tags] of Object.entries(SPEC.itemCategoryRules)) {
+      if (tags.some((tag) => labels.has(tag))) matched.add(category)
+    }
+    for (const [category, combos] of Object.entries(SPEC.itemCategoryAllOf)) {
+      if (combos.some((combo) => combo.every((tag) => labels.has(tag)))) matched.add(category)
+    }
+
+    // 特殊规则：**有血量、且完全没有输出标签 ⇒ 坦度装**。
+    // 例：凛冬之临 types=["AbilityHaste","Health","Mana"]，既无护甲也无伤害标签，
+    // 但语义上就是坦克/战士的蓝量装。这条比「有 Health 就算坦度」严谨得多。
+    const hasHealth = labels.has('Health')
+    const hasOffense = SPEC.offenseTags.some((tag) => labels.has(tag))
+    if (hasHealth && !hasOffense) matched.add('tank')
+
+    if (SPEC.supportByName.includes(item.name)) matched.add('support')
+
+    // 人工覆盖优先级最高，且是**替换**而不是叠加
+    const override = SPEC.itemCategoryOverrides[item.name]
+    if (override) {
+      matched.clear()
+      for (const category of override) matched.add(category)
+    }
+
+    categories[item.id] = [...matched].sort()
+
+    expect(
+      categories[item.id].length >= SPEC.minCategoriesPerItem,
+      `装备「${item.name}」(${item.id}) 归类为空，types=${JSON.stringify(item.types)}；` +
+        `请在 SPEC.itemCategoryRules 或 itemCategoryOverrides 里补上`,
+    )
+  }
+
   return {
     legendary,
     boots,
@@ -332,6 +430,7 @@ export function normalizeItems(rawItems, rawItemsExt) {
     supportQuestUpgrades: SPEC.supportQuestUpgrades.map(starterRef),
     uniqueGroups,
     rangedOnly,
+    categories,
   }
 }
 
